@@ -1,0 +1,7 @@
+-We'll build in an "eject" button for the HTML frame above the game, it doesn't need to be built into your scene
+-Each scene will be exported as a separate webGL build
+-No default Unity skybox should be visible, anywhere, either flat color sky (see root folder) or some other style
+-Focus here not so much on establishing a sense of place or location, but on the interaction, and relation to the visual
+-Avoiding attempts at "photoreal" but nearly any other style - flat shaded, PS1-era, 2D, etc. all welcome
+-Please aim to keep file sizes and number of files in a given scene reasonably modest, since across all scenes they're inevitably going to add up quite a bit
+-Remember it's all running in browser, so any effects or inputs need to be webGL compatible
