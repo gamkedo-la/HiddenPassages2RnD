@@ -1,0 +1,124 @@
+you are in lateral file, <a href="index.html">go back</a><br/>
+<canvas id="gameCanvas" width="800" height="800"></canvas>
+<script>
+var canvas;
+var canvasContext;
+var speedMulti = 560;
+
+var ballX = 400;
+var ballY = 250;
+var ballSize = 10;
+var ballSpeedX = 5;
+var ballSpeedY = 3;
+const PADDLE_HEIGHT = 120;
+const PADDLE_THICKNESS = 15;
+
+var paddle1Y = 250;
+var paddle2Y = 250;
+
+var net1X = 0;
+var net2X = 800 - PADDLE_THICKNESS;
+const NET_WIDTH = 25;
+
+//Gets input
+function calculateMousePos(evt) {
+    var rect = canvas.getBoundingClientRect();
+    var root = document.documentElement;
+    var mouseX = evt.clientX - rect.left - root.scrollLeft;
+    var mouseY = evt.clientY - rect.top - root.scrollTop;
+    return {
+        x: mouseX,
+        y: mouseY
+    };
+}
+//Loads Game
+window.onload = function() {
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+
+    var framesPerSecond = 30;
+    setInterval(function() {
+        moveEverything();
+        drawEverything();
+    }, speedMulti / framesPerSecond);
+
+    canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = calculateMousePos(evt);
+        paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
+
+        console.log('y');
+    });
+}
+//Game Mechanics
+function ballReset() {
+    var upDown = Math.random() < 0.5 ? -1 : 1;
+    ballSpeedX = upDown * -ballSpeedX;
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+}
+
+function computerMovement() {
+    var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT / 2);
+
+    if (paddle2YCenter < ballY) {
+        console.log("comp moved down"); //// was cosole
+        paddle2Y += 10;
+    } else {
+        console.log("comp moved up")
+        paddle2Y -= 10;
+    }
+}
+
+function moveEverything() {
+    computerMovement(); ////
+
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
+    if (ballX < 0 + NET_WIDTH) {
+        if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
+            ballSpeedX = -ballSpeedX;
+        } else {
+            console.log("P2 Scored");
+            ballReset();
+        }
+    }
+    if (ballX > canvas.width - NET_WIDTH) {
+        if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
+            ballSpeedX = -ballSpeedX;
+        } else {
+            console.log("P1 Scored");
+            ballReset();
+        }
+    }
+    if (ballY < 0) {
+        ballSpeedY = -ballSpeedY;
+    }
+    if (ballY > canvas.height) {
+        ballSpeedY = -ballSpeedY;
+    }
+}
+//draws game
+function drawEverything() {
+    //background
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    //Player 1
+    colorRect(net1X, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'yellow');
+
+    //Player 2
+    colorRect(net2X, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'red');
+    //ball
+    colorCircle(ballX, ballY, ballSize, 'white');
+}
+//draw the ball
+function colorCircle(centerX, centerY, radius, drawColor) {
+    canvasContext.fillStyle = drawColor;
+    canvasContext.beginPath();
+    canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+    canvasContext.fill();
+}
+// draws paddles and background
+function colorRect(leftX, topY, width, height, drawColor) {
+    canvasContext.fillStyle = drawColor;
+    canvasContext.fillRect(leftX, topY, width, height);
+}
+</script>
