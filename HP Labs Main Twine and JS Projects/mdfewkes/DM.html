@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 <html>
 	<title>Drum Machine</title>
 </html>
@@ -15,30 +16,17 @@
 
 <body>
 	Flavor text <a href="../index.html">link out</a>
-
-	<div tabindex="0"
-	onkeydown="playSound(hat)"
-	style="background:black; height:200px;width:200px;">
-	<canvas nx="matrix" style="height:100%;width:100%;"></canvas>
-	</div>
-
+	<canvas id="canvas" width="800" height="600" style="display: block;background: #000;position: absolute; left: 0px; top: 35px; margin:0px auto 0px auto;"></canvas>
 </body>
 
 <script>
 	var audio_context = window.AudioContext || window.webkitAudioContext;
-	var con = new audio_context();
-
-	var hat;
-	//loadSample('hh.wav', function(buffer){hat = buffer;});
-	var snare;
-	//loadSample('sd.wav', function(buffer){snare = buffer;});
-	var kick;
-	//loadSample('bd.wav', function(buffer){kick = buffer;});
+	var context = new audio_context();
 
 	var seq = [
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0]
+		[1,0,1,0,1,0,1,0],
+		[0,0,0,0,1,0,0,0],
+		[1,0,0.2,0,0,0,0,0]
 	];
 		
 	var step = 0;
@@ -47,9 +35,7 @@
 	var got_up_to = 0;
 	
 	setInterval(function() {
-		var now = con.currentTime;
-		
-		matrix1.jumpToCol(step % seq[0].length);
+		var now = context.currentTime;
 		
 		var max_future_time = now + (wait_time * 1.5);
 		if(got_up_to > now) {
@@ -58,62 +44,157 @@
 		
 		while(now <= max_future_time) {
 			step++;
-			if (seq[0][step % seq[0].length]) {
-				playSound(hat, now);
+			if (Math.random() <= (seq[0][step % seq[0].length])) {
+				playHiHat(now);
 			}
-			if (seq[1][step % seq[1].length]) {
-				playSound(snare, now);
+			if (Math.random() <= (seq[1][step % seq[1].length])) {
+				playSnare(now);
 			}
-			if (seq[2][step % seq[2].length]) {
-				playSound(kick, now);
+			if (Math.random() <= (seq[2][step % seq[2].length])) {
+				playKick(now);
 			}
 			now += interval;
 		}
 		got_up_to = now;
 	}, wait_time*1000);
 	
-	function playSound(buffer, time) {
-		var player = con.createBufferSource();
-		player.buffer = buffer;
-		player.loop = false;
-		player.connect(con.destination);
-		player.start(time);
+	function playKick(now) {
+		var kick = new Kick();
+		kick.trigger(now);
+	}
+	
+	function playSnare(now) {
+		var snare = new Snare();
+		snare.trigger(now);
+	}
+	
+	function playHiHat(now) {
+		var hiHat = new HiHat();
+		hiHat.trigger(now);
 	}
 
-	
-	function loadSample(url, callback){
-		var request = new XMLHttpRequest();
-		request.open('GET', url, true);
-		request.responseType = 'arraybuffer';
-		request.onload = function(){
-			var audioData = request.response;
-			con.decodeAudioData(audioData, function(buffer) {
-				console.log(buffer);
-				callback(buffer);
-			});
-		};
-		request.send();
-	}
-	
-	var matrix1;
-	
-	nx.onload = function() {
-		matrix1.col = seq[0].length;
-		matrix1.row = seq.length;
-		matrix1.init();
-		//for(var i = 0; i < seq.length; i++) {
-		//	for(var j = 0; j < seq[i].length; j++) {
-		//		matrix1.matrix[i][j] = seq[i][j];
-		//	}
-		//}
-		
-		matrix1.on('*', function(data) {
-			if(data.row !== undefined) {
-				seq[data.row][data.col] = data.level;
-				console.log(seq, data);
-			}
-		});
+
+	// https://dev.opera.com/articles/drum-sounds-webaudio/
+	function Kick() {
+		this.context = context;
 	};
+
+	Kick.prototype.setup = function() {
+		this.osc = this.context.createOscillator();
+		this.gain = this.context.createGain();
+		this.osc.connect(this.gain);
+		this.gain.connect(this.context.destination)
+	};
+
+	Kick.prototype.trigger = function(time) {
+		this.setup();
+
+		this.osc.frequency.setValueAtTime(150, time);
+		this.gain.gain.setValueAtTime(1, time);
+
+		this.osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
+		this.gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
+
+		this.osc.start(time);
+
+		this.osc.stop(time + 0.5);
+	};
+
+	// https://dev.opera.com/articles/drum-sounds-webaudio/
+	function Snare() {
+		this.context = context;
+	};
+
+	Snare.prototype.noiseBuffer = function() {
+		var bufferSize = this.context.sampleRate;
+		var buffer = this.context.createBuffer(1, bufferSize, this.context.sampleRate);
+		var output = buffer.getChannelData(0);
+
+		for (var i = 0; i < bufferSize; i++) {
+			output[i] = Math.random() * 2 - 1;
+		}
+
+		return buffer;
+	};
+
+	Snare.prototype.setup = function() {
+		this.noise = this.context.createBufferSource();
+		this.noise.buffer = this.noiseBuffer();
+		var noiseFilter = this.context.createBiquadFilter();
+		noiseFilter.type = 'highpass';
+		noiseFilter.frequency.value = 1000;
+		this.noise.connect(noiseFilter);
+
+		this.noiseEnvelope = this.context.createGain();
+		noiseFilter.connect(this.noiseEnvelope);
+
+		this.noiseEnvelope.connect(this.context.destination);
+
+		this.osc = this.context.createOscillator();
+		this.osc.type = 'triangle';
+
+		this.oscEnvelope = this.context.createGain();
+		this.osc.connect(this.oscEnvelope);
+		this.oscEnvelope.connect(this.context.destination);
+	};
+
+	Snare.prototype.trigger = function(time) {
+		this.setup();
+
+		this.noiseEnvelope.gain.setValueAtTime(1, time);
+		this.noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
+		this.noise.start(time)
+
+		this.osc.frequency.setValueAtTime(100, time);
+		this.oscEnvelope.gain.setValueAtTime(0.7, time);
+		this.oscEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
+		this.osc.start(time)
+
+		this.osc.stop(time + 0.2);
+		this.noise.stop(time + 0.2);
+	};
+
+	// http://joesul.li/van/synthesizing-hi-hats/
+	function HiHat(){
+		var fundamental = 40;
+		var ratios = [2, 3, 4.16, 5.43, 6.79, 8.21];
+
+		var gain = context.createGain();
+
+		// Bandpass
+		var bandpass = context.createBiquadFilter();
+		bandpass.type = "bandpass";
+		bandpass.frequency.value = 10000;
+
+		// Highpass
+		var highpass = context.createBiquadFilter();
+		highpass.type = "highpass";
+		highpass.frequency.value = 7000;
+
+		// Connect the graph
+		bandpass.connect(highpass);
+		highpass.connect(gain);
+		gain.connect(context.destination);
+
+		this.trigger = function(now) {
+			// Create the oscillators
+			ratios.forEach(function(ratio) {
+			  var osc = context.createOscillator();
+			  osc.type = "square";
+			  // Frequency is the fundamental * this oscillator's ratio
+			  osc.frequency.value = fundamental * ratio;
+			  osc.connect(bandpass);
+			  osc.start(now);
+			  osc.stop(now + 0.3);
+			});
+
+			// Define the volume envelope
+			gain.gain.setValueAtTime(0.00001, now);
+			gain.gain.exponentialRampToValueAtTime(1, now + 0.02);
+			gain.gain.exponentialRampToValueAtTime(0.3, now + 0.03);
+			gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.3);
+		}
+	}
 
 	
 </script>
