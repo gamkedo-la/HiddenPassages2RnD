@@ -1,107 +1,119 @@
 <!DOCTYPE html>
 <html>
-    <title>Drum Machine</title>
+	<title>Drum Machine</title>
 </html>
+<head>
+<style>
+	a:link {color: orange;}
+	a:visited {color: orange;}
+	a:hover {color: orange;}
+	a:active {color: orange;}
+	body {color: gray;}
+</style>
+</head>
 
 
 <body>
-    <div tabindex="0"
-    onkeydown="playSound(hat)"
-    style="background:black; height:200px;width:200px;">
-        <canvas nx="matrix" style="height:100%;width:100%;"></canvas>
-    </div>
+	Flavor text <a href="../index.html">link out</a>
+
+	<div tabindex="0"
+	onkeydown="playSound(hat)"
+	style="background:black; height:200px;width:200px;">
+	<canvas nx="matrix" style="height:100%;width:100%;"></canvas>
+	</div>
+
 </body>
 
 <script>
-    var audio_context = window.AudioContext || window.webkitAudioContext;
-    var con = new audio_context();
-    
-    var hat;
-    loadSample('hh.wav', function(buffer){hat = buffer;});
-    var snare;
-    loadSample('sd.wav', function(buffer){snare = buffer;});
-    var kick;
-    loadSample('bd.wav', function(buffer){kick = buffer;});
- 
-    var seq = [
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0]
-    ];
-    
-    var step = 0;
-    var interval = 0.125;
-    var wait_time = 0.1;
-    var got_up_to = 0;
-    
-    setInterval(function() {
-        var now = con.currentTime;
-        
-        matrix1.jumpToCol(step % seq[0].length);
-        
-        var max_future_time = now + (wait_time * 1.5);
-        if(got_up_to > now) {
-            now = got_up_to;
-        }
-        
-        while(now <= max_future_time) {
-            step++;
-            if (seq[0][step % seq[0].length]) {
-                playSound(hat, now);
-            }
-            if (seq[1][step % seq[1].length]) {
-                playSound(snare, now);
-            }
-            if (seq[2][step % seq[2].length]) {
-                playSound(kick, now);
-            }
-            now += interval;
-        }
-        got_up_to = now;
-    }, wait_time*1000);
-    
-    function playSound(buffer, time) {
-        var player = con.createBufferSource();
-        player.buffer = buffer;
-        player.loop = false;
-        player.connect(con.destination);
-        player.start(time);
-    }
+	var audio_context = window.AudioContext || window.webkitAudioContext;
+	var con = new audio_context();
 
-    
-    function loadSample(url, callback){
-        var request = new XMLHttpRequest();
-        request.open('GET', url, true);
-        request.responseType = 'arraybuffer';
-        request.onload = function(){
-            var audioData = request.response;
-            con.decodeAudioData(audioData, function(buffer) {
-                console.log(buffer);
-                callback(buffer);
-            });
-        };
-        request.send();
-    }
-    
-    var matrix1;
-    
-    nx.onload = function() {
-        matrix1.col = seq[0].length;
-        matrix1.row = seq.length;
-        matrix1.init();
-//        for(var i = 0; i < seq.length; i++) {
-//            for(var j = 0; j < seq[i].length; j++) {
-//                matrix1.matrix[i][j] = seq[i][j];
-//            }
-//        }
-        
-        matrix1.on('*', function(data) {
-            if(data.row !== undefined) {
-                seq[data.row][data.col] = data.level;
-                console.log(seq, data);
-            }
-        });
-    };
+	var hat;
+	//loadSample('hh.wav', function(buffer){hat = buffer;});
+	var snare;
+	//loadSample('sd.wav', function(buffer){snare = buffer;});
+	var kick;
+	//loadSample('bd.wav', function(buffer){kick = buffer;});
 
-    
+	var seq = [
+		[0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0]
+	];
+		
+	var step = 0;
+	var interval = 0.125;
+	var wait_time = 0.1;
+	var got_up_to = 0;
+	
+	setInterval(function() {
+		var now = con.currentTime;
+		
+		matrix1.jumpToCol(step % seq[0].length);
+		
+		var max_future_time = now + (wait_time * 1.5);
+		if(got_up_to > now) {
+			now = got_up_to;
+		}
+		
+		while(now <= max_future_time) {
+			step++;
+			if (seq[0][step % seq[0].length]) {
+				playSound(hat, now);
+			}
+			if (seq[1][step % seq[1].length]) {
+				playSound(snare, now);
+			}
+			if (seq[2][step % seq[2].length]) {
+				playSound(kick, now);
+			}
+			now += interval;
+		}
+		got_up_to = now;
+	}, wait_time*1000);
+	
+	function playSound(buffer, time) {
+		var player = con.createBufferSource();
+		player.buffer = buffer;
+		player.loop = false;
+		player.connect(con.destination);
+		player.start(time);
+	}
+
+	
+	function loadSample(url, callback){
+		var request = new XMLHttpRequest();
+		request.open('GET', url, true);
+		request.responseType = 'arraybuffer';
+		request.onload = function(){
+			var audioData = request.response;
+			con.decodeAudioData(audioData, function(buffer) {
+				console.log(buffer);
+				callback(buffer);
+			});
+		};
+		request.send();
+	}
+	
+	var matrix1;
+	
+	nx.onload = function() {
+		matrix1.col = seq[0].length;
+		matrix1.row = seq.length;
+		matrix1.init();
+		//for(var i = 0; i < seq.length; i++) {
+		//	for(var j = 0; j < seq[i].length; j++) {
+		//		matrix1.matrix[i][j] = seq[i][j];
+		//	}
+		//}
+		
+		matrix1.on('*', function(data) {
+			if(data.row !== undefined) {
+				seq[data.row][data.col] = data.level;
+				console.log(seq, data);
+			}
+		});
+	};
+
+	
 </script>
