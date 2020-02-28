@@ -1,0 +1,2 @@
+BlockZone is released under the SIL Open Font License
+https://github.com/ansilove/BlockZone

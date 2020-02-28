@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'BlockZone';
+    src: url('BlockZone-Regular.woff2') format('woff2'),
+        url('BlockZone-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
