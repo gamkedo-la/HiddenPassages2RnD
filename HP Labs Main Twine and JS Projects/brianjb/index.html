@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>Game Title</title>
+    <style>
+        body { margin:0; padding:0; overflow:hidden; }
+        #gameCanvas { margin:0; padding:0; }
+    </style>
+</head>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script type="text/javascript">
+
+//#region Main
+
+var canvas;
+var canvasContext;
+
+window.onload = function () {
+
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+    canvasContext.canvas.width = 800;
+    canvasContext.canvas.height = 600;
+
+    initRenderLoop()
+
+}
+
+function initRenderLoop() {
+    var framesPerSecond = 60;
+    setInterval(function () {
+        
+        moveEverything();
+        drawEverything();
+        
+
+    }, 1000 / framesPerSecond);
+    initInput();
+}
+
+function moveEverything() {
+  
+}
+
+function drawEverything() {
+    colorRect(0, 0, canvas.width, canvas.height, 'black');
+    
+}
+
+//#region Graphics Common
+
+function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
+    canvasContext.fillStyle = fillColor;
+    canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
+    
+}
+
+function colorCircle(centerX, centerY, radius, fillColor) {
+    canvasContext.fillStyle = fillColor;
+    canvasContext.beginPath();
+    canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+    canvasContext.fill();
+}
+
+function colorLine(x1, y1, x2, y2, color) {
+    canvasContext.beginPath();
+    canvasContext.strokeStyle = color;
+    canvasContext.moveTo(x1, y1);
+    canvasContext.lineTo(x2, y2);
+    canvasContext.stroke();
+}
+
+function colorLineAtAngle(x, y, angle, length, color){
+    canvasContext.beginPath();
+    canvasContext.strokeStyle = color;
+    canvasContext.moveTo(x, y);
+    canvasContext.lineTo(x + Math.cos(angle) * length, y + Math.sin(angle) * length);
+    canvasContext.stroke();
+}
+
+function rgb(r, g, b){
+    return "rgb("+r+","+g+","+b+")";
+}
+
+//#endregion Graphics Common
+
+//#region Utilities
+
+
+function getPixelCoordFromAngleAndSpeed(startingX, startingY, angle, speed) {
+    var newX = startingX + Math.cos(angle) * speed;
+    var newY = startingY + Math.sin(angle) * speed;
+    return [newX, newY];
+}
+
+function isWallTileAtPixelCoord(pixelX, pixelY) {
+
+    var levelTileCol = colAtXCoord(pixelX);
+    var levelTileRow = rowAtYCoord(pixelY);
+
+    if (levelTileCol < 0 || levelTileCol >= MAP_NUM_COLS || levelTileRow < 0 || levelTileRow >= MAP_NUM_ROWS) {
+        return false;
+    }
+
+    return isWallTileAtLevelTileCoord(levelTileCol, levelTileRow);
+}
+
+function colAtXCoord(pixelX) {
+    return Math.floor(pixelX / TILE_SIZE);
+}
+
+function rowAtYCoord(pixelY) {
+    return Math.floor(pixelY / TILE_SIZE);
+}
+
+function isWallTileAtLevelTileCoord(levelTileCol, levelTileRow) {
+    var levelTileIndex = levelTileIndexAtColRowCoord(levelTileCol, levelTileRow);
+    return (grid.grid[levelTileIndex] > 0);
+}
+
+function levelTileIndexAtColRowCoord(tileCol, tileRow) {
+    return (tileCol + MAP_NUM_COLS * tileRow);
+}
+
+function normalizeAngle(angle){
+    angle = angle % (2 * Math.PI);
+    if (angle < 0){
+        angle += (2 * Math.PI);
+    }
+    return angle;
+}
+
+function DistanceBetweenTwoPixelCoords(x1, y1, x2, y2) {
+    distance = Math.floor(Math.hypot(Math.floor(x1) - Math.floor(x2), Math.floor(y1) - Math.floor(y2)))
+    return distance;
+}
+
+//#endregion Utilities
+
+//#endregion Main
+
+</script>
+
+</body>
+
+</html>
