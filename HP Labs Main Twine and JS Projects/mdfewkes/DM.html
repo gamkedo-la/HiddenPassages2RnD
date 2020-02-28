@@ -2,26 +2,30 @@
 <html lang="en">
 <html>
 	<title>Drum Machine</title>
-</html>
+
 <head>
-<style>
+	<style>
 	a:link {color: orange;}
 	a:visited {color: orange;}
 	a:hover {color: orange;}
 	a:active {color: orange;}
 	body {color: gray;}
-</style>
+	</style>
 </head>
-
-
 <body>
-	Flavor text <a href="../index.html">link out</a>
-	<canvas id="canvas" width="800" height="600" style="display: block;background: #000;position: absolute; left: 0px; top: 35px; margin:0px auto 0px auto;"></canvas>
+	Set the drum machine <a href="../index.html">down</a>
+	<canvas id="laCanvas" width="800" height="600" style="display: block;background: #000;position: absolute; left: 0px; top: 35px; margin:0px auto 0px auto;"></canvas>
 </body>
 
 <script>
+
+	document.addEventListener('pointerdown', mouseDown);
+
 	var audio_context = window.AudioContext || window.webkitAudioContext;
 	var context = new audio_context();
+
+	var canvas = document.getElementById('laCanvas');
+	var canvasContext = canvas.getContext('2d');
 
 	var seq = [
 		[1,0,1,0,1,0,1,0],
@@ -56,6 +60,10 @@
 			now += interval;
 		}
 		got_up_to = now;
+
+		//Buttons
+
+		mousePressed = false;
 	}, wait_time*1000);
 	
 	function playKick(now) {
@@ -73,86 +81,76 @@
 		hiHat.trigger(now);
 	}
 
-
 	// https://dev.opera.com/articles/drum-sounds-webaudio/
 	function Kick() {
-		this.context = context;
-	};
+	
+		var osc = context.createOscillator();
+		var gain = context.createGain();
+		osc.connect(gain);
+		gain.connect(context.destination)
 
-	Kick.prototype.setup = function() {
-		this.osc = this.context.createOscillator();
-		this.gain = this.context.createGain();
-		this.osc.connect(this.gain);
-		this.gain.connect(this.context.destination)
-	};
+		this.trigger = function(time) {
+			osc.frequency.setValueAtTime(150, time);
+			gain.gain.setValueAtTime(1, time);
 
-	Kick.prototype.trigger = function(time) {
-		this.setup();
+			osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
+			gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
 
-		this.osc.frequency.setValueAtTime(150, time);
-		this.gain.gain.setValueAtTime(1, time);
+			osc.start(time);
 
-		this.osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
-		this.gain.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
-
-		this.osc.start(time);
-
-		this.osc.stop(time + 0.5);
-	};
+			osc.stop(time + 0.5);
+		}
+	}
 
 	// https://dev.opera.com/articles/drum-sounds-webaudio/
 	function Snare() {
-		this.context = context;
-	};
 
-	Snare.prototype.noiseBuffer = function() {
-		var bufferSize = this.context.sampleRate;
-		var buffer = this.context.createBuffer(1, bufferSize, this.context.sampleRate);
-		var output = buffer.getChannelData(0);
+		function noiseBuffer() {
+			var bufferSize = context.sampleRate;
+			var buffer = context.createBuffer(1, bufferSize, context.sampleRate);
+			var output = buffer.getChannelData(0);
 
-		for (var i = 0; i < bufferSize; i++) {
-			output[i] = Math.random() * 2 - 1;
+			for (var i = 0; i < bufferSize; i++) {
+				output[i] = Math.random() * 2 - 1;
+			}
+
+			return buffer;
 		}
 
-		return buffer;
-	};
-
-	Snare.prototype.setup = function() {
-		this.noise = this.context.createBufferSource();
-		this.noise.buffer = this.noiseBuffer();
-		var noiseFilter = this.context.createBiquadFilter();
+		var noise = context.createBufferSource();
+		noise.buffer = noiseBuffer();
+		var noiseFilter = context.createBiquadFilter();
 		noiseFilter.type = 'highpass';
 		noiseFilter.frequency.value = 1000;
-		this.noise.connect(noiseFilter);
+		noise.connect(noiseFilter);
 
-		this.noiseEnvelope = this.context.createGain();
-		noiseFilter.connect(this.noiseEnvelope);
+		var noiseEnvelope = context.createGain();
+		noiseFilter.connect(noiseEnvelope);
 
-		this.noiseEnvelope.connect(this.context.destination);
+		noiseEnvelope.connect(context.destination);
 
-		this.osc = this.context.createOscillator();
-		this.osc.type = 'triangle';
+		var osc = context.createOscillator();
+		osc.type = 'triangle';
 
-		this.oscEnvelope = this.context.createGain();
-		this.osc.connect(this.oscEnvelope);
-		this.oscEnvelope.connect(this.context.destination);
-	};
+		var oscEnvelope = context.createGain();
+		osc.connect(oscEnvelope);
+		oscEnvelope.connect(context.destination);
 
-	Snare.prototype.trigger = function(time) {
-		this.setup();
+		this.trigger = function(time) {
 
-		this.noiseEnvelope.gain.setValueAtTime(1, time);
-		this.noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
-		this.noise.start(time)
+			noiseEnvelope.gain.setValueAtTime(1, time);
+			noiseEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.2);
+			noise.start(time)
 
-		this.osc.frequency.setValueAtTime(100, time);
-		this.oscEnvelope.gain.setValueAtTime(0.7, time);
-		this.oscEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
-		this.osc.start(time)
+			osc.frequency.setValueAtTime(100, time);
+			oscEnvelope.gain.setValueAtTime(0.7, time);
+			oscEnvelope.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
+			osc.start(time)
 
-		this.osc.stop(time + 0.2);
-		this.noise.stop(time + 0.2);
-	};
+			osc.stop(time + 0.2);
+			noise.stop(time + 0.2);
+		}
+	}
 
 	// http://joesul.li/van/synthesizing-hi-hats/
 	function HiHat(){
@@ -196,5 +194,30 @@
 		}
 	}
 
+	function buttonClass(x, y, radius) {
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+
+
+	}
+
+	var mousePressed = false;
+	var mouseX = 0;
+	var mouseY = 0;
+
+	function mouseDown(evt) {
+		var rect = canvas.getBoundingClientRect(),
+		root = document.documentElement;
+		mouseX = evt.clientX - rect.left - root.scrollLeft;
+		mouseY = evt.clientY - rect.top - root.scrollTop;
+
+		console.log(mouseX + " " + mouseY)
+
+		mousePressed = true;
+	}
+
 	
 </script>
+<body bgcolor="black"></body>
+</html>
