@@ -1,6 +1,6 @@
 // simple MS-DOS style terminal with "DIR" etc
 // based on work by https://github.com/eosterberg/terminaljs
-
+// This is just a git test, will be removed.
 const bootupTXT = 
 "HomeTeam (R) HT-DOS Version 3.22\n"+
 "Copyright (C) 1989-1998 HTGD Inc. All rights reserved.\n"+
