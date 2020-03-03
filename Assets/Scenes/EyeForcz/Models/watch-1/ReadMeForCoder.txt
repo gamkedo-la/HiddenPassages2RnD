@@ -1,0 +1,4 @@
+-Illusion-1 (ring at the front) turns counterclockwise around the watchface
+-Illusion-2 (ring at the back) turns clockwise around the watchface
+-Illusion-3 spins in Z axis ccw/cc (up to you)
+-everything else is static (except watchhands ofc)
