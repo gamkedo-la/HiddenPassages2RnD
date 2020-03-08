@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<html>
+	<title>Trombone</title>
+
+<head>
+	<style>
+	a:link {color: orange;}
+	a:visited {color: orange;}
+	a:hover {color: orange;}
+	a:active {color: orange;}
+	body {color: gray;}
+	</style>
+</head>
+<body>
+	Set the trombone <a href="../index.html">down</a> and return to the musical emporium
+	<canvas id="laCanvas" width="800" height="600" style="display: block;background: #000;position: absolute; left: 0px; top: 35px; margin:0px auto 0px auto;"></canvas>
+</body>
+
+<script>
+
+	document.addEventListener('pointerdown', mouseDown);
+	document.addEventListener('pointerup', mouseUp);
+	document.getElementById('laCanvas').addEventListener('pointermove', calculateMousePos);
+
+	var audio_context = window.AudioContext || window.webkitAudioContext;
+	var context = new audio_context();
+
+	var canvas = document.getElementById('laCanvas');
+	var canvasContext = canvas.getContext('2d');
+
+	window.onload = function() {
+		window.requestAnimationFrame(loop);
+	}
+
+	function loop() {
+		var now = context.currentTime;
+		
+		updateTrombone();
+		draw();
+
+		window.requestAnimationFrame(loop);
+	}
+
+	var rootFreq = 55;
+	var partial = 1;
+	var slidePosition = 1;
+
+	var rowSize = 20;
+	var colSize = 20;
+	var totalSlidePositions = 7-1;
+	var totalPartials = 7-1;
+
+	/*
+	Slide positions
+	1
+	0.94387
+	0.8909
+	0.8409
+	0.7937
+	0.74915
+	0.70711
+	*/
+
+	function updateTrombone() {
+		var offsetX = canvas.width/2 - (colSize*totalSlidePositions)/2;
+		var offsetY = canvas.height/2 - (rowSize*totalPartials)/2;
+		var right = canvas.width/2 + (colSize*totalSlidePositions)/2;
+		var bottom = canvas.height/2 + (rowSize*totalPartials)/2;
+
+		slidePosition = mouseX - offsetX;
+		console.log(slidePosition)
+		partial = mouseY - offsetY + 1;
+		console.log(partial)
+	}
+
+	function draw() {
+		var offsetX = canvas.width/2 - (colSize*totalSlidePositions)/2;
+		var offsetY = canvas.height/2 - (rowSize*totalPartials-1)/2;
+
+		for (var i = 0; i < totalSlidePositions; i++) {
+			for(var j = 0; j < totalPartials; j++) {
+				drawBox(offsetX+(i*colSize), offsetY+(j*rowSize), colSize, rowSize);
+			}
+		}
+
+	}
+
+	function drawBox(x, y, w, h) {
+		canvasContext.fillStyle = 'rgb(255, 255, 255)';
+        canvasContext.fillRect(x, y, w, h);
+
+        canvasContext.fillStyle = 'rgb(0, 0, 0)';
+        canvasContext.fillRect(x+1, y+1, w-2, h-2);
+
+	}
+	
+	var mousePressed = false;
+	var mouseX = 0;
+	var mouseY = 0;
+
+	function mouseDown(evt) {
+		calculateMousePos(evt);
+		mousePressed = true;
+	}
+
+	function mouseUp(evt) {
+		mousePressed = false;
+	}
+
+	function calculateMousePos(evt) {
+		var rect = canvas.getBoundingClientRect(),
+		root = document.documentElement;
+		mouseX = evt.clientX - rect.left - root.scrollLeft;
+		mouseY = evt.clientY - rect.top - root.scrollTop;
+	}
+
+	
+</script>
+<body bgcolor="black"></body>
+</html>
