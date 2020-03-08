@@ -1,25 +1,7 @@
 // simple MS-DOS style terminal with "DIR" etc
 // based on work by https://github.com/eosterberg/terminaljs
 
-const bootupTXT = 
-"HomeTeam (R) HT-DOS Version 3.22\n"+
-"Copyright (C) 1989-1998 HTGD Inc. All rights reserved.\n"+
-"\n"+
-"Volume in drive A is TOPSCRET\n"+
-"Volume Serial Number is 9A3E-085C\n";
-
-const dirTXT = 
-"Volume in drive A is TOPSCRET\n"+
-"Volume Serial Number is 9A3E-085C\n"+
-"\n"+
-"Directory of A:\n"+
-"\n"+
-"1998-05-31  10:29 AM    <DIR>          .\n"+
-"1998-05-31  10:29 AM    <DIR>          ..\n"+
-"1998-01-29  01:52 PM              1,024 DIR.EXE\n"+
-"1998-01-29  01:52 PM              1,024 BBS.EXE\n"+
-"               1 File(s)          4,096 bytes\n"+
-"               2 Dir(s)         230,944 bytes free";
+const promptTXT = "A:\\>";
 
 var MSDOS = (function () {
 
@@ -51,7 +33,7 @@ var MSDOS = (function () {
 		inputField.style.fontSize = '0.2em';
 
 		terminalObj._inputLine.textContent = '';
-		terminalObj._input.style.display = 'block';
+		terminalObj._input.style.display = 'inline-block';
 		terminalObj.html.appendChild(inputField);
 		
 		flashCursor(inputField, terminalObj);
@@ -107,15 +89,25 @@ var MSDOS = (function () {
 		this.html.className = 'Terminal';
 		if (typeof(id) === 'string') { this.html.id = id };
 
-		this._innerWindow = document.createElement('div');
-		this._output = document.createElement('p');
+		this._innerWindow = document.createElement('span');//'div');
+		this._output = document.createElement('span');//'p');
 		this._inputLine = document.createElement('span'); //the span element where the users input is put
 		this._cursor = document.createElement('span');
-		this._input = document.createElement('p'); //the full element administering the user input, including cursor
+		this._input = document.createElement('span');//p'); //the full element administering the user input, including cursor
 
 		this._shouldBlinkCursor = true;
 
-		this.print = function (message) {
+        this.cls = function() {
+            this._output.innerHTML = "";
+        }
+        
+        this.print = function (message) {
+            
+            // pre mode
+            this._output.innerHTML += message;
+            
+            /*
+            // block divs aplenty
             var msgs = message.split('\n');
             for(num in msgs) {
                 var newLine = document.createElement('div');
@@ -124,6 +116,7 @@ var MSDOS = (function () {
                 newLine.textContent = msgs[num];//message;
                 this._output.appendChild(newLine);
             }
+            */
 		}
 
 		this.input = function (message, callback) {
@@ -181,16 +174,19 @@ var MSDOS = (function () {
 
 		//this.setBackgroundColor('black');
 		this.setTextColor('rgba(0,200,64,1)');
-		this.setTextSize('16px');
+		this.setTextSize('24px');
 		this.setWidth('100%');
 		this.setHeight('100%');
 
 		this.html.style.fontFamily = 'BlockZone, Monaco, Courier, Terminal';
-		this.html.style.margin = '0';
-		this._innerWindow.style.padding = '10px';
+        this.html.style.margin = '0';
+        this.html.style.whiteSpace = "pre"; 
+        this.html.style.overflow = "hidden";
+		this._innerWindow.style.padding = '0px';
 		this._input.style.margin = '0';
 		this._output.style.margin = '0';
-		this._cursor.style.background = 'rgba(0,200,64,1)';
+        this._output.style.overflow = "hidden";
+        this._cursor.style.background = 'rgba(0,200,64,1)';
 		this._cursor.innerHTML = 'C'; //put something in the cursor..
 		this._cursor.style.display = 'none'; //then hide it
 		this._input.style.display = 'none';
@@ -202,14 +198,27 @@ var MSDOS = (function () {
 var t1 = new MSDOS();
 
 function commandDotCom(input) {
-    if (input.toUpperCase()=="DIR") {
-        t1.print(dirTXT);
+    
+    t1.cls(); // clear
+    
+    input = input.toUpperCase();
+    input = input.replace(".EXE", "");
+    
+    if (input=="?") input = "HELP";
+    if (input=="") input = "HELP";
+    if (input=="LS") input = "DIR";
+    
+    // find a hidden pre in the html
+    var found = document.getElementById(input);
+    if (found) {
+        console.log("found command: " + input);
+        console.log("found text: " + found.innerHTML);
+        t1.print("\n"+found.innerHTML);
     } else {
-        t1.print('Unknown command or file name: ' + input);
-        t1.print('//TODO: make stuff happen here');
+        t1.print('Unknown command or file name: ' + input + '.EXE\n');
     }
     
-    t1.input('A:\> ', commandDotCom);
+    t1.input(promptTXT, commandDotCom);
 }
 
 function init(e) {
@@ -217,9 +226,8 @@ function init(e) {
     
     document.getElementById('monitor').appendChild(t1.html)
     
-    t1.print(bootupTXT, commandDotCom);
+    commandDotCom("BOOT");
     
-    t1.input('A:\> ', commandDotCom);
 }
 
 window.addEventListener("load",init);

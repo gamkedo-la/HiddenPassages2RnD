@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-		<title>MS-DOS</title>
-		<script src="game.js"></script>
-		<link href="stylesheet.css" rel="stylesheet">
-		<style>
-			body { background:black; margin:32px; font-size:32px; margin:0; padding:0; overflow:hidden; background:silver; }
-			#game { position:absolute; top:0px; left:0px; width:100%; height:100%; 
-                background-image:url(bg.jpg); 
-                margin:0; padding:0; }
-            #monitor { position:absolute; top:128px; left:410px;
-                 width:800px; height:600px; 
-                background:none; overflow:auto; 
-                perspective: 50px;
-                transform:rotateZ(3.5deg) rotateY(40deg);
-            }
-		</style>
-	</head>
-	<body>
+<head>
+    <meta charset="utf-8"/>
+    <title>MS-DOS</title>
+    <script src="game.js"></script>
+    <link href="stylesheet.css" rel="stylesheet">
+    <style>
+        body { background:#464749; margin:32px; font-size:32px; margin:0; padding:0; overflow:hidden; }
+        
+        #game { position:absolute; top:0px; left:0px; width:100%; height:100%; 
+            background-image:url(bg.jpg); 
+            background-repeat:no-repeat;
+            margin:0; padding:0; }
 
-		<div id='game'><div id='monitor'></div></div>
+        #monitor { position:absolute; top:160px; left:280px;
+                width:640px; height:480px; 
+            background:none; overflow:auto; 
+            perspective: 50px;
+            transform:rotateZ(3.5deg);
+        }
+        pre { display:none; }
+    </style>
+</head>
+<body>
 
-	</body>
+<div id='game'><div id='monitor'></div></div>
+        
+<pre id='BOOT'>
+HomeTeam (R) HT-DOS Version 3.22
+Copyright (C) 1989-1998 HTGD Inc.
+All rights reserved.
+
+Volume in drive A is TOPSCRET
+Volume Serial Number is 9A3E-085C
+</pre>
+
+<pre id='HELP'>
+For a list of installed programs
+type DIR and press ENTER.
+</pre>
+
+<pre id='BBS'>
+Connecting to COM port 0...
+Modem detected: HT Robotix 84-EX
+Dialing [Dark Secrit BBS] 
+ATDT14165554096
+Connected at 1200 baud!
+</pre>
+
+<pre id='DIR'>
+Volume in drive A is TOPSCRET
+Volume Serial Number is 9A3E-085C
+
+Directory of A:
+
+1998-05-31  10:29 AM &ltDIR&gt; .
+1998-05-31  10:29 AM &ltDIR&gt; ..
+1998-01-29  01:52 PM 1,024 DIR.EXE
+1998-01-29  01:52 PM 1,024 BBS.EXE
+            1 File(s)  4,096 bytes
+            2 Dir(s) 230,944 bytes free
+</pre>
+
+<pre id='HI'>
+GREETINGS.
+</pre>
+
+</body>
 </html>
