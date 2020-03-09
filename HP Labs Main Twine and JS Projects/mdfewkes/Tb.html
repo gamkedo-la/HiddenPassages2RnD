@@ -57,10 +57,12 @@
 	var partial = 1;
 	var slidePosition = 1;
 
-	var rowSize = 10;
-	var colSize = 30;
+	var rowSize = 20;
+	var colSize = 40;
 	var totalSlidePositions = 7-1;
 	var totalPartials = 7-1;
+
+	var maxVolume = 0.5
 
 	/*
 	Slide positions
@@ -83,23 +85,20 @@
 		if (slidePosition > 1) slidePosition = 1;
 		if (slidePosition < 0) slidePosition = 0;
 		slidePosition = scaleRange(0, 1, 1, 0.70711, slidePosition);
-		//console.log(slidePosition)
 
 		partial = (mouseY-top)/(bottom-top);
 		if (partial > 1.1) partial = 1.1;
 		if (partial < 0.1) partial = 0.1;
 		partial = 9-Math.ceil(partial*totalPartials+1);
-		//console.log(partial)
 
 		pitch.frequency.setValueAtTime(rootFreq * partial * slidePosition, context.currentTime + 0.001);
 
 		if (mousePressed && volume.gain.value == 0) {
-			volume.gain.setValueAtTime(1, context.currentTime + 0.001);
+			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
 		}
-		if (!mousePressed && volume.gain.value == 1) {
+		if (!mousePressed && volume.gain.value == maxVolume) {
 			volume.gain.setValueAtTime(0, context.currentTime + 0.001);
 		}
-		console.log(volume.gain.value)
 	}
 
 	function draw() {
