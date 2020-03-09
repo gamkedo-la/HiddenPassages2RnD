@@ -26,6 +26,17 @@
 	var audio_context = window.AudioContext || window.webkitAudioContext;
 	var context = new audio_context();
 
+	var pitch = context.createOscillator();
+	var volume = context.createGain();
+	pitch.type = 'sawtooth';
+	pitch.frequency.setValueAtTime(55, context.currentTime);
+	volume.gain.setValueAtTime(0, context.currentTime);
+
+	pitch.connect(volume);
+	volume.connect(context.destination);
+
+	pitch.start();
+
 	var canvas = document.getElementById('laCanvas');
 	var canvasContext = canvas.getContext('2d');
 
@@ -46,8 +57,8 @@
 	var partial = 1;
 	var slidePosition = 1;
 
-	var rowSize = 20;
-	var colSize = 20;
+	var rowSize = 10;
+	var colSize = 30;
 	var totalSlidePositions = 7-1;
 	var totalPartials = 7-1;
 
@@ -63,21 +74,39 @@
 	*/
 
 	function updateTrombone() {
-		var offsetX = canvas.width/2 - (colSize*totalSlidePositions)/2;
-		var offsetY = canvas.height/2 - (rowSize*totalPartials)/2;
+		var left = canvas.width/2 - (colSize*totalSlidePositions)/2;
+		var top = canvas.height/2 - (rowSize*totalPartials)/2;
 		var right = canvas.width/2 + (colSize*totalSlidePositions)/2;
 		var bottom = canvas.height/2 + (rowSize*totalPartials)/2;
 
-		slidePosition = mouseX - offsetX;
-		console.log(slidePosition)
-		partial = mouseY - offsetY + 1;
-		console.log(partial)
+		slidePosition = (mouseX-left)/(right-left);
+		if (slidePosition > 1) slidePosition = 1;
+		if (slidePosition < 0) slidePosition = 0;
+		slidePosition = scaleRange(0, 1, 1, 0.70711, slidePosition);
+		//console.log(slidePosition)
+
+		partial = (mouseY-top)/(bottom-top);
+		if (partial > 1.1) partial = 1.1;
+		if (partial < 0.1) partial = 0.1;
+		partial = 9-Math.ceil(partial*totalPartials+1);
+		//console.log(partial)
+
+		pitch.frequency.setValueAtTime(rootFreq * partial * slidePosition, context.currentTime + 0.001);
+
+		if (mousePressed && volume.gain.value == 0) {
+			volume.gain.setValueAtTime(1, context.currentTime + 0.001);
+		}
+		if (!mousePressed && volume.gain.value == 1) {
+			volume.gain.setValueAtTime(0, context.currentTime + 0.001);
+		}
+		console.log(volume.gain.value)
 	}
 
 	function draw() {
 		var offsetX = canvas.width/2 - (colSize*totalSlidePositions)/2;
 		var offsetY = canvas.height/2 - (rowSize*totalPartials-1)/2;
 
+		var lastOffset = 1;
 		for (var i = 0; i < totalSlidePositions; i++) {
 			for(var j = 0; j < totalPartials; j++) {
 				drawBox(offsetX+(i*colSize), offsetY+(j*rowSize), colSize, rowSize);
@@ -93,6 +122,11 @@
         canvasContext.fillStyle = 'rgb(0, 0, 0)';
         canvasContext.fillRect(x+1, y+1, w-2, h-2);
 
+	}
+
+	function scaleRange(inputStart, inputEnd, outputStart, outputEnd, value) {
+		var scale = (outputEnd - outputStart) / (inputEnd - inputStart);
+		return outputStart + ((value - inputStart) * scale);
 	}
 	
 	var mousePressed = false;
