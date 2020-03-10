@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <html>
-	<title>Trombone</title>
+	<title>Trumpet</title>
 
 <head>
 	<style>
@@ -26,19 +26,19 @@
 	window.addEventListener('keydown', keyDown);
 
 	var audio_context = window.AudioContext || window.webkitAudioContext;
-	var audioContext = new audio_context();
+	var context = new audio_context();
 
-	var pitch = audioContext.createOscillator();
-	var tone = audioContext.createBiquadFilter()
-	var volume = audioContext.createGain();
+	var pitch = context.createOscillator();
+	var tone = context.createBiquadFilter()
+	var volume = context.createGain();
 	pitch.type = 'sawtooth';
-	pitch.frequency.setValueAtTime(55, audioContext.currentTime);
+	pitch.frequency.setValueAtTime(55, context.currentTime);
 	tone.type = 'lowpass';
-	volume.gain.setValueAtTime(0, audioContext.currentTime);
+	volume.gain.setValueAtTime(0, context.currentTime);
 
 	pitch.connect(tone);
 	tone.connect(volume);
-	volume.connect(audioContext.destination);
+	volume.connect(context.destination);
 
 	pitch.start();
 
@@ -50,7 +50,7 @@
 	}
 
 	function loop() {
-		var now = audioContext.currentTime;
+		var now = context.currentTime;
 		
 		updateTrombone();
 		draw();
@@ -58,79 +58,102 @@
 		window.requestAnimationFrame(loop);
 	}
 
-	var rootFreq = 55;
+	var rootFreq = 110;
 	var partial = 1;
-	var slidePosition = 1;
+	var halfsteps = 0;
 
 	var rowSize = 20;
 	var colSize = 40;
-	var totalSlidePositions = 7-1;
 	var totalPartials = 8-1;
 
 	var maxVolume = 0.5
 
-	/*
-	Slide positions
-	1
-	0.94387
-	0.8909
-	0.8409
-	0.7937
-	0.74915
-	0.70711
-	*/
-
 	function updateTrombone() {
-		var left = canvas.width/2 - (colSize*totalSlidePositions)/2;
+		var left = canvas.width/2 - (colSize)/2;
 		var top = canvas.height/2 - (rowSize*totalPartials)/2;
-		var right = canvas.width/2 + (colSize*totalSlidePositions)/2;
+		var right = canvas.width/2 + (colSize)/2;
 		var bottom = canvas.height/2 + (rowSize*totalPartials)/2;
-
-		slidePosition = (mouseX-left)/(right-left);
-		if (slidePosition > 1) slidePosition = 1;
-		if (slidePosition < 0) slidePosition = 0;
-		slidePosition = scaleRange(0, 1, 1, 0.70711, slidePosition);
 
 		partial = (mouseY-top)/(bottom-top);
 		if (partial > 1.1) partial = 1.1;
 		if (partial < 0.1) partial = 0.1;
 		partial = 10-Math.ceil(partial*totalPartials+1);
 
-		pitch.frequency.setValueAtTime(rootFreq * partial * slidePosition, audioContext.currentTime + 0.001);
-		tone.frequency.setValueAtTime(pitch.frequency.value * 3, audioContext.currentTime + 0.001);
+		pitch.frequency.setValueAtTime(rootFreq * partial * valveLength(), context.currentTime + 0.001);
+		tone.frequency.setValueAtTime(pitch.frequency.value * 3, context.currentTime + 0.001);
 
 		if ((mousePressed || spacePressed) && volume.gain.value == 0) {
-			volume.gain.setValueAtTime(maxVolume, audioContext.currentTime + 0.001);
+			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
 		}
 		if ((!mousePressed & !spacePressed) && volume.gain.value == maxVolume) {
-			volume.gain.setValueAtTime(0, audioContext.currentTime + 0.001);
+			volume.gain.setValueAtTime(0, context.currentTime + 0.001);
 		}
 	}
 
 	function draw() {
-		var offsetX = canvas.width/2 - (colSize*totalSlidePositions)/2;
+		var offsetX = canvas.width/2 - (colSize)/2;
 		var offsetY = canvas.height/2 - (rowSize*totalPartials-1)/2;
 
 		var lastOffset = 1;
-		for (var i = 0; i < totalSlidePositions; i++) {
-			for(var j = 0; j < totalPartials; j++) {
-				drawBox(offsetX+(i*colSize), offsetY+(j*rowSize), colSize, rowSize);
-			}
+		for(var j = 0; j < totalPartials; j++) {
+			drawBox(offsetX, offsetY+(j*rowSize), colSize, rowSize);
 		}
+
+		colorText("Z", canvas.width/2 - 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("X", canvas.width/2, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("C", canvas.width/2 + 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+
+
 	}
 
 	function drawBox(x, y, w, h) {
 		canvasContext.fillStyle = 'rgb(255, 255, 255)';
-		canvasContext.fillRect(x, y, w, h);
+        canvasContext.fillRect(x, y, w, h);
 
-		canvasContext.fillStyle = 'rgb(0, 0, 0)';
-		canvasContext.fillRect(x+1, y+1, w-2, h-2);
+        canvasContext.fillStyle = 'rgb(0, 0, 0)';
+        canvasContext.fillRect(x+1, y+1, w-2, h-2);
 
-	}   
+	}
 
-	function scaleRange(inputStart, inputEnd, outputStart, outputEnd, value) {
-		var scale = (outputEnd - outputStart) / (inputEnd - inputStart);
-		return outputStart + ((value - inputStart) * scale);
+
+	function colorText(showWords, textX, textY) {
+		canvasContext.textAlign = "center";
+		canvasContext.font = "20px Arial";
+		canvasContext.fillStyle = "White";
+		canvasContext.fillText(showWords, textX, textY);
+	}
+
+	function valveLength() {
+		if (halfsteps < 0) halfsteps = 0;
+		if (halfsteps > 6) halfsteps = 6;
+		switch (halfsteps) {
+			case 0:
+				return 1;
+			case 1:
+				return 0.94387;
+			case 2:
+				return 0.8909;
+			case 3:
+				return 0.8409;
+			case 4:
+				return 0.7937;
+			case 5:
+				return 0.74915;
+			case 6:
+				return 0.70711;
+			default:
+				return 1;
+		}
+		/*
+		Slide positions
+		1
+		0.94387
+		0.8909
+		0.8409
+		0.7937
+		0.74915
+		0.70711
+		*/
 	}
 	
 	var mousePressed = false;
@@ -154,16 +177,43 @@
 	}
 
 	var spacePressed = false;
+	var valve1 = false;
+	var valve2 = false;
+	var valve3 = false;
 
 	function keyUp(evt) {
 		if (evt.keyCode == 32) {
 			spacePressed = false;
+		}
+		if (evt.keyCode == 90 && valve1) {
+			halfsteps -= 2;
+			valve1 = false;
+		}
+		if (evt.keyCode == 88 && valve2) {
+			halfsteps -= 1;
+			valve2 = false;
+		}
+		if (evt.keyCode == 67 && valve3) {
+			halfsteps -= 3;
+			valve3 = false;
 		}
 	}
 
 	function keyDown(evt) {
 		if (evt.keyCode == 32) {
 			spacePressed = true;
+		}
+		if (evt.keyCode == 90 && !valve1) {
+			halfsteps += 2;
+			valve1 = true;
+		}
+		if (evt.keyCode == 88 && !valve2) {
+			halfsteps += 1;
+			valve2 = true;
+		}
+		if (evt.keyCode == 67 && !valve3) {
+			halfsteps += 3;
+			valve3 = true;
 		}
 	}
 
