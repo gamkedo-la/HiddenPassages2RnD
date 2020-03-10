@@ -22,17 +22,22 @@
 	document.addEventListener('pointerdown', mouseDown);
 	document.addEventListener('pointerup', mouseUp);
 	document.getElementById('laCanvas').addEventListener('pointermove', calculateMousePos);
+	window.addEventListener('keyup', keyUp);
+	window.addEventListener('keydown', keyDown);
 
 	var audio_context = window.AudioContext || window.webkitAudioContext;
 	var context = new audio_context();
 
 	var pitch = context.createOscillator();
+	var tone = context.createBiquadFilter()
 	var volume = context.createGain();
 	pitch.type = 'sawtooth';
 	pitch.frequency.setValueAtTime(55, context.currentTime);
+	tone.type = 'lowpass';
 	volume.gain.setValueAtTime(0, context.currentTime);
 
-	pitch.connect(volume);
+	pitch.connect(tone);
+	tone.connect(volume);
 	volume.connect(context.destination);
 
 	pitch.start();
@@ -92,6 +97,7 @@
 		partial = 9-Math.ceil(partial*totalPartials+1);
 
 		pitch.frequency.setValueAtTime(rootFreq * partial * slidePosition, context.currentTime + 0.001);
+		tone.frequency.setValueAtTime(pitch.frequency.value * 3, context.currentTime + 0.001);
 
 		if (mousePressed && volume.gain.value == 0) {
 			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
@@ -146,6 +152,18 @@
 		root = document.documentElement;
 		mouseX = evt.clientX - rect.left - root.scrollLeft;
 		mouseY = evt.clientY - rect.top - root.scrollTop;
+	}
+
+	function keyUp(evt) {
+		if (evt.keyCode == 32 && volume.gain.value == maxVolume) {
+			volume.gain.setValueAtTime(0, context.currentTime + 0.001);
+		}
+	}
+
+	function keyDown(evt) {
+		if (evt.keyCode == 32 && volume.gain.value == 0) {
+			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
+		}
 	}
 
 	
