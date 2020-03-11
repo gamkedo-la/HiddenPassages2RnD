@@ -2,7 +2,7 @@
 // based on work by https://github.com/eosterberg/terminaljs
 
 const promptDOS = "A:\\>";
-const promptBBS = "Main Menu........>";
+const promptBBS = "Main Menu: ";
 
 var incomingModemData = ""; // COM1 buffer =)
 var TerminalOutput = null; // this._output
