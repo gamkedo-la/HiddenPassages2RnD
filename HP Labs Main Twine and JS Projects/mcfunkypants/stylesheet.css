@@ -6,3 +6,32 @@
     font-style: normal;
 }
 
+body { 
+    background:#464749;
+    font-size:32px;
+    margin:0; padding:0;
+    overflow:hidden;
+}
+
+#game { 
+    position:absolute; 
+    top:0px; left:0px; 
+    width:100%; height:100%; 
+    background-image:url(bg.jpg); 
+    background-repeat:no-repeat;
+    margin:0; padding:0; 
+}
+
+#monitor { 
+    position:absolute;
+    top:160px; left:280px;
+    width:640px; height:480px; 
+    background:none;
+    overflow:auto; 
+    perspective: 50px;
+    transform:rotateZ(3.5deg);
+}
+
+pre { 
+    display:none; 
+}

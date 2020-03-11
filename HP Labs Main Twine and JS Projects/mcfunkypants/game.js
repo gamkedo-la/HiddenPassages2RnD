@@ -3,6 +3,22 @@
 
 const promptTXT = "A:\\>";
 
+var incomingModemData = ""; // COM1 buffer =)
+var TerminalOutput = null; // this._output
+
+// animate like a 1200 baud modem, 150 bytes per second
+function ModemPoll() { 
+
+    if (incomingModemData && incomingModemData.length) {
+        TerminalOutput.innerHTML += incomingModemData[0]; // output one char
+        incomingModemData = incomingModemData.substr(1); // remove from COM1 buffer
+    }
+
+    setTimeout(ModemPoll,1000/150); // 1200 baud is 150 bytes per second
+}
+
+ModemPoll(); // NOW!!! fixme: wait for onload?
+
 var MSDOS = (function () {
 
 	var PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3;
@@ -23,7 +39,8 @@ var MSDOS = (function () {
 
 	function promptInput(terminalObj, message, PROMPT_TYPE, callback) {
 
-		var shouldDisplayInput = (PROMPT_TYPE === PROMPT_INPUT);
+        var shouldDisplayInput = (PROMPT_TYPE === PROMPT_INPUT);
+        var shouldPrintInput = false; // $CTK don't output after hitting enter
 		var inputField = document.createElement('input');
 		inputField.style.position = 'absolute';
 		inputField.style.zIndex = '-100';
@@ -66,7 +83,7 @@ var MSDOS = (function () {
 			if (PROMPT_TYPE === PROMPT_CONFIRM || e.which === 13) {
 				terminalObj._input.style.display = 'none'
 				var inputValue = inputField.value
-				if (shouldDisplayInput) terminalObj.print(inputValue)
+				if (shouldPrintInput) terminalObj.print(inputValue)
 				terminalObj.html.removeChild(inputField)
 				if (typeof(callback) === 'function') {
 					if (PROMPT_TYPE === PROMPT_CONFIRM) {
@@ -95,16 +112,26 @@ var MSDOS = (function () {
 		this._cursor = document.createElement('span');
 		this._input = document.createElement('span');//p'); //the full element administering the user input, including cursor
 
-		this._shouldBlinkCursor = true;
+        this._shouldBlinkCursor = true;
+        
+        TerminalOutput = this._output;
 
         this.cls = function() {
             this._output.innerHTML = "";
         }
         
+        this.modem = function (message) { // same as print except teletype animation
+            incomingModemData += message;
+        }
+
+////////////////////////////////////////////////////////////////
         this.print = function (message) {
+////////////////////////////////////////////////////////////////            
             
-            // pre mode
-            this._output.innerHTML += message;
+            // pre mode - pretty easy! instant, WORKS!
+            // this._output.innerHTML += message;
+
+            this.modem(message);
             
             /*
             // block divs aplenty
@@ -213,7 +240,7 @@ function commandDotCom(input) {
     if (found) {
         console.log("found command: " + input);
         console.log("found text: " + found.innerHTML);
-        t1.print("\n"+found.innerHTML);
+        t1.print(found.innerHTML.trimLeft()); // trimmed because our PREs have leading crlf
     } else {
         t1.print('Unknown command or file name: ' + input + '.EXE\n');
     }
