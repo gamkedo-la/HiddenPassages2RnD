@@ -232,6 +232,15 @@ function commandDotCom(input) {
     if (input=="?") input = "HELP";
     if (input=="") input = "HELP";
     if (input=="LS") input = "DIR";
+
+    // special commands
+    if (input=="EXIT" ||
+        input=="QUIT" ||
+        input=="BACK") {
+        console.log("User requested that we QUIT.");
+        // FIXME: prompt y/n?
+        window.history.back();
+    }
     
     // find a hidden pre in the html
     var found = document.getElementById(input);
@@ -250,7 +259,8 @@ function init(e) {
 
     console.log("INIT!");
     
-    document.getElementById('monitor').appendChild(t1.html)
+    document.getElementById('monitor').appendChild(t1.html);
+    
     
     commandDotCom("BOOT");
 
