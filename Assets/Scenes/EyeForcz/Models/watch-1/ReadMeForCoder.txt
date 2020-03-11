@@ -1,4 +1,7 @@
--Illusion-1 (ring at the front) turns counterclockwise around the watchface
--Illusion-2 (ring at the back) turns clockwise around the watchface
--Illusion-3 spins in Z axis ccw/cc (up to you)
+-Illusion-1 (ring at the front) turns CW around the watchface
+-Illusion-2 (ring at the back) turns CCW around the watchface
+-Illusion-3 - DELETE PLS
+-chuchu-illu-1 turns CW looking from top
+-chuchu-illu-2 turns CW looking from top (a bit faster)
+-chuchu-train drives CCW looking from top
 -everything else is static (except watchhands ofc)
