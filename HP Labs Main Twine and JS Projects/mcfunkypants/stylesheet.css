@@ -32,6 +32,17 @@ body {
     transform:rotateZ(3.5deg);
 }
 
+#powerButton {
+    position:absolute;
+    display:block;
+    margin:0; border:0; outline:0; padding:0;
+    top:0px; left:0px;
+    width:128px; height:128px; 
+    background:url(powerButton.png);
+    opacity:0.5;
+}
+#powerButton:hover { opacity:1; }
+
 pre { 
     display:none; 
 }

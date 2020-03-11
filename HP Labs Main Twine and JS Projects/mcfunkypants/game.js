@@ -17,8 +17,6 @@ function ModemPoll() {
     setTimeout(ModemPoll,1000/150); // 1200 baud is 150 bytes per second
 }
 
-ModemPoll(); // NOW!!! fixme: wait for onload?
-
 var MSDOS = (function () {
 
 	var PROMPT_INPUT = 1, PROMPT_PASSWORD = 2, PROMPT_CONFIRM = 3;
@@ -249,11 +247,14 @@ function commandDotCom(input) {
 }
 
 function init(e) {
+
     console.log("INIT!");
     
     document.getElementById('monitor').appendChild(t1.html)
     
     commandDotCom("BOOT");
+
+    ModemPoll();
     
 }
 
