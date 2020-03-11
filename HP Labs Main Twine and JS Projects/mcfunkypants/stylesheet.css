@@ -25,9 +25,9 @@ body {
 #monitor { 
     position:absolute;
     top:160px; left:280px;
-    width:640px; height:480px; 
+    width:1024px; height:480px; 
     background:none;
-    overflow:auto; 
+    overflow:hidden; 
     perspective: 50px;
     transform:rotateZ(3.5deg);
 }

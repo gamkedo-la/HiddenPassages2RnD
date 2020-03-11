@@ -1,20 +1,29 @@
 // simple MS-DOS style terminal with "DIR" etc
 // based on work by https://github.com/eosterberg/terminaljs
 
-const promptTXT = "A:\\>";
+const promptDOS = "A:\\>";
+const promptBBS = "Main Menu........>";
 
 var incomingModemData = ""; // COM1 buffer =)
 var TerminalOutput = null; // this._output
+var onBBS = false;
 
 // animate like a 1200 baud modem, 150 bytes per second
 function ModemPoll() { 
 
+    var delay = 0; // extra "lag"
     if (incomingModemData && incomingModemData.length) {
-        TerminalOutput.innerHTML += incomingModemData[0]; // output one char
-        incomingModemData = incomingModemData.substr(1); // remove from COM1 buffer
+        var char = incomingModemData[0];
+        // special case: we need all 4 bytes at once
+        if (incomingModemData.startsWith("&gt;")) { char = "&gt;"; }
+        if (incomingModemData.startsWith("&lt;")) { char = "&lt;"; }
+        TerminalOutput.innerHTML += char; // output one char
+        incomingModemData = incomingModemData.substr(char.length); // remove from COM1 buffer
+        // special fx: go slower if there's a ... in the text
+        if (char=='.' && incomingModemData[0]=='.') delay = 500;
     }
 
-    setTimeout(ModemPoll,1000/150); // 1200 baud is 150 bytes per second
+    setTimeout(ModemPoll,(1000/150)+delay); // 1200 baud is 150 bytes per second
 }
 
 var MSDOS = (function () {
@@ -191,18 +200,17 @@ var MSDOS = (function () {
 			this._shouldBlinkCursor = (bool === 'TRUE' || bool === '1' || bool === 'YES');
 		}
 
-		this._input.appendChild(this._inputLine);
+        // CSS inits
+        this._input.appendChild(this._inputLine);
 		this._input.appendChild(this._cursor);
 		this._innerWindow.appendChild(this._output);
 		this._innerWindow.appendChild(this._input);
 		this.html.appendChild(this._innerWindow);
-
 		//this.setBackgroundColor('black');
 		this.setTextColor('rgba(0,200,64,1)');
-		this.setTextSize('24px');
+		this.setTextSize('22px');
 		this.setWidth('100%');
 		this.setHeight('100%');
-
 		this.html.style.fontFamily = 'BlockZone, Monaco, Courier, Terminal';
         this.html.style.margin = '0';
         this.html.style.whiteSpace = "pre"; 
@@ -214,7 +222,9 @@ var MSDOS = (function () {
         this._cursor.style.background = 'rgba(0,200,64,1)';
 		this._cursor.innerHTML = 'C'; //put something in the cursor..
 		this._cursor.style.display = 'none'; //then hide it
-		this._input.style.display = 'none';
+        this._input.style.display = 'none';
+        this.html.style.lineHeight = '16px';
+        this.html.style.letterSpacing = '-1px'; // to avoid small gaps
 	}
 
 	return TerminalConstructor;
@@ -232,6 +242,8 @@ function commandDotCom(input) {
     if (input=="?") input = "HELP";
     if (input=="") input = "HELP";
     if (input=="LS") input = "DIR";
+
+    if (input=="BBS") onBBS = true;
 
     // special commands
     if (input=="EXIT" ||
@@ -252,7 +264,7 @@ function commandDotCom(input) {
         t1.print('Unknown command or file name: ' + input + '.EXE\n');
     }
     
-    t1.input(promptTXT, commandDotCom);
+    t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
 }
 
 function init(e) {
