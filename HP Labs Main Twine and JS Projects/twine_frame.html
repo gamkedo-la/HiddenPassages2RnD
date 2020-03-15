@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+</head>
+<center><a href="index.html" id="phrase"></a><br/>
+<iframe id="frame" src="" width="700" height="500"></iframe></center>
+<script>
+
+function getUrlVars() { // borrowed from https://html-online.com/articles/get-url-parameters-javascript/
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function replaceAll(inStr, replThis, replWith) {
+	var wasStr;
+	do {
+		wasStr = inStr;
+		inStr = inStr.replace(replThis, replWith);
+	} while(wasStr != inStr);
+	return inStr;
+}
+
+var args = getUrlVars();
+window.onload = function() {
+	phrasePart = document.getElementById("phrase");
+	phraseArg = args["phrase"];
+	phraseArg = replaceAll(phraseArg,"_", " ");
+	phrasePart.innerHTML = phraseArg;
+
+	framePart = document.getElementById("frame");
+	fileArg = args["file"];
+	fileArg = replaceAll(fileArg, "_", "/");
+	fileArg = fileArg.replace("~", ".html");
+	framePart.src = fileArg;
+}
+</script>
+</html>
