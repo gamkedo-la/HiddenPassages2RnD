@@ -12,15 +12,29 @@ var onBBS = false;
 function ModemPoll() { 
 
     var delay = 0; // extra "lag"
+    var outputSomething = false;
     if (incomingModemData && incomingModemData.length) {
         var char = incomingModemData[0];
         // special case: we need all 4 bytes at once
         if (incomingModemData.startsWith("&gt;")) { char = "&gt;"; }
         if (incomingModemData.startsWith("&lt;")) { char = "&lt;"; }
+        
         TerminalOutput.innerHTML += char; // output one char
+        outputSomething = true;
+        
         incomingModemData = incomingModemData.substr(char.length); // remove from COM1 buffer
         // special fx: go slower if there's a ... in the text
         if (char=='.' && incomingModemData[0]=='.') delay = 500;
+    }
+
+    // just finished?
+    if (incomingModemData=="" && outputSomething) {
+        console.log("Finished printing all incoming modem data.");
+        if (pendingBufferedCommand) {
+            console.log("Running a pending buffered command: " + pendingBufferedCommand);
+            commandDotCom(pendingBufferedCommand);
+            pendingBufferedCommand = null;
+        }
     }
 
     setTimeout(ModemPoll,(1000/150)+delay); // 1200 baud is 150 bytes per second
@@ -231,13 +245,24 @@ var MSDOS = (function () {
 }());
 
 var t1 = new MSDOS();
-
+var pendingBufferedCommand = "";
 function commandDotCom(input) {
-    
-    t1.cls(); // clear
     
     input = input.toUpperCase();
     input = input.replace(".EXE", "");
+
+    if (input=="DEFRAG2") {
+        TerminalOutput.innerHTML = "<div style='position:absolute; margin:0; padding:0; top:4px; left:0px; line-height:16px;'>" +  TerminalOutput.innerHTML + "</div>";
+        pendingBufferedCommand = null;
+        // start drawing on top in a new pre
+    } else { // normal:
+        if (input=="DEFRAG") { 
+            pendingBufferedCommand = "DEFRAG2"; 
+        } else {
+            pendingBufferedCommand = null;
+        }
+        t1.cls(); // clear
+    }
     
     if (input=="?") input = "HELP";
     if (input=="") input = "HELP";
@@ -264,7 +289,7 @@ function commandDotCom(input) {
         t1.print('Unknown command or file name: ' + input + '.EXE\n');
     }
     
-    t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
+    if (!pendingBufferedCommand) t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
 }
 
 function init(e) {
