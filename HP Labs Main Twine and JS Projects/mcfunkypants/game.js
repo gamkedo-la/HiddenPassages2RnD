@@ -8,6 +8,11 @@ var incomingModemData = ""; // COM1 buffer =)
 var TerminalOutput = null; // this._output
 var onBBS = false;
 
+var soundON = false;
+var keyboardSound;
+var modemSound;
+var discSound;
+
 // animate like a 1200 baud modem, 150 bytes per second
 function ModemPoll() { 
 
@@ -39,6 +44,16 @@ function ModemPoll() {
 
     setTimeout(ModemPoll,(1000/150)+delay); // 1200 baud is 150 bytes per second
 }
+
+function isPlaying(thisAudio) {
+    return thisAudio
+        && thisAudio.currentTime > 0
+        && !thisAudio.paused
+        && !thisAudio.ended
+        && thisAudio.readyState > 2;
+}
+
+// REWIND: my_audio.load(); 
 
 var MSDOS = (function () {
 
@@ -92,7 +107,12 @@ var MSDOS = (function () {
 		}
 
 		inputField.onkeydown = function (e) {
-			if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
+            
+            soundON = true;
+            if (isPlaying(keyboardSound)) keyboardSound.load(); // rewind!
+            keyboardSound.play();
+            
+            if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
 				e.preventDefault()
 			} else if (shouldDisplayInput && e.which !== 13) {
 				setTimeout(function () {
@@ -248,8 +268,14 @@ var t1 = new MSDOS();
 var pendingBufferedCommand = "";
 function commandDotCom(input) {
     
+    if (soundON) discSound.play();
+    
     input = input.toUpperCase();
     input = input.replace(".EXE", "");
+
+    if (input=="BBS") {
+        modemSound.play();
+    }
 
     if (input=="DEFRAG2") {
         TerminalOutput.innerHTML = "<div style='position:absolute; margin:0; padding:0; top:4px; left:0px; line-height:16px;'>" +  TerminalOutput.innerHTML + "</div>";
@@ -293,16 +319,13 @@ function commandDotCom(input) {
 }
 
 function init(e) {
-
     console.log("INIT!");
-    
+    keyboardSound = document.getElementById("keyboardSound");
+    modemSound = document.getElementById("modemSound");
+    discSound = document.getElementById("discSound");
     document.getElementById('monitor').appendChild(t1.html);
-    
-    
     commandDotCom("BOOT");
-
     ModemPoll();
-    
 }
 
 window.addEventListener("load",init);
