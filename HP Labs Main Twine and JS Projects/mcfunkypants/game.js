@@ -108,7 +108,7 @@ var MSDOS = (function () {
 
 		inputField.onkeydown = function (e) {
             
-            soundON = true;
+            soundON = true; // allow sounds after the first this user-initiated event
             if (isPlaying(keyboardSound)) keyboardSound.load(); // rewind!
             keyboardSound.play();
             
@@ -116,7 +116,7 @@ var MSDOS = (function () {
 				e.preventDefault()
 			} else if (shouldDisplayInput && e.which !== 13) {
 				setTimeout(function () {
-					terminalObj._inputLine.textContent = inputField.value
+					terminalObj._inputLine.textContent = inputField.value.toUpperCase()
 				}, 1)
 			}
 		}
@@ -234,7 +234,8 @@ var MSDOS = (function () {
 			this._shouldBlinkCursor = (bool === 'TRUE' || bool === '1' || bool === 'YES');
 		}
 
-        // CSS inits
+        // CSS inits - FIXME: remove!!!!! scrape and stuff into the .css file
+        // this hardcoded tech debt interferes with the stylesheet
         this._input.appendChild(this._inputLine);
 		this._input.appendChild(this._cursor);
 		this._innerWindow.appendChild(this._output);
@@ -278,9 +279,9 @@ function commandDotCom(input) {
     }
 
     if (input=="DEFRAG2") {
-        TerminalOutput.innerHTML = "<div style='position:absolute; margin:0; padding:0; top:4px; left:0px; line-height:16px;'>" +  TerminalOutput.innerHTML + "</div>";
+        // start drawing on top in a new pre // FIXME doesn't quite line up?
+        TerminalOutput.innerHTML = "";//"<pre style='position:absolute; margin:0; padding:0; top:4px; left:0px; line-height:16px;'>" +  TerminalOutput.innerHTML + "</pre>";
         pendingBufferedCommand = null;
-        // start drawing on top in a new pre
     } else { // normal:
         if (input=="DEFRAG") { 
             pendingBufferedCommand = "DEFRAG2"; 
@@ -312,7 +313,7 @@ function commandDotCom(input) {
         console.log("found text: " + found.innerHTML);
         t1.print(found.innerHTML.trimLeft()); // trimmed because our PREs have leading crlf
     } else {
-        t1.print('Unknown command or file name: ' + input + '.EXE\n');
+        t1.print('Unknown command or file name: ' + input + '.EXE\nHint: try typing DIR then pressing enter.\n');
     }
     
     if (!pendingBufferedCommand) t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
