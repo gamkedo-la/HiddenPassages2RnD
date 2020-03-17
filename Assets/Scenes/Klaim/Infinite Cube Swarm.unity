@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 232354089}
   - component: {fileID: 232354088}
   m_Layer: 0
-  m_Name: puzzle
+  m_Name: puzzle_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   random_max_speed: 0.5
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 82
+  camera_view_size_per_side: 90
   change_movement_randomly: 1
 --- !u!4 &232354089
 Transform:
@@ -316,6 +316,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &408641165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 408641167}
+  - component: {fileID: 408641166}
+  m_Layer: 0
+  m_Name: puzzle_6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &408641166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408641165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 40
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &408641167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408641165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &601744789
 GameObject:
@@ -416,6 +491,456 @@ MonoBehaviour:
   screen_resolution: {x: 0, y: 0}
   min_square_side_size: 480
   min_side_padding: 100
+--- !u!1 &806796879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 806796881}
+  - component: {fileID: 806796880}
+  m_Layer: 0
+  m_Name: puzzle_7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &806796880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806796879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 48
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &806796881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806796879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1158874251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158874253}
+  - component: {fileID: 1158874252}
+  m_Layer: 0
+  m_Name: puzzle_8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1158874252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158874251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 56
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &1158874253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158874251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1189433595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1189433597}
+  - component: {fileID: 1189433596}
+  m_Layer: 0
+  m_Name: puzzle_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1189433596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189433595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 24
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &1189433597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189433595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1209684851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209684853}
+  - component: {fileID: 1209684852}
+  m_Layer: 0
+  m_Name: puzzle_5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1209684852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209684851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 32
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &1209684853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209684851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1255268755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255268757}
+  - component: {fileID: 1255268756}
+  m_Layer: 0
+  m_Name: puzzle_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1255268756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255268755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 16
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &1255268757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255268755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1355289567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355289569}
+  - component: {fileID: 1355289568}
+  m_Layer: 0
+  m_Name: puzzle_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1355289568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355289567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FRONT_BACKGROUND_Z: 8
+  BACK_BACKGROUND_Z: 10000
+  transition_back_to_front: 0
+  transition_front_to_back: 0
+  destroy_when_farther_than_background: 0
+  perspective_enabled: 0
+  initial_entry_speed: -1000
+  entry_acceleration: -1
+  entry_max_speed: 80
+  initial_exit_speed: 1000
+  exit_acceleration: 2
+  exit_max_speed: 100
+  max_z_speed: 100
+  z_speed: 0
+  z_acceleration: 0
+  target_z: 0
+  tile_prefab: {fileID: 6324385585655782861, guid: e55e8c7c6c46c2045873b86ef3a3d233,
+    type: 3}
+  min_tiles_per_side: 3
+  overlap: {x: 0, y: 0}
+  offset: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  rotation: 0
+  max_acceleration: 1
+  max_speed: 1
+  random_max_acceleration: 0.5
+  random_max_speed: 0.5
+  random_max_rotation: 0
+  random_changes_every_secs: 15
+  camera_view_size_per_side: 90
+  change_movement_randomly: 1
+--- !u!4 &1355289569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355289567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1831630115
 GameObject:
   m_ObjectHideFlags: 0
