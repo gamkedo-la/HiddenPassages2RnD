@@ -7,8 +7,9 @@ public class CoreGameplay : MonoBehaviour
     private struct Tile
     {
         public Transform tile;
-        public Transform cube;
         public Transform boundaries;
+        public Transform cube;
+        public Transform center;
     };
 
     private Tile[] puzzle_tiles;
@@ -16,9 +17,12 @@ public class CoreGameplay : MonoBehaviour
     public float resize_speed = 1.0f;
     public float resize_min = 0.5f;
     public float resize_max = 1.0f;
-    public float current_size = 1.0f;
 
     public Vector3 rotation_speed = Vector3.one;
+
+    public float x_axis_move_speed = 1.0f;
+    public float x_axis_min = 0.0f;
+    public float x_axis_max = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +61,19 @@ public class CoreGameplay : MonoBehaviour
         if (Input.GetKey(KeyCode.End))
             rotate_puzzle_tiles(Vector3.back);
 
+        if (Input.GetKey(KeyCode.W))
+            move_puzzle_tiles_along_x_axis(1.0f);
+
+        if (Input.GetKey(KeyCode.S))
+            move_puzzle_tiles_along_x_axis(-1.0f);
+
+
+        if (Input.GetKey(KeyCode.A))
+            rotate_puzzle_tiles_along_y_axis(1.0f);
+
+        if (Input.GetKey(KeyCode.D))
+            rotate_puzzle_tiles_along_y_axis(-1.0f);
+
 
     }
 
@@ -71,6 +88,7 @@ public class CoreGameplay : MonoBehaviour
             tile.tile = tiles[i].transform;
             tile.boundaries = tile.tile.Find("Boundaries");
             tile.cube = tile.boundaries.Find("Cube");
+            tile.center = tile.boundaries.Find("Center");
 
             puzzle_tiles[i] = tile;
         }
@@ -79,8 +97,8 @@ public class CoreGameplay : MonoBehaviour
     void resize_puzzle_tiles(float factor)
     {
         var growth = factor * (resize_speed * Time.deltaTime);
-        var max_scale = new Vector3(resize_max, resize_max, resize_max);
-        var min_scale = new Vector3(resize_min, resize_min, resize_min);
+        var max_scale = Vector3.one * resize_max;
+        var min_scale = Vector3.one * resize_min;
 
         foreach (var tile in puzzle_tiles)
         {
@@ -101,8 +119,35 @@ public class CoreGameplay : MonoBehaviour
         foreach (var tile in puzzle_tiles)
         {
             tile.cube.Rotate(rotation);
+            tile.center.Rotate(rotation);
         }
     }
 
+    void move_puzzle_tiles_along_x_axis(float factor)
+    {
+        var max_pos = Vector3.right * x_axis_max;
+        var min_pos = Vector3.right * x_axis_min;
 
+        var speed = factor * (x_axis_move_speed * Time.deltaTime);
+        var translation = Vector3.right * speed;
+
+        foreach (var tile in puzzle_tiles)
+        {
+            var new_position = tile.cube.localPosition + translation;
+            new_position = Vector3.Min(new_position, max_pos);
+            new_position = Vector3.Max(new_position, min_pos);
+            tile.cube.localPosition = new_position;
+        }
+    }
+
+    void rotate_puzzle_tiles_along_y_axis(float factor)
+    {
+        var rotation = rotation_speed * Time.deltaTime;
+        rotation.y *= factor;
+        
+        foreach (var tile in puzzle_tiles)
+        {
+            tile.boundaries.Rotate(rotation);
+        }
+    }
 }

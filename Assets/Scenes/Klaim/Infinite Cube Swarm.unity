@@ -241,8 +241,10 @@ MonoBehaviour:
   resize_speed: 0.66
   resize_min: 0.5
   resize_max: 1
-  current_size: 1
   rotation_speed: {x: 100, y: 100, z: 100}
+  x_axis_move_speed: 1
+  x_axis_min: 0
+  x_axis_max: 1
 --- !u!1 &232354087
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,10 +298,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -334,7 +336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &408641166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,10 +373,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -508,7 +510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &806796880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,10 +547,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -583,7 +585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1158874252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,10 +622,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -658,7 +660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1189433596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,10 +697,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -733,7 +735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1209684852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,10 +772,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -808,7 +810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1255268756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,10 +847,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
@@ -883,7 +885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1355289568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,10 +922,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   rotation: 0
-  max_acceleration: 1
-  max_speed: 1
-  random_max_acceleration: 0.5
-  random_max_speed: 0.5
+  max_acceleration: 0.3
+  max_speed: 0.3
+  random_max_acceleration: 0.3
+  random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
   camera_view_size_per_side: 90
