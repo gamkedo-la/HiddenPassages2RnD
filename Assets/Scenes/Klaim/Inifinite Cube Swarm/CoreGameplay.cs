@@ -29,12 +29,17 @@ public class CoreGameplay : MonoBehaviour
     public Vector3 color_min = Vector3.zero;
     public Vector3 color_max = Vector3.one;
 
+    private enum EvenOrOdd
+    {
+        Even, Odd
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         global_light = GameObject.Find("Directional Light").transform;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -103,22 +108,42 @@ public class CoreGameplay : MonoBehaviour
 
 
         if (Input.GetKey(KeyCode.Keypad4))
-            translate_color_of_tiles_cubes(Vector3.left);
+            translate_color_of_tiles_cubes(Vector3.left, EvenOrOdd.Even);
 
         if (Input.GetKey(KeyCode.Keypad6))
-            translate_color_of_tiles_cubes(Vector3.right);
+            translate_color_of_tiles_cubes(Vector3.right, EvenOrOdd.Even);
 
         if (Input.GetKey(KeyCode.Keypad8))
-            translate_color_of_tiles_cubes(Vector3.up);
+            translate_color_of_tiles_cubes(Vector3.up, EvenOrOdd.Even);
 
         if (Input.GetKey(KeyCode.Keypad5))
-            translate_color_of_tiles_cubes(Vector3.down);
+            translate_color_of_tiles_cubes(Vector3.down, EvenOrOdd.Even);
 
         if (Input.GetKey(KeyCode.Keypad9))
-            translate_color_of_tiles_cubes(Vector3.forward);
+            translate_color_of_tiles_cubes(Vector3.forward, EvenOrOdd.Even);
 
         if (Input.GetKey(KeyCode.Keypad7))
-            translate_color_of_tiles_cubes(Vector3.back);
+            translate_color_of_tiles_cubes(Vector3.back, EvenOrOdd.Even);
+
+
+
+        if (Input.GetKey(KeyCode.Z))
+            translate_color_of_tiles_cubes(Vector3.left, EvenOrOdd.Odd);
+
+        if (Input.GetKey(KeyCode.X))
+            translate_color_of_tiles_cubes(Vector3.right, EvenOrOdd.Odd);
+
+        if (Input.GetKey(KeyCode.C))
+            translate_color_of_tiles_cubes(Vector3.up, EvenOrOdd.Odd);
+
+        if (Input.GetKey(KeyCode.V))
+            translate_color_of_tiles_cubes(Vector3.down, EvenOrOdd.Odd);
+
+        if (Input.GetKey(KeyCode.B))
+            translate_color_of_tiles_cubes(Vector3.forward, EvenOrOdd.Odd);
+
+        if (Input.GetKey(KeyCode.N))
+            translate_color_of_tiles_cubes(Vector3.back, EvenOrOdd.Odd);
 
 
     }
@@ -209,7 +234,7 @@ public class CoreGameplay : MonoBehaviour
         }
     }
 
-    void translate_color_of_tiles_cubes(Vector3 factor)
+    void translate_color_of_tiles_cubes(Vector3 factor, EvenOrOdd even_or_odd)
     {
         var color_translation = color_translate_speed * Time.deltaTime;
         color_translation.x *= factor.x;
@@ -226,8 +251,23 @@ public class CoreGameplay : MonoBehaviour
         min_color.y *= color_min.y;
         min_color.z *= color_min.z;
 
+        bool current_is_even = false;
         foreach (var tile in puzzle_tiles)
         {
+            current_is_even = !current_is_even;
+
+            switch (even_or_odd)
+            {
+                case EvenOrOdd.Even:
+                    if (!current_is_even)
+                        continue;
+                    break;
+                case EvenOrOdd.Odd:
+                    if (current_is_even)
+                        continue;
+                    break;
+            }
+
             var renderer = tile.cube.GetComponent<Renderer>();
             var material = renderer.materials[0];
             var initial_color = material.color;
@@ -238,7 +278,6 @@ public class CoreGameplay : MonoBehaviour
             new_color = Vector3.Max(new_color, min_color);
 
             material.color = new Color(new_color.x, new_color.y, new_color.z);
-
 
         }
 
