@@ -45,22 +45,22 @@ public class CoreGameplay : MonoBehaviour
                 resize_puzzle_tiles(-1.0f);
 
         if (Input.GetKey(KeyCode.LeftArrow))
-            rotate_puzzle_tiles(Vector3.left);
+            rotate_puzzle_tiles_cubes(Vector3.left);
 
         if (Input.GetKey(KeyCode.RightArrow))
-            rotate_puzzle_tiles(Vector3.right);
+            rotate_puzzle_tiles_cubes(Vector3.right);
 
         if (Input.GetKey(KeyCode.UpArrow))
-            rotate_puzzle_tiles(Vector3.up);
+            rotate_puzzle_tiles_cubes(Vector3.up);
 
         if (Input.GetKey(KeyCode.DownArrow))
-            rotate_puzzle_tiles(Vector3.down);
+            rotate_puzzle_tiles_cubes(Vector3.down);
 
         if (Input.GetKey(KeyCode.Home))
-            rotate_puzzle_tiles(Vector3.forward);
+            rotate_puzzle_tiles_cubes(Vector3.forward);
 
         if (Input.GetKey(KeyCode.End))
-            rotate_puzzle_tiles(Vector3.back);
+            rotate_puzzle_tiles_cubes(Vector3.back);
 
         if (Input.GetKey(KeyCode.W))
             move_puzzle_tiles_along_x_axis(1.0f);
@@ -71,10 +71,16 @@ public class CoreGameplay : MonoBehaviour
 
 
         if (Input.GetKey(KeyCode.A))
-            rotate_puzzle_tiles_along_y_axis(1.0f);
+            rotate_puzzle_tiles(Vector3.right);
 
         if (Input.GetKey(KeyCode.D))
-            rotate_puzzle_tiles_along_y_axis(-1.0f);
+            rotate_puzzle_tiles(Vector3.left);
+
+        if (Input.GetKey(KeyCode.E))
+            rotate_puzzle_tiles(Vector3.forward);
+
+        if (Input.GetKey(KeyCode.Q))
+            rotate_puzzle_tiles(Vector3.back);
 
 
 
@@ -126,7 +132,7 @@ public class CoreGameplay : MonoBehaviour
         }
     }
 
-    void rotate_puzzle_tiles(Vector3 factor)
+    void rotate_puzzle_tiles_cubes(Vector3 factor)
     {
         var rotation = rotation_speed * Time.deltaTime;
         rotation.x *= factor.x;
@@ -167,11 +173,13 @@ public class CoreGameplay : MonoBehaviour
         }
     }
 
-    void rotate_puzzle_tiles_along_y_axis(float factor)
+    void rotate_puzzle_tiles(Vector3 factor)
     {
         var rotation = rotation_speed * Time.deltaTime;
-        rotation.y *= factor;
-        
+        rotation.x *= factor.x;
+        rotation.y *= factor.y;
+        rotation.z *= factor.z;
+
         foreach (var tile in puzzle_tiles)
         {
             tile.boundaries.Rotate(rotation);
