@@ -18,6 +18,8 @@ public class CoreGameplay : MonoBehaviour
     public float resize_max = 1.0f;
     public float current_size = 1.0f;
 
+    public Vector3 rotation_speed = Vector3.one;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,29 @@ public class CoreGameplay : MonoBehaviour
             reset_puzzle_tiles();
 
 
-        if(Input.GetKeyDown(KeyCode.PageUp))
+        if(Input.GetKey(KeyCode.PageUp))
             resize_puzzle_tiles(1.0f);
 
-        if(Input.GetKeyDown(KeyCode.PageDown))
+        if(Input.GetKey(KeyCode.PageDown))
                 resize_puzzle_tiles(-1.0f);
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+            rotate_puzzle_tiles(Vector3.left);
+
+        if (Input.GetKey(KeyCode.RightArrow))
+            rotate_puzzle_tiles(Vector3.right);
+
+        if (Input.GetKey(KeyCode.UpArrow))
+            rotate_puzzle_tiles(Vector3.up);
+
+        if (Input.GetKey(KeyCode.DownArrow))
+            rotate_puzzle_tiles(Vector3.down);
+
+        if (Input.GetKey(KeyCode.Home))
+            rotate_puzzle_tiles(Vector3.forward);
+
+        if (Input.GetKey(KeyCode.End))
+            rotate_puzzle_tiles(Vector3.back);
 
 
     }
@@ -70,5 +90,19 @@ public class CoreGameplay : MonoBehaviour
             tile.cube.localScale = new_scale;
         }
     }
+
+    void rotate_puzzle_tiles(Vector3 factor)
+    {
+        var rotation = rotation_speed * Time.deltaTime;
+        rotation.x *= factor.x;
+        rotation.y *= factor.y;
+        rotation.z *= factor.z;
+
+        foreach (var tile in puzzle_tiles)
+        {
+            tile.cube.Rotate(rotation);
+        }
+    }
+
 
 }
