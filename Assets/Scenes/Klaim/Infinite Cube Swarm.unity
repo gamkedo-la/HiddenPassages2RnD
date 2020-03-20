@@ -245,6 +245,9 @@ MonoBehaviour:
   x_axis_move_speed: 1
   x_axis_min: 0
   x_axis_max: 1
+  color_translate_speed: {x: 0.5, y: 0.5, z: 0.5}
+  color_min: {x: 0, y: 0, z: 0}
+  color_max: {x: 1, y: 1, z: 1}
 --- !u!1 &232354087
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1189433596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,7 +813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1255268756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,7 +888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1355289568
 MonoBehaviour:
   m_ObjectHideFlags: 0
