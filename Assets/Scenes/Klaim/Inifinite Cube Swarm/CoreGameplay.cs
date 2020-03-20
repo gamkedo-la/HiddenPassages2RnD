@@ -25,6 +25,10 @@ public class CoreGameplay : MonoBehaviour
     public float x_axis_min = 0.0f;
     public float x_axis_max = 1.0f;
 
+    public Vector3 color_translate_speed = Vector3.one * 0.5f;
+    public Vector3 color_min = Vector3.zero;
+    public Vector3 color_max = Vector3.one;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,6 +100,25 @@ public class CoreGameplay : MonoBehaviour
 
         if (Input.GetKey(KeyCode.K))
             rotate_light(Vector3.down);
+
+
+        if (Input.GetKey(KeyCode.Keypad4))
+            translate_color_of_tiles_cubes(Vector3.left);
+
+        if (Input.GetKey(KeyCode.Keypad6))
+            translate_color_of_tiles_cubes(Vector3.right);
+
+        if (Input.GetKey(KeyCode.Keypad8))
+            translate_color_of_tiles_cubes(Vector3.up);
+
+        if (Input.GetKey(KeyCode.Keypad5))
+            translate_color_of_tiles_cubes(Vector3.down);
+
+        if (Input.GetKey(KeyCode.Keypad9))
+            translate_color_of_tiles_cubes(Vector3.forward);
+
+        if (Input.GetKey(KeyCode.Keypad7))
+            translate_color_of_tiles_cubes(Vector3.back);
 
 
     }
@@ -185,4 +208,43 @@ public class CoreGameplay : MonoBehaviour
             tile.boundaries.Rotate(rotation);
         }
     }
+
+    void translate_color_of_tiles_cubes(Vector3 factor)
+    {
+        var color_translation = color_translate_speed * Time.deltaTime;
+        color_translation.x *= factor.x;
+        color_translation.y *= factor.y;
+        color_translation.z *= factor.z;
+
+        var max_color = Vector3.one;
+        max_color.x *= color_max.x;
+        max_color.y *= color_max.y;
+        max_color.z *= color_max.z;
+
+        var min_color = Vector3.one;
+        min_color.x *= color_min.x;
+        min_color.y *= color_min.y;
+        min_color.z *= color_min.z;
+
+        foreach (var tile in puzzle_tiles)
+        {
+            var renderer = tile.cube.GetComponent<Renderer>();
+            var material = renderer.materials[0];
+            var initial_color = material.color;
+
+
+            var new_color = new Vector3(initial_color.r, initial_color.g, initial_color.b) + color_translation;
+            new_color = Vector3.Min(new_color, max_color);
+            new_color = Vector3.Max(new_color, min_color);
+
+            material.color = new Color(new_color.x, new_color.y, new_color.z);
+
+
+        }
+
+
+
+       
+    }
+
 }
