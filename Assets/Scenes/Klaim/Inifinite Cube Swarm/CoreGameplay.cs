@@ -13,6 +13,7 @@ public class CoreGameplay : MonoBehaviour
     };
 
     private Tile[] puzzle_tiles;
+    private Transform global_light;
 
     public float resize_speed = 1.0f;
     public float resize_min = 0.5f;
@@ -27,7 +28,7 @@ public class CoreGameplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        global_light = GameObject.Find("Directional Light").transform;
     }
 
     // Update is called once per frame
@@ -68,11 +69,27 @@ public class CoreGameplay : MonoBehaviour
             move_puzzle_tiles_along_x_axis(-1.0f);
 
 
+
         if (Input.GetKey(KeyCode.A))
             rotate_puzzle_tiles_along_y_axis(1.0f);
 
         if (Input.GetKey(KeyCode.D))
             rotate_puzzle_tiles_along_y_axis(-1.0f);
+
+
+
+
+        if (Input.GetKey(KeyCode.J))
+            rotate_light(Vector3.left);
+
+        if (Input.GetKey(KeyCode.L))
+            rotate_light(Vector3.right);
+
+        if (Input.GetKey(KeyCode.I))
+            rotate_light(Vector3.up);
+
+        if (Input.GetKey(KeyCode.K))
+            rotate_light(Vector3.down);
 
 
     }
@@ -121,6 +138,16 @@ public class CoreGameplay : MonoBehaviour
             tile.cube.Rotate(rotation);
             tile.center.Rotate(rotation);
         }
+    }
+
+    void rotate_light(Vector3 factor)
+    {
+        var rotation = rotation_speed * Time.deltaTime;
+        rotation.x *= factor.x;
+        rotation.y *= factor.y;
+        rotation.z *= factor.z;
+
+        global_light.Rotate(rotation);
     }
 
     void move_puzzle_tiles_along_x_axis(float factor)
