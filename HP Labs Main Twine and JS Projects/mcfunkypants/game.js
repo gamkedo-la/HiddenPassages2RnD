@@ -318,6 +318,8 @@ function commandDotCom(input) {
         window.history.back();
     }
     
+    t1.cls(); // clear the screen, why scroll at all
+
     // find a hidden pre in the html
     var found = document.getElementById(input);
     if (found) {
