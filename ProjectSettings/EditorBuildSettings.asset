@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/EyeForcz/TurnTable.unity
-    guid: 41b146d48462a4d1285f87ad69ec5c7f
+    path: Assets/Scenes/EyeForcz/ClockSpin.unity
+    guid: a5033e708a57a47b99c60dd263d4dbb2
   m_configObjects: {}
