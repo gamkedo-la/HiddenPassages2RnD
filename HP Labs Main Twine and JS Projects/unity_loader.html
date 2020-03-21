@@ -29,7 +29,8 @@ function replaceAll(inStr, replThis, replWith) {
 }
 
 var args = getUrlVars();
-buildName = args["file"];
+buildName = "common";
+sceneName = args["file"];
 window.onload = function() {
 	phrasePart = document.getElementById("phrase");
 	phraseArg = args["phrase"];
