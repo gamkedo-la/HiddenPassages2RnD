@@ -166,13 +166,19 @@ var MSDOS = (function () {
         }
 
 ////////////////////////////////////////////////////////////////
-        this.print = function (message) {
+        this.print = function (message, instant, cls) {
 ////////////////////////////////////////////////////////////////            
             
             // pre mode - pretty easy! instant, WORKS!
             // this._output.innerHTML += message;
 
-            this.modem(message);
+            if (cls) this._output.innerHTML = "";
+            
+            if (instant) {
+                this._output.innerHTML += message;
+            } else {
+                this.modem(message);
+            }
             
             /*
             // block divs aplenty
@@ -278,11 +284,16 @@ function commandDotCom(input) {
         modemSound.play();
     }
 
-    if (input=="DEFRAG2") {
-        // start drawing on top in a new pre // FIXME doesn't quite line up?
-        TerminalOutput.innerHTML = "";//"<pre style='position:absolute; margin:0; padding:0; top:4px; left:0px; line-height:16px;'>" +  TerminalOutput.innerHTML + "</pre>";
+    if (input=="DEFRAG") {
+        
+        // special case: defragmentation animation
         pendingBufferedCommand = null;
-    } else { // normal:
+        defragAnimation();
+        return; // don't look for html txt
+
+    } 
+    
+    /*else { // draw text THEN defer special step 2
         if (input=="DEFRAG") { 
             pendingBufferedCommand = "DEFRAG2"; 
         } else {
@@ -290,6 +301,7 @@ function commandDotCom(input) {
         }
         t1.cls(); // clear
     }
+    */
     
     if (input=="?") input = "HELP";
     if (input=="") input = "HELP";
@@ -318,6 +330,101 @@ function commandDotCom(input) {
     
     if (!pendingBufferedCommand) t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
 }
+
+var defragHeader = 
+"┌──────────────────────────────────────────────┐\n"+
+"│ Defragmenting Disc A:\\ - 131,072 bytes total │\n"+
+"├──────────────────────────────────────────────┤\n";
+var defragProgressBar = 
+"├──────────────────────────────────────────────┤\n"+
+"│ Working... 0 bad sectors found in 0000 files │\n"+
+"└──────────────────────────────────────────────┘\n";
+var defragFooter = 
+"├──────────────────────────────────────────────┤\n"+
+"│ 3 bad sectors found in hidden file SYSOP.EXE │\n"+
+"└──────────────────────────────────────────────┘\n";
+
+var discData;
+var fragcount = 10000;
+function defragAnimation() {
+
+    //│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+    //│ ▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░ │
+
+    fragcount += Math.round(Math.random()*16); 
+
+    var done = false;
+    //var A = "█"; // alpha sorts wrong lol
+    var F = "▓";
+    var M = "▒";
+    var E = "░";
+    var L = "│ ";
+    var R = " │\n";
+    var cols = 44;
+    var rows = 8;
+    var rand = 0;
+    var defragOutput = "";
+
+    if (!discData) { // first frame?
+        discData = [];
+        for (let i=0; i<rows*cols; i++) {
+            rand = Math.random();
+            // fill disc with junk
+            //if (rand<0.3) discData[i] = A;
+            if (rand<0.2) discData[i] = F;
+            else if (rand<0.3) discData[i] = M;
+            else discData[i] = E;
+        }
+    }
+
+    done = bubbleSortSingleStep();
+    
+    for (let r=0; r<rows; r++) {
+        defragOutput += L;
+        for (let c=0; c<cols; c++) {
+            defragOutput += discData[c+r*cols];
+        }
+        defragOutput += R;
+    }
+
+    var defragProgressBar = 
+    "├──────────────────────────────────────────────┤\n"+
+    "│ Working... defragmented "+fragcount+" sectors so far │\n"+
+    "└──────────────────────────────────────────────┘\n";
+    
+
+    if (!done) {
+        t1.print(defragHeader + defragOutput + defragProgressBar,true,true); // instant+cls
+        setTimeout(defragAnimation,1);//(1000/15)); // FASTER? SLOWER?
+    } else {
+        console.log("Defragging completed!");
+        t1.print(defragHeader + defragOutput + defragFooter,true,true); // instant+cls
+        t1.input(promptDOS, commandDotCom);
+    }
+}
+
+function bubbleSortSingleStep() {
+    
+    let len = discData.length;
+    let swapped;
+    let tmp;
+    //do {
+        swapped = false;
+        //for (let j = 0; j < len; j++) { // extra
+            for (let i = 0; i < len; i++) {
+                if (discData[i] < discData[i + 1]) {
+                    tmp = discData[i];
+                    discData[i] = discData[i + 1];
+                    discData[i + 1] = tmp;
+                    swapped = true;
+                    if (swapped && Math.random()>0.5) break; //loop for single char SOMETIMES
+                }
+            }
+        //}
+    //} while (swapped);
+    //return discData;
+    return !swapped;
+};
 
 function init(e) {
     console.log("INIT!");
