@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce288f23dfaf1b4fa786fdcfe75d5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FRONT_BACKGROUND_Z: 100
+  FRONT_BACKGROUND_Z: 120
   BACK_BACKGROUND_Z: 10000
   transition_back_to_front: 0
   transition_front_to_back: 1
@@ -179,7 +180,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 112
-  camera_view_size_per_side: 200
+  camera_view_size_per_side: 204
   change_movement_randomly: 1
 --- !u!4 &70104777
 Transform:
@@ -239,8 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resize_speed: 0.66
-  resize_min: 0.5
-  resize_max: 1
+  resize_min: 0.3
+  resize_max: 1.2
   rotation_speed: {x: 100, y: 100, z: 100}
   x_axis_move_speed: 1
   x_axis_min: 0
@@ -307,7 +308,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &232354089
 Transform:
@@ -382,7 +383,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &408641167
 Transform:
@@ -513,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &806796880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +557,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &806796881
 Transform:
@@ -631,7 +632,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &1158874253
 Transform:
@@ -663,7 +664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1189433596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +707,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &1189433597
 Transform:
@@ -738,7 +739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1209684852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +782,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &1209684853
 Transform:
@@ -856,7 +857,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &1255268757
 Transform:
@@ -888,7 +889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1355289568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,7 +932,7 @@ MonoBehaviour:
   random_max_speed: 0.3
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 90
+  camera_view_size_per_side: 120
   change_movement_randomly: 1
 --- !u!4 &1355289569
 Transform:
@@ -972,8 +973,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831630115}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.9557064, b: 0.8349056, a: 1}
   m_Intensity: 1
   m_Range: 10
