@@ -31,6 +31,13 @@ function replaceAll(inStr, replThis, replWith) {
 var args = getUrlVars();
 buildName = "common";
 sceneName = args["file"];
+sceneName = replaceAll(sceneName,"_", " ");
+if (typeof(args["param"]) !== 'undefined') {
+  paramVal = args["param"];
+} else {
+  paramVal = 0;
+}
+
 window.onload = function() {
 	phrasePart = document.getElementById("phrase");
 	phraseArg = args["phrase"];
@@ -44,6 +51,7 @@ window.onload = function() {
 
       function OnScenesReady(){
           console.log("success! application is loaded")
+          unityInstance.SendMessage("MasterSwitcher","SetParam",paramVal);
           unityInstance.SendMessage("MasterSwitcher","SceneLoad","SpinTest");
       }
     </script>

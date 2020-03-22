@@ -23,7 +23,7 @@ public class CameraParentFromURL : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trainCamSpot(outerCam ? 1 : 0);
+        trainCamSpot(SceneSet.param);
     }
 
     // Update is called once per frame
