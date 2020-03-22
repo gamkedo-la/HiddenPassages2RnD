@@ -5,6 +5,7 @@ namespace klaim
 {
     public class ScrollingBackground : Background
     {
+        public bool generate_tiles_procedurally_on_start = true;
         public GameObject tile_prefab;
         public int min_tiles_per_side = 3;
 
@@ -46,8 +47,10 @@ namespace klaim
             if (tile_prefab == null)
                 Debug.LogError("Missing tile prefab!");
 
-
-            create_tile_grid();
+            if (generate_tiles_procedurally_on_start)
+                create_tile_grid();
+            else
+                acquire_all_child_tiles();
         }
 
         new void Update()
@@ -137,7 +140,7 @@ namespace klaim
             return Mathf.Sqrt(Mathf.Pow(side_length, 2.0f) + Mathf.Pow(side_length, 2.0f));
         }
 
-        private void create_tile_grid()
+        private void calculate_tile_grid_setup()
         {
             // Here we assume that the camera will always be a square.
             tile_size = calculate_size(tile_prefab);
@@ -151,7 +154,11 @@ namespace klaim
             //tile_limit = (grid_diagonal / 2) - (diagonal_of_square(tile_size) / 2); // TODO: reactivate when rotation is not buggy anymore
             tile_limit = half_side_size + half_tile_size;
             tile_adjust_offset = half_side_size - half_tile_size;
+        }
 
+        private void create_tile_grid()
+        {
+            calculate_tile_grid_setup();
             int required_tiles_count = tiles_per_side * tiles_per_side;
 
             tiles = new GameObject[required_tiles_count];
@@ -165,6 +172,16 @@ namespace klaim
             }
 
             update_tiles_positions();
+        }
+
+        private void acquire_all_child_tiles()
+        {
+            calculate_tile_grid_setup();
+            tiles = new GameObject[transform.childCount];
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                tiles[i] = transform.GetChild(i).gameObject;
+            }
         }
 
         private GameObject create_tile()

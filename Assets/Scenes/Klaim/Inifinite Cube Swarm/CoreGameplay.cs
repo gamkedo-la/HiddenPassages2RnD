@@ -58,6 +58,7 @@ namespace klaim
         void Start()
         {
             global_light = GameObject.Find("Directional Light").transform;
+            reset_puzzle_tiles();
 
             KeyCode[] keys = new KeyCode[]
             {
@@ -136,13 +137,10 @@ namespace klaim
 
             for (int i = 0; i < puzzle_tiles.Length; i++)
             {
-                var tile = new Tile();
-                tile.tile = tiles[i].transform;
-                tile.boundaries = tile.tile.Find("Boundaries");
-                tile.cube = tile.boundaries.Find("Cube");
-                tile.center = tile.boundaries.Find("Center");
-
-                puzzle_tiles[i] = tile;
+                puzzle_tiles[i].tile = tiles[i].transform;
+                puzzle_tiles[i].boundaries = puzzle_tiles[i].tile.GetChild(0);
+                puzzle_tiles[i].cube = puzzle_tiles[i].boundaries.GetChild(0);
+                puzzle_tiles[i].center = puzzle_tiles[i].boundaries.GetChild(1);
             }
         }
 
