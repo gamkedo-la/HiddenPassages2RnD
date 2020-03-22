@@ -52,7 +52,7 @@ window.onload = function() {
       function OnScenesReady(){
           console.log("success! application is loaded")
           unityInstance.SendMessage("MasterSwitcher","SetParam",paramVal);
-          unityInstance.SendMessage("MasterSwitcher","SceneLoad","SpinTest");
+          unityInstance.SendMessage("MasterSwitcher","SceneLoad",sceneName);
       }
     </script>
   </head>
