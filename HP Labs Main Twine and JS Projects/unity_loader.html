@@ -41,6 +41,11 @@ window.onload = function() {
 
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "webgl-builds/Build/"+buildName+".json", {onProgress: UnityProgress});
+
+      function OnScenesReady(){
+          console.log("success! application is loaded")
+          unityInstance.SendMessage("MasterSwitcher","SceneLoad","SpinTest");
+      }
     </script>
   </head>
   <body>
