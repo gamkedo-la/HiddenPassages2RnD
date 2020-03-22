@@ -2,7 +2,7 @@
 {
     JSInitialize: function ()
     {
-        console.log("JS file accessed by unity jslib");
+        console.log("JS file accessed by unity jslib, trying to contact page JS");
         OnScenesReady();
     },
 };
