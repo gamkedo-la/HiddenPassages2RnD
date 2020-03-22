@@ -133,6 +133,9 @@ namespace klaim
         void reset_puzzle_tiles()
         {
             var tiles = GameObject.FindGameObjectsWithTag("puzzle_tile");
+            if (tiles.Length == 0)
+                return; // Delay to later call
+
             puzzle_tiles = new Tile[tiles.Length];
 
             for (int i = 0; i < puzzle_tiles.Length; i++)
