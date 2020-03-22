@@ -7,16 +7,17 @@ using System.Runtime.InteropServices;
 public class SceneSet : MonoBehaviour
 {
     [DllImport("__Internal")]
-    static extern void OnScenesReady(); // in the javascript
+    static extern void JSInitialize(); // in the javascript
+
     public void SceneLoad(string sceneName) {
         SceneManager.LoadScene(sceneName);
     }
 
-    void Start()
+    private void Start()
     {
         Debug.Log("scene switcher is loaded and ready");
 #if !UNITY_EDITOR && UNITY_WEBGL
-        OnScenesReady();
+        JSInitialize();
 #endif
     }
 }
