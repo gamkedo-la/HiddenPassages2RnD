@@ -8,23 +8,52 @@ var incomingModemData = ""; // COM1 buffer =)
 var TerminalOutput = null; // this._output
 var onBBS = false;
 
+var soundON = false;
+var keyboardSound;
+var modemSound;
+var discSound;
+
 // animate like a 1200 baud modem, 150 bytes per second
 function ModemPoll() { 
 
     var delay = 0; // extra "lag"
+    var outputSomething = false;
     if (incomingModemData && incomingModemData.length) {
         var char = incomingModemData[0];
         // special case: we need all 4 bytes at once
         if (incomingModemData.startsWith("&gt;")) { char = "&gt;"; }
         if (incomingModemData.startsWith("&lt;")) { char = "&lt;"; }
+        
         TerminalOutput.innerHTML += char; // output one char
+        outputSomething = true;
+        
         incomingModemData = incomingModemData.substr(char.length); // remove from COM1 buffer
         // special fx: go slower if there's a ... in the text
         if (char=='.' && incomingModemData[0]=='.') delay = 500;
     }
 
+    // just finished?
+    if (incomingModemData=="" && outputSomething) {
+        console.log("Finished printing all incoming modem data.");
+        if (pendingBufferedCommand) {
+            console.log("Running a pending buffered command: " + pendingBufferedCommand);
+            commandDotCom(pendingBufferedCommand);
+            pendingBufferedCommand = null;
+        }
+    }
+
     setTimeout(ModemPoll,(1000/150)+delay); // 1200 baud is 150 bytes per second
 }
+
+function isPlaying(thisAudio) {
+    return thisAudio
+        && thisAudio.currentTime > 0
+        && !thisAudio.paused
+        && !thisAudio.ended
+        && thisAudio.readyState > 2;
+}
+
+// REWIND: my_audio.load(); 
 
 var MSDOS = (function () {
 
@@ -78,11 +107,16 @@ var MSDOS = (function () {
 		}
 
 		inputField.onkeydown = function (e) {
-			if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
+            
+            soundON = true; // allow sounds after the first this user-initiated event
+            if (isPlaying(keyboardSound)) keyboardSound.load(); // rewind!
+            keyboardSound.play();
+            
+            if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
 				e.preventDefault()
 			} else if (shouldDisplayInput && e.which !== 13) {
 				setTimeout(function () {
-					terminalObj._inputLine.textContent = inputField.value
+					terminalObj._inputLine.textContent = inputField.value.toUpperCase()
 				}, 1)
 			}
 		}
@@ -132,13 +166,19 @@ var MSDOS = (function () {
         }
 
 ////////////////////////////////////////////////////////////////
-        this.print = function (message) {
+        this.print = function (message, instant, cls) {
 ////////////////////////////////////////////////////////////////            
             
             // pre mode - pretty easy! instant, WORKS!
             // this._output.innerHTML += message;
 
-            this.modem(message);
+            if (cls) this._output.innerHTML = "";
+            
+            if (instant) {
+                this._output.innerHTML += message;
+            } else {
+                this.modem(message);
+            }
             
             /*
             // block divs aplenty
@@ -200,7 +240,8 @@ var MSDOS = (function () {
 			this._shouldBlinkCursor = (bool === 'TRUE' || bool === '1' || bool === 'YES');
 		}
 
-        // CSS inits
+        // CSS inits - FIXME: remove!!!!! scrape and stuff into the .css file
+        // this hardcoded tech debt interferes with the stylesheet
         this._input.appendChild(this._inputLine);
 		this._input.appendChild(this._cursor);
 		this._innerWindow.appendChild(this._output);
@@ -231,13 +272,36 @@ var MSDOS = (function () {
 }());
 
 var t1 = new MSDOS();
-
+var pendingBufferedCommand = "";
 function commandDotCom(input) {
     
-    t1.cls(); // clear
+    if (soundON) discSound.play();
     
     input = input.toUpperCase();
     input = input.replace(".EXE", "");
+
+    if (input=="BBS") {
+        modemSound.play();
+    }
+
+    if (input=="DEFRAG") {
+        
+        // special case: defragmentation animation
+        pendingBufferedCommand = null;
+        defragAnimation();
+        return; // don't look for html txt
+
+    } 
+    
+    /*else { // draw text THEN defer special step 2
+        if (input=="DEFRAG") { 
+            pendingBufferedCommand = "DEFRAG2"; 
+        } else {
+            pendingBufferedCommand = null;
+        }
+        t1.cls(); // clear
+    }
+    */
     
     if (input=="?") input = "HELP";
     if (input=="") input = "HELP";
@@ -254,6 +318,8 @@ function commandDotCom(input) {
         window.history.back();
     }
     
+    t1.cls(); // clear the screen, why scroll at all
+
     // find a hidden pre in the html
     var found = document.getElementById(input);
     if (found) {
@@ -261,23 +327,115 @@ function commandDotCom(input) {
         console.log("found text: " + found.innerHTML);
         t1.print(found.innerHTML.trimLeft()); // trimmed because our PREs have leading crlf
     } else {
-        t1.print('Unknown command or file name: ' + input + '.EXE\n');
+        t1.print('Unknown command or file name: ' + input + '.EXE\nHint: try typing DIR then pressing enter.\n');
     }
     
-    t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
+    if (!pendingBufferedCommand) t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
 }
 
+var defragHeader = 
+"┌──────────────────────────────────────────────┐\n"+
+"│ Defragmenting Disc A:\\ - 131,072 bytes total │\n"+
+"├──────────────────────────────────────────────┤\n";
+var defragProgressBar = 
+"├──────────────────────────────────────────────┤\n"+
+"│ Working... 0 bad sectors found in 0000 files │\n"+
+"└──────────────────────────────────────────────┘\n";
+var defragFooter = 
+"├──────────────────────────────────────────────┤\n"+
+"│ 3 bad sectors found in hidden file SYSOP.EXE │\n"+
+"└──────────────────────────────────────────────┘\n";
+
+var discData;
+var fragcount = 10000;
+function defragAnimation() {
+
+    //│ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ │
+    //│ ▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░ │
+
+    fragcount += Math.round(Math.random()*16); 
+
+    var done = false;
+    //var A = "█"; // alpha sorts wrong lol
+    var F = "▓";
+    var M = "▒";
+    var E = "░";
+    var L = "│ ";
+    var R = " │\n";
+    var cols = 44;
+    var rows = 8;
+    var rand = 0;
+    var defragOutput = "";
+
+    if (!discData) { // first frame?
+        discData = [];
+        for (let i=0; i<rows*cols; i++) {
+            rand = Math.random();
+            // fill disc with junk
+            //if (rand<0.3) discData[i] = A;
+            if (rand<0.2) discData[i] = F;
+            else if (rand<0.3) discData[i] = M;
+            else discData[i] = E;
+        }
+    }
+
+    done = bubbleSortSingleStep();
+    
+    for (let r=0; r<rows; r++) {
+        defragOutput += L;
+        for (let c=0; c<cols; c++) {
+            defragOutput += discData[c+r*cols];
+        }
+        defragOutput += R;
+    }
+
+    var defragProgressBar = 
+    "├──────────────────────────────────────────────┤\n"+
+    "│ Working... defragmented "+fragcount+" sectors so far │\n"+
+    "└──────────────────────────────────────────────┘\n";
+    
+
+    if (!done) {
+        t1.print(defragHeader + defragOutput + defragProgressBar,true,true); // instant+cls
+        setTimeout(defragAnimation,1);//(1000/15)); // FASTER? SLOWER?
+    } else {
+        console.log("Defragging completed!");
+        t1.print(defragHeader + defragOutput + defragFooter,true,true); // instant+cls
+        t1.input(promptDOS, commandDotCom);
+    }
+}
+
+function bubbleSortSingleStep() {
+    
+    let len = discData.length;
+    let swapped;
+    let tmp;
+    //do {
+        swapped = false;
+        //for (let j = 0; j < len; j++) { // extra
+            for (let i = 0; i < len; i++) {
+                if (discData[i] < discData[i + 1]) {
+                    tmp = discData[i];
+                    discData[i] = discData[i + 1];
+                    discData[i + 1] = tmp;
+                    swapped = true;
+                    if (swapped && Math.random()>0.5) break; //loop for single char SOMETIMES
+                }
+            }
+        //}
+    //} while (swapped);
+    //return discData;
+    return !swapped;
+};
+
 function init(e) {
-
     console.log("INIT!");
-    
+    keyboardSound = document.getElementById("keyboardSound");
+    modemSound = document.getElementById("modemSound");
+    discSound = document.getElementById("discSound");
     document.getElementById('monitor').appendChild(t1.html);
-    
-    
     commandDotCom("BOOT");
-
     ModemPoll();
-    
 }
 
 window.addEventListener("load",init);

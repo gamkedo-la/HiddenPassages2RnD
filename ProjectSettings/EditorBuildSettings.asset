@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/webGLSceneSwitcher.unity
+    guid: 6079d82fd09d04025ba2e8b7d8daec12
+  - enabled: 1
+    path: Assets/Scenes/ChrisDeLeon/SpinTest.unity
+    guid: 726892d8fca2144f785040f4a7e270d2
+  - enabled: 1
+    path: Assets/Scenes/EyeForcz/ClockSpin.unity
+    guid: a5033e708a57a47b99c60dd263d4dbb2
+  - enabled: 1
     path: Assets/Scenes/EyeForcz/TurnTable.unity
     guid: 41b146d48462a4d1285f87ad69ec5c7f
+  - enabled: 1
+    path: Assets/Scenes/Klaim/Infinite Cube Swarm.unity
+    guid: 1e28258fa6262ca478a2386e29ce771d
+  - enabled: 1
+    path: Assets/Scenes/JChinGames/JChinOne.unity
+    guid: 375e39ffa05d81c40bcd26feb4ec8d20
   m_configObjects: {}

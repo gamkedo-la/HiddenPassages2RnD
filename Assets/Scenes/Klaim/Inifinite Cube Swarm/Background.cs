@@ -7,8 +7,12 @@ namespace klaim
     // Handle generic behaviour of dynamic backgrounds
     public class Background : MonoBehaviour
     {
-        public const float FRONT_BACKGROUND_Z = 0.0f;
-        public const float BACK_BACKGROUND_Z = 10000.0f;
+
+        public float FRONT_BACKGROUND_Z = 0.0f;
+        public float BACK_BACKGROUND_Z = 10000.0f;
+
+        public bool transition_back_to_front = true;
+        public bool transition_front_to_back = true;
 
         public bool destroy_when_farther_than_background = false;
         public bool perspective_enabled = false;
@@ -58,20 +62,37 @@ namespace klaim
         public void on_wave_begin()
         {
             Debug.LogFormat("BEGIN BACKGROUND {0}", gameObject.name);
-            transform.position = new Vector3(0.0f, 0.0f, BACK_BACKGROUND_Z);
+
+            
             target_z = FRONT_BACKGROUND_Z;
             z_speed = initial_entry_speed;
             max_z_speed = entry_max_speed;
             z_acceleration = entry_acceleration;
+
+            if (transition_back_to_front)
+            {
+                transform.position = new Vector3(0.0f, 0.0f, BACK_BACKGROUND_Z);
+            }
+            else
+            {
+                transform.position = new Vector3(0.0f, 0.0f, target_z);
+            }
+
+
         }
 
         public void on_wave_end()
         {
             Debug.LogFormat("END BACKGROUND {0}", gameObject.name);
-            target_z = BACK_BACKGROUND_Z + 10.0f; // We want to go farther than the background
-            z_speed = initial_exit_speed;
-            max_z_speed = exit_max_speed;
-            z_acceleration = exit_acceleration;
+            
+            if (transition_front_to_back)
+            {
+                target_z = BACK_BACKGROUND_Z + 10.0f; // We want to go farther than the background
+                z_speed = initial_exit_speed;
+                max_z_speed = exit_max_speed;
+                z_acceleration = exit_acceleration;
+
+            }
 
             Destroy(gameObject, 5.0f); // This is just to be sure we don't overload the game
         }

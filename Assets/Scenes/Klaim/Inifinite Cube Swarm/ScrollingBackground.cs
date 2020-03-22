@@ -21,6 +21,8 @@ namespace klaim
         public float random_max_rotation = 0.0f;
         public float random_changes_every_secs = 10.0f;
 
+        public float camera_view_size_per_side = GameCamera.SIZE_PER_SIDE;
+
         public bool change_movement_randomly = false;
         private IEnumerator current_random_coroutine;
 
@@ -140,7 +142,7 @@ namespace klaim
             // Here we assume that the camera will always be a square.
             tile_size = calculate_size(tile_prefab);
             half_tile_size = tile_size / 2.0f;
-            tiles_per_side = Mathf.CeilToInt((GameCamera.SIZE_PER_SIDE) / tile_size) + 2;
+            tiles_per_side = Mathf.CeilToInt((camera_view_size_per_side) / tile_size) + 2;
             tiles_per_side = Mathf.Max(min_tiles_per_side, tiles_per_side);
             side_size = tiles_per_side * tile_size;
             half_side_size = side_size / 2.0f;

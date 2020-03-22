@@ -29,7 +29,15 @@ function replaceAll(inStr, replThis, replWith) {
 }
 
 var args = getUrlVars();
-buildName = args["file"];
+buildName = "common";
+sceneName = args["file"];
+sceneName = replaceAll(sceneName,"_", " ");
+if (typeof(args["param"]) !== 'undefined') {
+  paramVal = parseInt(args["param"]);
+} else {
+  paramVal = 0;
+}
+
 window.onload = function() {
 	phrasePart = document.getElementById("phrase");
 	phraseArg = args["phrase"];
@@ -40,6 +48,12 @@ window.onload = function() {
 
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "webgl-builds/Build/"+buildName+".json", {onProgress: UnityProgress});
+
+      function OnScenesReady(){
+          console.log("success! application is loaded")
+          unityInstance.SendMessage("MasterSwitcher","SetParam",paramVal);
+          unityInstance.SendMessage("MasterSwitcher","SceneLoad",sceneName);
+      }
     </script>
   </head>
   <body>
