@@ -33,7 +33,7 @@ buildName = "common";
 sceneName = args["file"];
 sceneName = replaceAll(sceneName,"_", " ");
 if (typeof(args["param"]) !== 'undefined') {
-  paramVal = args["param"];
+  paramVal = parseInt(args["param"]);
 } else {
   paramVal = 0;
 }
