@@ -106,8 +106,7 @@ namespace klaim
         // Update is called once per frame
         void Update()
         {
-            if (puzzle_tiles == null)
-                reset_puzzle_tiles();
+            reset_puzzle_tiles();
 
             foreach (var key_action in key_actions)
             {
@@ -115,6 +114,11 @@ namespace klaim
                     key_action.action();
             }
 
+            // TODO: Remove this in the final game
+            if (Input.GetKey(KeyCode.DownArrow))
+                resize_puzzle_tiles(-1.0f);
+            if (Input.GetKey(KeyCode.UpArrow))
+                resize_puzzle_tiles(1.0f);
 
         }
 
@@ -133,7 +137,7 @@ namespace klaim
         void reset_puzzle_tiles()
         {
             var tiles = GameObject.FindGameObjectsWithTag("puzzle_tile");
-            if (tiles.Length == 0)
+            if (tiles.Length == 0 || (puzzle_tiles != null && tiles.Length == puzzle_tiles.Length))
                 return; // Delay to later call
 
             puzzle_tiles = new Tile[tiles.Length];
