@@ -419,7 +419,12 @@ function bubbleSortSingleStep() {
                     discData[i] = discData[i + 1];
                     discData[i + 1] = tmp;
                     swapped = true;
-                    if (swapped && Math.random()>0.5) break; //loop for single char SOMETIMES
+                    // slow at first, but then speed up so it's not boring
+                    if (fragcount<13000) {
+                        if (swapped) break; // really slow at first
+                    } else if (fragcount<25000) {
+                        if (swapped && Math.random()>0.75) break; //loop for single char SOMETIMES
+                    }
                 }
             }
         //}
