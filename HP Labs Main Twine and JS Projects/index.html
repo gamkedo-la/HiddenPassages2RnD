@@ -221,8 +221,32 @@ else {
 //    textToSpeech("already loaded")
 }
 
+function keyPush(evt)  {
+	var sayWordsToggled;
+	switch(evt.keyCode) {
+		case 77: // M Key
+			sayWordsToggled = !speakerThing.sayWords;
+			speakerThing.sayWords = true; // turn on to hear feedback
+			if(sayWordsToggled) {
+				speakerThing.textToSpeech("VO on");
+			} else {
+				speakerThing.textToSpeech("VO off");
+			}
+			speakerThing.sayWords = sayWordsToggled;
+			break;
+		default:
+				speakerThing.textToSpeech("unused key: "+evt.keyCode);
+				break;
+	}
+}
+document.addEventListener("keydown",keyPush);
+
 var speakerThing = {
+ 	  sayWords: false,
     textToSpeech: function(sayWords) {
+			  if(speakerThing.sayWords==false) {
+					return;
+				}
         // get all voices that browser offers
         var available_voices = window.speechSynthesis.getVoices();
 
