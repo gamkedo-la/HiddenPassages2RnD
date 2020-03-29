@@ -236,7 +236,8 @@ function keyPush(evt)  {
 			localStorage.setItem('useVO',speakerThing.sayWords);
 			break;
 		default:
-				speakerThing.textToSpeech("unused key: "+evt.keyCode);
+//				speakerThing.textToSpeech("unused key: "+evt.keyCode);
+			console.log("unused keycode: "+evt.keyCode);
 				break;
 	}
 }
@@ -263,10 +264,15 @@ var speakerThing = {
 
         // find voice by language locale "en-US"
         // if not then select the first voice
+				var voicesToSkip = 3; // which voice? maybe varies by OS/browser?
+
         for (var i = 0; i < available_voices.length; i++) {
             if (available_voices[i].lang === 'en-US') {
                 english_voice = available_voices[i];
+							voicesToSkip--;
+							if(voicesToSkip<=0) { // otherwise dig for another option
                 break;
+							}
             }
         }
         if (english_voice === '')
