@@ -228,9 +228,15 @@ function keyPush(evt)  {
 			sayWordsToggled = !speakerThing.sayWords;
 			speakerThing.sayWords = true; // turn on to hear feedback
 			if(sayWordsToggled) {
-				speakerThing.textToSpeech("VO on");
+				if(speakerThing.mutedBuffer != "") {
+				  speakerThing.textToSpeech(speakerThing.mutedBuffer);
+				} else {
+					speakerThing.textToSpeech("VO on");
+				}
 			} else {
-				speakerThing.textToSpeech("VO off");
+				var resumeSay = speakerThing.mutedBuffer;
+				speakerThing.textToSpeech("VO off"); // skip override mutedBuffer
+				speakerThing.mutedBuffer = resumeSay;
 			}
 			speakerThing.sayWords = sayWordsToggled;
 			localStorage.setItem('useVO',speakerThing.sayWords);
@@ -252,7 +258,9 @@ if (useVOreload === null) {
 
 var speakerThing = {
  	  sayWords: useVOreload,
+	  mutedBuffer: "",
     textToSpeech: function(sayWords) {
+				speakerThing.mutedBuffer = sayWords; // what to replay if unmuted?
 			  if(speakerThing.sayWords!=true) { // phrased to include undefined
 					return;
 				}
@@ -290,6 +298,7 @@ var speakerThing = {
             console.log('Speech finished saying: ' + utter.text);
         }
         // speak
+				window.speechSynthesis.cancel(); // interrupt previous
         window.speechSynthesis.speak(utter);
     }
 };
