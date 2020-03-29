@@ -233,6 +233,7 @@ function keyPush(evt)  {
 				speakerThing.textToSpeech("VO off");
 			}
 			speakerThing.sayWords = sayWordsToggled;
+			localStorage.setItem('useVO',speakerThing.sayWords);
 			break;
 		default:
 				speakerThing.textToSpeech("unused key: "+evt.keyCode);
@@ -241,10 +242,17 @@ function keyPush(evt)  {
 }
 document.addEventListener("keydown",keyPush);
 
+var useVOreload = localStorage.getItem('useVO');
+if (useVOreload === null) {
+    useVOreload = false;
+} else {
+    useVOreload = JSON.parse(useVOreload)
+}
+
 var speakerThing = {
- 	  sayWords: false,
+ 	  sayWords: useVOreload,
     textToSpeech: function(sayWords) {
-			  if(speakerThing.sayWords==false) {
+			  if(speakerThing.sayWords!=true) { // phrased to include undefined
 					return;
 				}
         // get all voices that browser offers
