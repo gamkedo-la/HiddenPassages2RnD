@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JChinGames/JChinOne.unity
     guid: 375e39ffa05d81c40bcd26feb4ec8d20
+  - enabled: 1
+    path: Assets/Scenes/EyeForcz/TurnTableCar.unity
+    guid: b7b34b6f271b24b309bdfdcae2c0fb6b
   m_configObjects: {}
