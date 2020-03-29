@@ -209,15 +209,53 @@ tw-icon:hover {
 }
 
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">
 
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">// list of languages is probably not loaded, wait for it
+if(window.speechSynthesis.getVoices().length == 0) {
+    window.speechSynthesis.addEventListener('voiceschanged', function() {
+//        textToSpeech("finished loading");
+    });
+}
+else {
+    // languages list available, no need to wait
+//    textToSpeech("already loaded")
+}
 
+var speakerThing = {
+    textToSpeech: function(sayWords) {
+        // get all voices that browser offers
+        var available_voices = window.speechSynthesis.getVoices();
 
+        // this will hold an english voice
+        var english_voice = '';
 
+        // find voice by language locale "en-US"
+        // if not then select the first voice
+        for (var i = 0; i < available_voices.length; i++) {
+            if (available_voices[i].lang === 'en-US') {
+                english_voice = available_voices[i];
+                break;
+            }
+        }
+        if (english_voice === '')
+            english_voice = available_voices[0];
 
+        // new SpeechSynthesisUtterance object
+        var utter = new SpeechSynthesisUtterance();
+        utter.rate = 1;
+        utter.pitch = 0.5;
+        utter.text = sayWords;
+        utter.voice = english_voice;
 
-
-</script><tw-passagedata pid="1" name="Here is where it starts" tags="" position="393,560" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
+        // event after text has been spoken
+        utter.onend = function() {
+            console.log('Speech finished saying: ' + utter.text);
+        }
+        // speak
+        window.speechSynthesis.speak(utter);
+    }
+};
+window.SpeakingThing = speakerThing;</script><tw-passagedata pid="1" name="Here is where it starts" tags="" position="393,560" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
 
 [[debug path]]: demos quick access
 
@@ -225,12 +263,15 @@ tw-icon:hover {
 
 [[main office-&gt;officeStart]]: skip intro, go to player hub
 
-[[writing experiments]]: early tests, most won&#39;t stick</tw-passagedata><tw-passagedata pid="2" name="debug path" tags="" position="348,710" size="100,100">[[prototypes not yet categorized into areas]]
+[[writing experiments]]: early tests, most won&#39;t stick
+
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;main menu&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="2" name="debug path" tags="" position="348,710" size="100,100">[[prototypes not yet categorized into areas]]
 By Time Period
 [[1980s time warp]]
 [[2020 present day office]]
 [[year 7020 far future]]
-note: there are likely to be other spaces and realms added, but these time shifted versions of the main prototyping office/labs area are a start</tw-passagedata><tw-passagedata pid="3" name="playerPath1-amnesia" tags="" position="789,340" size="100,100">You&#39;re laid out on the hardwood floor, waking up to fluorescent lights humming overhead.
+note: there are likely to be other spaces and realms added, but these time shifted versions of the main prototyping office/labs area are a start
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;this is debug information&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="3" name="playerPath1-amnesia" tags="" position="789,340" size="100,100">You&#39;re laid out on the hardwood floor, waking up to fluorescent lights humming overhead.
 
 [[I get up, checking myself to make sure I&#39;m unharmed.-&gt;getUp]]
 
