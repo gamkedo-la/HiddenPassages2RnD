@@ -13,7 +13,7 @@
 	</style>
 </head>
 <body>
-	Set the trombone <a href="../index.html">down</a> and return to the musical emporium
+	Set the ESI <a href="../index.html">down</a> and return to the musical emporium
 	<canvas id="laCanvas" width="800" height="600" style="display: block;background: #000000;position: absolute; left: 0px; top: 35px; margin:0px auto 0px auto;"></canvas>
 </body>
 
@@ -29,7 +29,7 @@
 	var audioContext = new audio_context();
 
 	var pitch = audioContext.createOscillator();
-	var tone = audioContext.createBiquadFilter()
+	var tone = audioContext.createBiquadFilter();
 	var volume = audioContext.createGain();
 	pitch.type = 'sawtooth';
 	pitch.frequency.setValueAtTime(55, audioContext.currentTime);

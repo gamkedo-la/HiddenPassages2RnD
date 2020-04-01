@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <html>
-	<title>Trumpet</title>
+	<title>Flute</title>
 
 <head>
 	<style>
@@ -13,7 +13,7 @@
 	</style>
 </head>
 <body>
-	Set the EVI <a href="../index.html">down</a> and return to the musical emporium
+	Set the EWI <a href="../index.html">down</a> and return to the musical emporium
 	<canvas id="laCanvas" width="800" height="600" style="display: block;background: #000000;position: absolute; left: 0px; top: 35px; margin:0px auto 0px auto;"></canvas>
 </body>
 
@@ -29,15 +29,11 @@
 	var context = new audio_context();
 
 	var pitch = context.createOscillator();
-	var tone = context.createBiquadFilter();
 	var volume = context.createGain();
-	pitch.type = 'sawtooth';
-	pitch.frequency.setValueAtTime(55, context.currentTime);
-	tone.type = 'lowpass';
-	volume.gain.setValueAtTime(0, context.currentTime);
+	pitch.type = 'triangle';
+	pitch.frequency.setValueAtTime(880, context.currentTime);
 
-	pitch.connect(tone);
-	tone.connect(volume);
+	pitch.connect(volume);
 	volume.connect(context.destination);
 
 	pitch.start();
@@ -52,35 +48,20 @@
 	function loop() {
 		var now = context.currentTime;
 		
-		updateTrumpet();
+		updateFlute();
 		draw();
 
 		window.requestAnimationFrame(loop);
 	}
 
-	var rootFreq = 110;
-	var partial = 1;
+	var rootFreq = 880;
 	var halfsteps = 0;
-
-	var rowSize = 20;
-	var colSize = 40;
-	var totalPartials = 8-1;
 
 	var maxVolume = 0.5
 
-	function updateTrumpet() {
-		var left = canvas.width/2 - (colSize)/2;
-		var top = canvas.height/2 - (rowSize*totalPartials)/2;
-		var right = canvas.width/2 + (colSize)/2;
-		var bottom = canvas.height/2 + (rowSize*totalPartials)/2;
+	function updateFlute() {
 
-		partial = (mouseY-top)/(bottom-top);
-		if (partial > 1.1) partial = 1.1;
-		if (partial < 0.1) partial = 0.1;
-		partial = 10-Math.ceil(partial*totalPartials+1);
-
-		pitch.frequency.setValueAtTime(rootFreq * partial * valveLength(), context.currentTime + 0.001);
-		tone.frequency.setValueAtTime(pitch.frequency.value * 3, context.currentTime + 0.001);
+		pitch.frequency.setValueAtTime(rootFreq * keysDown(), context.currentTime + 0.001);
 
 		if ((mousePressed || spacePressed) && volume.gain.value == 0) {
 			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
@@ -91,28 +72,14 @@
 	}
 
 	function draw() {
-		var offsetX = canvas.width/2 - (colSize)/2;
-		var offsetY = canvas.height/2 - (rowSize*totalPartials-1)/2;
 
-		var lastOffset = 1;
-		for(var j = 0; j < totalPartials; j++) {
-			drawBox(offsetX, offsetY+(j*rowSize), colSize, rowSize);
-		}
-
-		colorText("Z", canvas.width/2 - 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-		colorText("X", canvas.width/2, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-		colorText("C", canvas.width/2 + 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-
-
-	}
-
-	function drawBox(x, y, w, h) {
-		canvasContext.fillStyle = 'rgb(255, 255, 255)';
-        canvasContext.fillRect(x, y, w, h);
-
-        canvasContext.fillStyle = 'rgb(0, 0, 0)';
-        canvasContext.fillRect(x+1, y+1, w-2, h-2);
-
+		colorText("Z", canvas.width/2, canvas.height/2 - 80);
+		colorText("X", canvas.width/2, canvas.height/2 - 60);
+		colorText("C", canvas.width/2, canvas.height/2 - 40);
+		colorText("V", canvas.width/2, canvas.height/2 - 20);
+		colorText("N", canvas.width/2, canvas.height/2 + 20);
+		colorText("M", canvas.width/2, canvas.height/2 + 40);
+		colorText("<", canvas.width/2, canvas.height/2 + 60);
 	}
 
 
@@ -123,9 +90,9 @@
 		canvasContext.fillText(showWords, textX, textY);
 	}
 
-	function valveLength() {
+	function keysDown() {
 		if (halfsteps < 0) halfsteps = 0;
-		if (halfsteps > 6) halfsteps = 6;
+		if (halfsteps > 13) halfsteps = 13;
 		switch (halfsteps) {
 			case 0:
 				return 1;
@@ -141,19 +108,23 @@
 				return 0.74915;
 			case 6:
 				return 0.70711;
+			case 7:
+				return 0.66742;
+			case 8:
+				return 0.62996;
+			case 9:
+				return 0.5946;
+			case 10:
+				return 0.56123;
+			case 11:
+				return 0.52973;
+			case 12:
+				return 0.5;
+			case 13:
+				return 0.47194;
 			default:
 				return 1;
 		}
-		/*
-		Slide positions
-		1
-		0.94387
-		0.8909
-		0.8409
-		0.7937
-		0.74915
-		0.70711
-		*/
 	}
 	
 	var mousePressed = false;
@@ -177,25 +148,50 @@
 	}
 
 	var spacePressed = false;
-	var valve1 = false;
-	var valve2 = false;
-	var valve3 = false;
+	var key1 = false;
+	var key2 = false;
+	var key3 = false;
+	var key4 = false;
+	var key5 = false;
+	var key6 = false;
+	var key7 = false;
+	var key8 = false;
 
 	function keyUp(evt) {
 		if (evt.keyCode == 32) {
 			spacePressed = false;
 		}
-		if (evt.keyCode == 90 && valve1) {
-			halfsteps -= 2;
-			valve1 = false;
-		}
-		if (evt.keyCode == 88 && valve2) {
+		if (evt.keyCode == 90 && key1) {
 			halfsteps -= 1;
-			valve2 = false;
+			key1 = false;
 		}
-		if (evt.keyCode == 67 && valve3) {
-			halfsteps -= 3;
+		if (evt.keyCode == 88 && key2) {
+			halfsteps -= 2;
+			key2 = false;
+		}
+		if (evt.keyCode == 67 && key3) {
+			halfsteps -= 2;
 			valve3 = false;
+		}
+		if (evt.keyCode == 86 && key4) {
+			halfsteps -= 2;
+			key4 = false;
+		}
+		if (evt.keyCode == 78 && key5) {
+			halfsteps -= 1;
+			key5 = false;
+		}
+		if (evt.keyCode == 77 && key6) {
+			halfsteps -= 2;
+			key6 = false;
+		}
+		if (evt.keyCode == 188 && key7) {
+			halfsteps -= 2;
+			key7 = false;
+		}
+		if (evt.keyCode == 190 && key8) {
+			halfsteps -= 1;
+			key8 = false;
 		}
 	}
 
@@ -203,17 +199,37 @@
 		if (evt.keyCode == 32) {
 			spacePressed = true;
 		}
-		if (evt.keyCode == 90 && !valve1) {
-			halfsteps += 2;
-			valve1 = true;
-		}
-		if (evt.keyCode == 88 && !valve2) {
+		if (evt.keyCode == 90 && !key1) {
 			halfsteps += 1;
-			valve2 = true;
+			key1 = true;
 		}
-		if (evt.keyCode == 67 && !valve3) {
-			halfsteps += 3;
-			valve3 = true;
+		if (evt.keyCode == 88 && !key2) {
+			halfsteps += 2;
+			key2 = true;
+		}
+		if (evt.keyCode == 67 && !key3) {
+			halfsteps += 2;
+			key3 = true;
+		}
+		if (evt.keyCode == 86 && !key4) {
+			halfsteps += 2;
+			key4 = true;
+		}
+		if (evt.keyCode == 78 && !key5) {
+			halfsteps += 1;
+			key5 = true;
+		}
+		if (evt.keyCode == 77 && !key6) {
+			halfsteps += 2;
+			key6 = true;
+		}
+		if (evt.keyCode == 188 && !key7) {
+			halfsteps += 2;
+			key7 = true;
+		}
+		if (evt.keyCode == 190 && !key8) {
+			halfsteps += 1;
+			key8 = true;
 		}
 	}
 
