@@ -99,9 +99,9 @@
 			drawBox(offsetX, offsetY+(j*rowSize), colSize, rowSize);
 		}
 
-		colorText("Z", canvas.width/2 - 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-		colorText("X", canvas.width/2, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-		colorText("C", canvas.width/2 + 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("A", canvas.width/2 - 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("S", canvas.width/2, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("D", canvas.width/2 + 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
 
 
 	}
@@ -186,15 +186,15 @@
 		if (evt.keyCode == 32) {
 			spacePressed = false;
 		}
-		if (evt.keyCode == 90 && valve1) {
+		if (evt.keyCode == 65 && valve1) {
 			halfsteps -= 2;
 			valve1 = false;
 		}
-		if (evt.keyCode == 88 && valve2) {
+		if (evt.keyCode == 83 && valve2) {
 			halfsteps -= 1;
 			valve2 = false;
 		}
-		if (evt.keyCode == 67 && valve3) {
+		if (evt.keyCode == 68 && valve3) {
 			halfsteps -= 3;
 			valve3 = false;
 		}
@@ -204,15 +204,15 @@
 		if (evt.keyCode == 32) {
 			spacePressed = true;
 		}
-		if (evt.keyCode == 90 && !valve1) {
+		if (evt.keyCode == 65 && !valve1) {
 			halfsteps += 2;
 			valve1 = true;
 		}
-		if (evt.keyCode == 88 && !valve2) {
+		if (evt.keyCode == 83 && !valve2) {
 			halfsteps += 1;
 			valve2 = true;
 		}
-		if (evt.keyCode == 67 && !valve3) {
+		if (evt.keyCode == 68 && !valve3) {
 			halfsteps += 3;
 			valve3 = true;
 		}

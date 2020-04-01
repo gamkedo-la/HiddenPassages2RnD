@@ -74,13 +74,13 @@
 
 	function draw() {
 
-		colorText("Z", canvas.width/2, canvas.height/2 - 80);
-		colorText("X", canvas.width/2, canvas.height/2 - 60);
-		colorText("C", canvas.width/2, canvas.height/2 - 40);
-		colorText("V", canvas.width/2, canvas.height/2 - 20);
-		colorText("N", canvas.width/2, canvas.height/2 + 20);
-		colorText("M", canvas.width/2, canvas.height/2 + 40);
-		colorText("<", canvas.width/2, canvas.height/2 + 60);
+		colorText("A", canvas.width/2, canvas.height/2 - 80);
+		colorText("S", canvas.width/2, canvas.height/2 - 60);
+		colorText("D", canvas.width/2, canvas.height/2 - 40);
+		colorText("F", canvas.width/2, canvas.height/2 - 20);
+		colorText("J", canvas.width/2, canvas.height/2 + 20);
+		colorText("K", canvas.width/2, canvas.height/2 + 40);
+		colorText("L", canvas.width/2, canvas.height/2 + 60);
 	}
 
 
@@ -163,35 +163,35 @@
 		if (evt.keyCode == 32) {
 			spacePressed = false;
 		}
-		if (evt.keyCode == 90 && key1) {
+		if (evt.keyCode == 65 && key1) {
 			halfsteps -= 1;
 			key1 = false;
 		}
-		if (evt.keyCode == 88 && key2) {
+		if (evt.keyCode == 83 && key2) {
 			halfsteps -= 2;
 			key2 = false;
 		}
-		if (evt.keyCode == 67 && key3) {
+		if (evt.keyCode == 68 && key3) {
 			halfsteps -= 2;
 			valve3 = false;
 		}
-		if (evt.keyCode == 86 && key4) {
+		if (evt.keyCode == 70 && key4) {
 			halfsteps -= 2;
 			key4 = false;
 		}
-		if (evt.keyCode == 78 && key5) {
+		if (evt.keyCode == 74 && key5) {
 			halfsteps -= 1;
 			key5 = false;
 		}
-		if (evt.keyCode == 77 && key6) {
+		if (evt.keyCode == 75 && key6) {
 			halfsteps -= 2;
 			key6 = false;
 		}
-		if (evt.keyCode == 188 && key7) {
+		if (evt.keyCode == 76 && key7) {
 			halfsteps -= 2;
 			key7 = false;
 		}
-		if (evt.keyCode == 190 && key8) {
+		if (evt.keyCode == 59 && key8) {
 			halfsteps -= 1;
 			key8 = false;
 		}
@@ -201,35 +201,35 @@
 		if (evt.keyCode == 32) {
 			spacePressed = true;
 		}
-		if (evt.keyCode == 90 && !key1) {
+		if (evt.keyCode == 65 && !key1) {
 			halfsteps += 1;
 			key1 = true;
 		}
-		if (evt.keyCode == 88 && !key2) {
+		if (evt.keyCode == 83 && !key2) {
 			halfsteps += 2;
 			key2 = true;
 		}
-		if (evt.keyCode == 67 && !key3) {
+		if (evt.keyCode == 68 && !key3) {
 			halfsteps += 2;
 			key3 = true;
 		}
-		if (evt.keyCode == 86 && !key4) {
+		if (evt.keyCode == 70 && !key4) {
 			halfsteps += 2;
 			key4 = true;
 		}
-		if (evt.keyCode == 78 && !key5) {
+		if (evt.keyCode == 74 && !key5) {
 			halfsteps += 1;
 			key5 = true;
 		}
-		if (evt.keyCode == 77 && !key6) {
+		if (evt.keyCode == 75 && !key6) {
 			halfsteps += 2;
 			key6 = true;
 		}
-		if (evt.keyCode == 188 && !key7) {
+		if (evt.keyCode == 76 && !key7) {
 			halfsteps += 2;
 			key7 = true;
 		}
-		if (evt.keyCode == 190 && !key8) {
+		if (evt.keyCode == 59 && !key8) {
 			halfsteps += 1;
 			key8 = true;
 		}
