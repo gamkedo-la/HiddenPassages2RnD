@@ -26,19 +26,19 @@
 	window.addEventListener('keydown', keyDown);
 
 	var audio_context = window.AudioContext || window.webkitAudioContext;
-	var audioContext = new audio_context();
+	var audioCtx = new audio_context();
 
-	var pitch = audioContext.createOscillator();
-	var tone = audioContext.createBiquadFilter();
-	var volume = audioContext.createGain();
+	var pitch = audioCtx.createOscillator();
+	var tone = audioCtx.createBiquadFilter();
+	var volume = audioCtx.createGain();
 	pitch.type = 'sawtooth';
-	pitch.frequency.setValueAtTime(55, audioContext.currentTime);
+	pitch.frequency.setValueAtTime(55, audioCtx.currentTime);
 	tone.type = 'lowpass';
-	volume.gain.setValueAtTime(0, audioContext.currentTime);
+	volume.gain.setValueAtTime(0, audioCtx.currentTime);
 
 	pitch.connect(tone);
 	tone.connect(volume);
-	volume.connect(audioContext.destination);
+	volume.connect(audioCtx.destination);
 
 	pitch.start();
 
@@ -47,13 +47,13 @@
 
 	window.onload = function() {
 		window.requestAnimationFrame(loop);
+		draw();
 	}
 
 	function loop() {
-		var now = audioContext.currentTime;
+		var now = audioCtx.currentTime;
 		
 		updateTrombone();
-		draw();
 
 		window.requestAnimationFrame(loop);
 	}
@@ -96,14 +96,14 @@
 		if (partial < 0.1) partial = 0.1;
 		partial = 10-Math.ceil(partial*totalPartials+1);
 
-		pitch.frequency.setValueAtTime(rootFreq * partial * slidePosition, audioContext.currentTime + 0.001);
-		tone.frequency.setValueAtTime(pitch.frequency.value * 3, audioContext.currentTime + 0.001);
+		pitch.frequency.setValueAtTime(rootFreq * partial * slidePosition, audioCtx.currentTime + 0.001);
+		tone.frequency.setValueAtTime(pitch.frequency.value * 3, audioCtx.currentTime + 0.001);
 
 		if ((mousePressed || spacePressed) && volume.gain.value == 0) {
-			volume.gain.setValueAtTime(maxVolume, audioContext.currentTime + 0.001);
+			volume.gain.setValueAtTime(maxVolume, audioCtx.currentTime + 0.001);
 		}
 		if ((!mousePressed & !spacePressed) && volume.gain.value == maxVolume) {
-			volume.gain.setValueAtTime(0, audioContext.currentTime + 0.001);
+			volume.gain.setValueAtTime(0, audioCtx.currentTime + 0.001);
 		}
 	}
 
@@ -111,22 +111,26 @@
 		var offsetX = canvas.width/2 - (colSize*totalSlidePositions)/2;
 		var offsetY = canvas.height/2 - (rowSize*totalPartials-1)/2;
 
-		var lastOffset = 1;
-		for (var i = 0; i < totalSlidePositions; i++) {
-			for(var j = 0; j < totalPartials; j++) {
-				drawBox(offsetX+(i*colSize), offsetY+(j*rowSize), colSize, rowSize);
-			}
+		for(var i = 0; i < totalPartials; i++) {
+			drawBox(offsetX, offsetY+(i*rowSize), totalSlidePositions*colSize, rowSize);
+		}
+
+		var boxWidth = 0.70711;
+		for(var i = 0; i < totalPartials; i++) {
+			var width = boxWidth * colSize * i;
+			drawBox(offsetX, offsetY, width, totalPartials*rowSize);
+			boxWidth *= 1.06;
+			console.log(boxWidth)
 		}
 	}
 
 	function drawBox(x, y, w, h) {
-		canvasContext.fillStyle = 'rgb(255, 255, 255)';
-		canvasContext.fillRect(x, y, w, h);
+		canvasContext.strokeStyle  = 'rgb(255, 255, 255)';
+		canvasContext.rect(x, y, w, h);
+		canvasContext.stroke();
+	}
 
-		canvasContext.fillStyle = 'rgb(0, 0, 0)';
-		canvasContext.fillRect(x+1, y+1, w-2, h-2);
 
-	}   
 
 	function scaleRange(inputStart, inputEnd, outputStart, outputEnd, value) {
 		var scale = (outputEnd - outputStart) / (inputEnd - inputStart);
@@ -140,7 +144,7 @@
 	function mouseDown(evt) {
 		calculateMousePos(evt);
 		mousePressed = true;
-		context.resume();
+		audioCtx.resume();
 	}
 
 	function mouseUp(evt) {
@@ -166,7 +170,7 @@
 		if (evt.keyCode == 32) {
 			spacePressed = true;
 		}
-		context.resume();
+		audioCtx.resume();
 	}
 
 	

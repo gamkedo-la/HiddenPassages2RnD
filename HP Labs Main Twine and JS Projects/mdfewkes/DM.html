@@ -24,7 +24,7 @@
 	document.getElementById('laCanvas').addEventListener('pointermove', calculateMousePos);
 
 	var audio_context = window.AudioContext || window.webkitAudioContext;
-	var context = new audio_context();
+	var audioCtx = new audio_context();
 
 	var canvas = document.getElementById('laCanvas');
 	var canvasContext = canvas.getContext('2d');
@@ -74,7 +74,7 @@
 	}
 
 	function loop() {
-		var now = context.currentTime;
+		var now = audioCtx.currentTime;
 		
 		var max_future_time = now + (wait_time * 1.5);
 		if(got_up_to > now) {
@@ -154,10 +154,10 @@
 	// https://dev.opera.com/articles/drum-sounds-webaudio/
 	function Kick() {
 	
-		var osc = context.createOscillator();
-		var gain = context.createGain();
+		var osc = audioCtx.createOscillator();
+		var gain = audioCtx.createGain();
 		osc.connect(gain);
-		gain.connect(context.destination)
+		gain.connect(audioCtx.destination)
 
 		this.trigger = function(time) {
 			osc.frequency.setValueAtTime(150, time);
@@ -176,8 +176,8 @@
 	function Snare() {
 
 		function noiseBuffer() {
-			var bufferSize = context.sampleRate;
-			var buffer = context.createBuffer(1, bufferSize, context.sampleRate);
+			var bufferSize = audioCtx.sampleRate;
+			var buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
 			var output = buffer.getChannelData(0);
 
 			for (var i = 0; i < bufferSize; i++) {
@@ -187,24 +187,24 @@
 			return buffer;
 		}
 
-		var noise = context.createBufferSource();
+		var noise = audioCtx.createBufferSource();
 		noise.buffer = noiseBuffer();
-		var noiseFilter = context.createBiquadFilter();
+		var noiseFilter = audioCtx.createBiquadFilter();
 		noiseFilter.type = 'highpass';
 		noiseFilter.frequency.value = 1000;
 		noise.connect(noiseFilter);
 
-		var noiseEnvelope = context.createGain();
+		var noiseEnvelope = audioCtx.createGain();
 		noiseFilter.connect(noiseEnvelope);
 
-		noiseEnvelope.connect(context.destination);
+		noiseEnvelope.connect(audioCtx.destination);
 
-		var osc = context.createOscillator();
+		var osc = audioCtx.createOscillator();
 		osc.type = 'triangle';
 
-		var oscEnvelope = context.createGain();
+		var oscEnvelope = audioCtx.createGain();
 		osc.connect(oscEnvelope);
-		oscEnvelope.connect(context.destination);
+		oscEnvelope.connect(audioCtx.destination);
 
 		this.trigger = function(time) {
 
@@ -227,27 +227,27 @@
 		var fundamental = 40;
 		var ratios = [2, 3, 4.16, 5.43, 6.79, 8.21];
 
-		var gain = context.createGain();
+		var gain = audioCtx.createGain();
 
 		// Bandpass
-		var bandpass = context.createBiquadFilter();
+		var bandpass = audioCtx.createBiquadFilter();
 		bandpass.type = "bandpass";
 		bandpass.frequency.value = 10000;
 
 		// Highpass
-		var highpass = context.createBiquadFilter();
+		var highpass = audioCtx.createBiquadFilter();
 		highpass.type = "highpass";
 		highpass.frequency.value = 7000;
 
 		// Connect the graph
 		bandpass.connect(highpass);
 		highpass.connect(gain);
-		gain.connect(context.destination);
+		gain.connect(audioCtx.destination);
 
 		this.trigger = function(now) {
 			// Create the oscillators
 			ratios.forEach(function(ratio) {
-			  var osc = context.createOscillator();
+			  var osc = audioCtx.createOscillator();
 			  osc.type = "square";
 			  // Frequency is the fundamental * this oscillator's ratio
 			  osc.frequency.value = fundamental * ratio;
@@ -310,7 +310,7 @@
 		calculateMousePos(evt);
 		mousePressed = true;
 		mouseClicked = true;
-		context.resume();
+		audioCtx.resume();
 	}
 
 	function mouseUp(evt) {

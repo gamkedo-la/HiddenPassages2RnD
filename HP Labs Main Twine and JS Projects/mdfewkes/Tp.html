@@ -26,19 +26,19 @@
 	window.addEventListener('keydown', keyDown);
 
 	var audio_context = window.AudioContext || window.webkitAudioContext;
-	var context = new audio_context();
+	var audioCtx = new audio_context();
 
-	var pitch = context.createOscillator();
-	var tone = context.createBiquadFilter();
-	var volume = context.createGain();
+	var pitch = audioCtx.createOscillator();
+	var tone = audioCtx.createBiquadFilter();
+	var volume = audioCtx.createGain();
 	pitch.type = 'sawtooth';
-	pitch.frequency.setValueAtTime(55, context.currentTime);
+	pitch.frequency.setValueAtTime(55, audioCtx.currentTime);
 	tone.type = 'lowpass';
-	volume.gain.setValueAtTime(0, context.currentTime);
+	volume.gain.setValueAtTime(0, audioCtx.currentTime);
 
 	pitch.connect(tone);
 	tone.connect(volume);
-	volume.connect(context.destination);
+	volume.connect(audioCtx.destination);
 
 	pitch.start();
 
@@ -47,13 +47,13 @@
 
 	window.onload = function() {
 		window.requestAnimationFrame(loop);
+		draw();
 	}
 
 	function loop() {
-		var now = context.currentTime;
+		var now = audioCtx.currentTime;
 		
 		updateTrumpet();
-		draw();
 
 		window.requestAnimationFrame(loop);
 	}
@@ -79,14 +79,14 @@
 		if (partial < 0.1) partial = 0.1;
 		partial = 10-Math.ceil(partial*totalPartials+1);
 
-		pitch.frequency.setValueAtTime(rootFreq * partial * valveLength(), context.currentTime + 0.001);
-		tone.frequency.setValueAtTime(pitch.frequency.value * 3, context.currentTime + 0.001);
+		pitch.frequency.setValueAtTime(rootFreq * partial * valveLength(), audioCtx.currentTime + 0.001);
+		tone.frequency.setValueAtTime(pitch.frequency.value * 3, audioCtx.currentTime + 0.001);
 
 		if ((mousePressed || spacePressed) && volume.gain.value == 0) {
-			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
+			volume.gain.setValueAtTime(maxVolume, audioCtx.currentTime + 0.001);
 		}
 		if ((!mousePressed & !spacePressed) && volume.gain.value == maxVolume) {
-			volume.gain.setValueAtTime(0, context.currentTime + 0.001);
+			volume.gain.setValueAtTime(0, audioCtx.currentTime + 0.001);
 		}
 	}
 
@@ -99,9 +99,9 @@
 			drawBox(offsetX, offsetY+(j*rowSize), colSize, rowSize);
 		}
 
-		colorText("A", canvas.width/2 - 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-		colorText("S", canvas.width/2, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
-		colorText("D", canvas.width/2 + 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("1", canvas.width/2 - 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("2", canvas.width/2, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
+		colorText("3", canvas.width/2 + 20, canvas.height/2 + (rowSize*totalPartials)/2 + 40);
 
 
 	}
@@ -163,7 +163,7 @@
 	function mouseDown(evt) {
 		calculateMousePos(evt);
 		mousePressed = true;
-		context.resume();
+		audioCtx.resume();
 	}
 
 	function mouseUp(evt) {
@@ -186,15 +186,15 @@
 		if (evt.keyCode == 32) {
 			spacePressed = false;
 		}
-		if (evt.keyCode == 65 && valve1) {
+		if (evt.keyCode == 49 && valve1) {
 			halfsteps -= 2;
 			valve1 = false;
 		}
-		if (evt.keyCode == 83 && valve2) {
+		if (evt.keyCode == 50 && valve2) {
 			halfsteps -= 1;
 			valve2 = false;
 		}
-		if (evt.keyCode == 68 && valve3) {
+		if (evt.keyCode == 51 && valve3) {
 			halfsteps -= 3;
 			valve3 = false;
 		}
@@ -204,19 +204,19 @@
 		if (evt.keyCode == 32) {
 			spacePressed = true;
 		}
-		if (evt.keyCode == 65 && !valve1) {
+		if (evt.keyCode == 49 && !valve1) {
 			halfsteps += 2;
 			valve1 = true;
 		}
-		if (evt.keyCode == 83 && !valve2) {
+		if (evt.keyCode == 50 && !valve2) {
 			halfsteps += 1;
 			valve2 = true;
 		}
-		if (evt.keyCode == 68 && !valve3) {
+		if (evt.keyCode == 51 && !valve3) {
 			halfsteps += 3;
 			valve3 = true;
 		}
-		context.resume();
+		audioCtx.resume();
 	}
 
 	

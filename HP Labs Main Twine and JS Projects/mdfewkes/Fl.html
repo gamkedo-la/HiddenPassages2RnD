@@ -26,16 +26,16 @@
 	window.addEventListener('keydown', keyDown);
 
 	var audio_context = window.AudioContext || window.webkitAudioContext;
-	var context = new audio_context();
+	var audioCtx = new audio_context();
 
-	var pitch = context.createOscillator();
-	var volume = context.createGain();
+	var pitch = audioCtx.createOscillator();
+	var volume = audioCtx.createGain();
 	pitch.type = 'triangle';
-	pitch.frequency.setValueAtTime(880, context.currentTime);
-	volume.gain.setValueAtTime(0, context.currentTime + 0.001);
+	pitch.frequency.setValueAtTime(880, audioCtx.currentTime);
+	volume.gain.setValueAtTime(0, audioCtx.currentTime + 0.001);
 
 	pitch.connect(volume);
-	volume.connect(context.destination);
+	volume.connect(audioCtx.destination);
 
 	pitch.start();
 
@@ -44,13 +44,13 @@
 
 	window.onload = function() {
 		window.requestAnimationFrame(loop);
+		draw();
 	}
 
 	function loop() {
-		var now = context.currentTime;
+		var now = audioCtx.currentTime;
 		
 		updateFlute();
-		draw();
 
 		window.requestAnimationFrame(loop);
 	}
@@ -62,25 +62,25 @@
 
 	function updateFlute() {
 
-		pitch.frequency.setValueAtTime(rootFreq * keysDown(), context.currentTime + 0.001);
+		pitch.frequency.setValueAtTime(rootFreq * keysDown(), audioCtx.currentTime + 0.001);
 
 		if ((mousePressed || spacePressed) && volume.gain.value == 0) {
-			volume.gain.setValueAtTime(maxVolume, context.currentTime + 0.001);
+			volume.gain.setValueAtTime(maxVolume, audioCtx.currentTime + 0.001);
 		}
 		if ((!mousePressed & !spacePressed) && volume.gain.value == maxVolume) {
-			volume.gain.setValueAtTime(0, context.currentTime + 0.001);
+			volume.gain.setValueAtTime(0, audioCtx.currentTime + 0.001);
 		}
 	}
 
 	function draw() {
 
-		colorText("A", canvas.width/2, canvas.height/2 - 80);
-		colorText("S", canvas.width/2, canvas.height/2 - 60);
-		colorText("D", canvas.width/2, canvas.height/2 - 40);
-		colorText("F", canvas.width/2, canvas.height/2 - 20);
-		colorText("J", canvas.width/2, canvas.height/2 + 20);
-		colorText("K", canvas.width/2, canvas.height/2 + 40);
-		colorText("L", canvas.width/2, canvas.height/2 + 60);
+		colorText("1", canvas.width/2, canvas.height/2 - 80);
+		colorText("2", canvas.width/2, canvas.height/2 - 60);
+		colorText("3", canvas.width/2, canvas.height/2 - 40);
+		colorText("4", canvas.width/2, canvas.height/2 - 20);
+		colorText("7", canvas.width/2, canvas.height/2 + 20);
+		colorText("8", canvas.width/2, canvas.height/2 + 40);
+		colorText("9", canvas.width/2, canvas.height/2 + 60);
 	}
 
 
@@ -135,7 +135,7 @@
 	function mouseDown(evt) {
 		calculateMousePos(evt);
 		mousePressed = true;
-		context.resume();
+		audioCtx.resume();
 	}
 
 	function mouseUp(evt) {
@@ -163,35 +163,35 @@
 		if (evt.keyCode == 32) {
 			spacePressed = false;
 		}
-		if (evt.keyCode == 65 && key1) {
+		if (evt.keyCode == 49 && key1) {
 			halfsteps -= 1;
 			key1 = false;
 		}
-		if (evt.keyCode == 83 && key2) {
+		if (evt.keyCode == 50 && key2) {
 			halfsteps -= 2;
 			key2 = false;
 		}
-		if (evt.keyCode == 68 && key3) {
+		if (evt.keyCode == 51 && key3) {
 			halfsteps -= 2;
 			valve3 = false;
 		}
-		if (evt.keyCode == 70 && key4) {
+		if (evt.keyCode == 52 && key4) {
 			halfsteps -= 2;
 			key4 = false;
 		}
-		if (evt.keyCode == 74 && key5) {
+		if (evt.keyCode == 55 && key5) {
 			halfsteps -= 1;
 			key5 = false;
 		}
-		if (evt.keyCode == 75 && key6) {
+		if (evt.keyCode == 56 && key6) {
 			halfsteps -= 2;
 			key6 = false;
 		}
-		if (evt.keyCode == 76 && key7) {
+		if (evt.keyCode == 57 && key7) {
 			halfsteps -= 2;
 			key7 = false;
 		}
-		if (evt.keyCode == 59 && key8) {
+		if (evt.keyCode == 48 && key8) {
 			halfsteps -= 1;
 			key8 = false;
 		}
@@ -201,39 +201,39 @@
 		if (evt.keyCode == 32) {
 			spacePressed = true;
 		}
-		if (evt.keyCode == 65 && !key1) {
+		if (evt.keyCode == 49 && !key1) {
 			halfsteps += 1;
 			key1 = true;
 		}
-		if (evt.keyCode == 83 && !key2) {
+		if (evt.keyCode == 50 && !key2) {
 			halfsteps += 2;
 			key2 = true;
 		}
-		if (evt.keyCode == 68 && !key3) {
+		if (evt.keyCode == 51 && !key3) {
 			halfsteps += 2;
 			key3 = true;
 		}
-		if (evt.keyCode == 70 && !key4) {
+		if (evt.keyCode == 52 && !key4) {
 			halfsteps += 2;
 			key4 = true;
 		}
-		if (evt.keyCode == 74 && !key5) {
+		if (evt.keyCode == 55 && !key5) {
 			halfsteps += 1;
 			key5 = true;
 		}
-		if (evt.keyCode == 75 && !key6) {
+		if (evt.keyCode == 56 && !key6) {
 			halfsteps += 2;
 			key6 = true;
 		}
-		if (evt.keyCode == 76 && !key7) {
+		if (evt.keyCode == 57 && !key7) {
 			halfsteps += 2;
 			key7 = true;
 		}
-		if (evt.keyCode == 59 && !key8) {
+		if (evt.keyCode == 48 && !key8) {
 			halfsteps += 1;
 			key8 = true;
 		}
-		context.resume();
+		audioCtx.resume();
 	}
 
 	
