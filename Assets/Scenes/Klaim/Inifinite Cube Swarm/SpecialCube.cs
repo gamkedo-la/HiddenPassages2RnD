@@ -25,14 +25,20 @@ namespace klaim
 
         public void OnMouseDown()
         {
-            Debug.Log("CLICKED!!!!!!!!!!!");
+            //Debug.Log("CLICKED!!!!!!!!!!!");
             if(is_special && !clicked)
             {
                 clicked = true;
+                const float seconds_to_destroy = 5.0f;
+                
                 var secret_text = GameObject.Find("/Canvas/secret_text");
                 secret_text.GetComponent<Text>().enabled = true;
+                GameObject.Destroy(secret_text, seconds_to_destroy);
+
                 var panel_secret_text = GameObject.Find("/Canvas/panel_secret_text");
                 panel_secret_text.GetComponent<Image>().enabled = true;
+                GameObject.Destroy(panel_secret_text, seconds_to_destroy);
+
             }
         }
 
