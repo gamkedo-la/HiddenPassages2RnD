@@ -38,6 +38,20 @@ var button3Y = 0;
 var button4X = 0;
 var button4Y = 0;
 
+var gameWon;
+
+function puzzleReset(){
+	gameWon = 0;
+	puzzleGrid = [0, 3, 1, 
+				  0, 0, 0, 
+				  2, 0, 0];
+	 movingGrid = [2, 0, 0, 
+				  0, 3, 0, 
+				  0, 0, 1];
+	colorRect(0,0, canvas.width,canvas.height, 'black');
+	updateAll();
+}
+
 function drawPuzzle(){
 	
 	var arrayIndex = 0;	
@@ -106,12 +120,26 @@ function drawButtons(){
 	canvasContext.drawImage(useImg, button4X,button4Y);
 }
 
+function winCheck(){
+
+	var notMatch = 0;
+	for (i=0; i<PUZZLE_COLS*PUZZLE_ROWS; i++){
+		if (puzzleGrid[i] != movingGrid[i]){
+			notMatch++;
+		} 
+	}
+	if (notMatch == 0) {
+		colorText("You win!", 350,525, "white");
+		colorText("Click anywhere to play again.", 265,555, "white");
+		gameWon = 1;
+	}
+}
+
 function puzzleChange(buttonPressed){
 
 	var temp = 0;
 
 	if (buttonPressed == 1){
-		console.log('Button 1 clicked~!');
 		temp = movingGrid[1];
 		movingGrid[1] = movingGrid[0];
 		movingGrid[0] = movingGrid[3];
@@ -120,7 +148,6 @@ function puzzleChange(buttonPressed){
 	} 
 
 	if (buttonPressed == 2) {	
-		console.log('Button 2 clicked~!');
 		temp = movingGrid[2];
 		movingGrid[2] = movingGrid[1];
 		movingGrid[1] = movingGrid[4];
@@ -129,7 +156,6 @@ function puzzleChange(buttonPressed){
 	} 
 
 	if (buttonPressed == 3) {	
-		console.log('Button 3 clicked~!');
 		temp = movingGrid[4];
 		movingGrid[4] = movingGrid[3];
 		movingGrid[3] = movingGrid[6];
@@ -145,5 +171,5 @@ function puzzleChange(buttonPressed){
 		movingGrid[8] = temp;
 	}
 
-
+	winCheck();
 }
