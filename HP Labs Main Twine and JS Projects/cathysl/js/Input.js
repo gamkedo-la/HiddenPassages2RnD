@@ -15,6 +15,7 @@ function calculateMousePos(evt){
 
 function handleMouseClick(evt){
 	if (gameWon){
+		gameWon = 0;
 		puzzleReset();
 	} else {
 		if (mouseX > button1X && mouseX < button1X + BUTTON_W &&

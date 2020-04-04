@@ -7,6 +7,7 @@ const PUZZLE_GAP = 10;
 const PUZZLE_COLS = 3;
 const PUZZLE_ROWS = 3;
 
+var puzzlesCompleted = 0;
 var puzzleGrid = [0, 3, 1, 
 				  0, 0, 0, 
 				  2, 0, 0];
@@ -40,14 +41,42 @@ var button4Y = 0;
 
 var gameWon;
 
+
+function checkArraysMatch(array1, array2){
+
+	var match = 0;
+	for (i=0; i < array1.length; i++){
+		if (array1[i] != 0 && array2[i] !=0){
+			if (array1[i] == array2[i]){
+				match++;
+			}
+		} 
+	}
+
+	if (match > 0) {
+		randomizeGrid();
+	} else {
+		return;
+	}
+}
+
+function shuffle(array){
+	for(i = array.length - 1; i > 0; i--){
+		const j = Math.floor(Math.random() * i);
+		const temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+}
+
+function randomizeGrid(){
+	shuffle(puzzleGrid);
+	shuffle(movingGrid);
+	checkArraysMatch(puzzleGrid, movingGrid);
+}
+
 function puzzleReset(){
-	gameWon = 0;
-	puzzleGrid = [0, 3, 1, 
-				  0, 0, 0, 
-				  2, 0, 0];
-	 movingGrid = [2, 0, 0, 
-				  0, 3, 0, 
-				  0, 0, 1];
+	randomizeGrid();
 	colorRect(0,0, canvas.width,canvas.height, 'black');
 	updateAll();
 }
@@ -129,7 +158,8 @@ function winCheck(){
 		} 
 	}
 	if (notMatch == 0) {
-		colorText("You win!", 350,525, "white");
+		puzzlesCompleted++;
+		colorText("You win! Puzzles Completed: "+puzzlesCompleted, 260,525, "white");
 		colorText("Click anywhere to play again.", 265,555, "white");
 		gameWon = 1;
 	}
