@@ -7740,11 +7740,11 @@ MonoBehaviour:
   rotation: 0
   max_acceleration: 0.16867442
   max_speed: 0.2278488
-  random_max_acceleration: 0.3
-  random_max_speed: 0.3
+  random_max_acceleration: 0.1
+  random_max_speed: 0.2
   random_max_rotation: 0
   random_changes_every_secs: 15
-  camera_view_size_per_side: 120
+  camera_view_size_per_side: 80
   change_movement_randomly: 1
 --- !u!1 &3900449701480516965
 GameObject:
