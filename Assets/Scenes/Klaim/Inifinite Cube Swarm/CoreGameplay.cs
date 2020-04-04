@@ -32,6 +32,8 @@ namespace klaim
         public Vector3 color_max = Vector3.one;
 
 
+        public bool random_keys = false;
+
         struct KeyAction
         {
             public delegate void Action();
@@ -60,13 +62,7 @@ namespace klaim
             global_light = GameObject.Find("Directional Light").transform;
             reset_puzzle_tiles();
 
-            KeyCode[] keys = new KeyCode[]
-            {
-                KeyCode.A, KeyCode.B, KeyCode.C, KeyCode.D, KeyCode.E, KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.I, KeyCode.J, KeyCode.K, KeyCode.L, KeyCode.M,
-                KeyCode.N, KeyCode.O, KeyCode.P, KeyCode.Q, KeyCode.R, KeyCode.S, KeyCode.T, KeyCode.U, KeyCode.V, KeyCode.W, KeyCode.X, KeyCode.Y, KeyCode.Z,
-                KeyCode.Alpha0, KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8, KeyCode.Alpha9
-            };
-            shuffle(ref keys);
+            var keys = select_keys();
 
             key_actions = new KeyAction[]
             {
@@ -113,13 +109,6 @@ namespace klaim
                 if (Input.GetKey(key_action.key))
                     key_action.action();
             }
-
-            // TODO: Remove this in the final game
-            if (Input.GetKey(KeyCode.DownArrow))
-                resize_puzzle_tiles(-1.0f);
-            if (Input.GetKey(KeyCode.UpArrow))
-                resize_puzzle_tiles(1.0f);
-
         }
 
         public static void shuffle<T>(ref T[] array)
@@ -132,6 +121,28 @@ namespace klaim
                 array[n] = array[k];
                 array[k] = temp;
             }
+        }
+
+        private KeyCode[] select_keys()
+        {
+            KeyCode[] keys = new KeyCode[]
+            {
+                KeyCode.Alpha1, KeyCode.Alpha2,                                                 // resize tile
+                KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.Q,               // rotate cube
+                KeyCode.Alpha3, KeyCode.Alpha4,                                                 // move cube on x local axis
+                KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V,                                     // rotate tile
+                KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8,                 // rotate light
+                KeyCode.R, KeyCode.T, KeyCode.Y, KeyCode.U, KeyCode.I, KeyCode.O,               // change colors of odd cubes
+                KeyCode.F, KeyCode.G, KeyCode.H, KeyCode.J, KeyCode.K, KeyCode.L,               // change colors of even cubes
+                KeyCode.Alpha9, KeyCode.Alpha0, KeyCode.M, KeyCode.P, KeyCode.B, KeyCode.N,     // unused keys
+            };
+
+            if (random_keys)
+            {
+                shuffle(ref keys);
+            }
+
+            return keys;
         }
 
         void reset_puzzle_tiles()
