@@ -886,24 +886,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'GOAL: click on the RED hidden cube
-
-    
-
-    WASDQE/ZXCV   : rotate
-    (cubes/tiles)
-
-    RTYUIO/FGHJKL : change cubes colors (odd/even)
-
-    1-2                          
-    : resize cubes
-
-    5-8                           : rotate light
-
-    3-4                          
-    : show/hide hidden cube
-
-'
+  m_Text: "GOAL: click on the RED hidden cube\r\n\r\nWASDQE / ZXCV\t: rotate (cubes/tiles)\r\nRTYUIO
+    / FGHJKL\t: change cubes colors (odd/even)\r\n1-2\t\t\t\t\t\t: resize cubes\n5-8\t\t\t\t\t\t:
+    rotate light\r\n3-4\t\t\t\t\t\t: show/hide hidden cube\r\n"
 --- !u!222 &1806599234
 CanvasRenderer:
   m_ObjectHideFlags: 0
