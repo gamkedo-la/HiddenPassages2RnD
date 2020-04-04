@@ -128,7 +128,7 @@ namespace klaim
             KeyCode[] keys = new KeyCode[]
             {
                 KeyCode.Alpha1, KeyCode.Alpha2,                                                 // resize tile
-                KeyCode.A, KeyCode.D, KeyCode.W, KeyCode.S, KeyCode.E, KeyCode.Q,               // rotate cube
+                KeyCode.S, KeyCode.W, KeyCode.A, KeyCode.D, KeyCode.E, KeyCode.Q,               // rotate cube
                 KeyCode.Alpha3, KeyCode.Alpha4,                                                 // move cube on x local axis
                 KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V,                                     // rotate tile
                 KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8,                 // rotate light
