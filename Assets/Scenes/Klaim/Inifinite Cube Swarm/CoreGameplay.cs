@@ -164,14 +164,10 @@ namespace klaim
             }
 
             // This is for gameplay purpose: force this central cube to be "special"
-            var special_cube = puzzle_tiles[Random.Range(0, tiles.Length - 1)].center.gameObject;
-            foreach (var renderer in special_cube.GetComponentsInChildren<Renderer>())
-            {
-                foreach (var material in renderer.materials)
-                {
-                    material.color = special_cube_color;
-                }
-            }
+            var special_cube = puzzle_tiles[Random.Range(0, tiles.Length - 1)].center.gameObject.GetComponent<SpecialCube>();
+            special_cube.mark_as_special(special_cube_color);
+
+            
 
         }
 
