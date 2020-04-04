@@ -34,6 +34,8 @@ namespace klaim
 
         public bool random_keys = false;
 
+        public Color special_cube_color = Color.red;
+
         struct KeyAction
         {
             public delegate void Action();
@@ -160,6 +162,17 @@ namespace klaim
                 puzzle_tiles[i].cube = puzzle_tiles[i].boundaries.GetChild(0);
                 puzzle_tiles[i].center = puzzle_tiles[i].boundaries.GetChild(1);
             }
+
+            // This is for gameplay purpose: force this central cube to be "special"
+            var special_cube = puzzle_tiles[Random.Range(0, tiles.Length - 1)].center.gameObject;
+            foreach (var renderer in special_cube.GetComponentsInChildren<Renderer>())
+            {
+                foreach (var material in renderer.materials)
+                {
+                    material.color = special_cube_color;
+                }
+            }
+
         }
 
         void resize_puzzle_tiles(float factor)
