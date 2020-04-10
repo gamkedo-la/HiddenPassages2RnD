@@ -273,12 +273,20 @@ var MSDOS = (function () {
 
 var t1 = new MSDOS();
 var pendingBufferedCommand = "";
+var hintRemoved = false;
 function commandDotCom(input) {
     
     if (soundON) discSound.play();
     
     input = input.toUpperCase();
     input = input.replace(".EXE", "");
+
+    if (input=="DIR") { // remove hint
+        if (!hintRemoved) {
+            hintRemoved = true;
+            document.getElementById('hint').style.display='none';
+        }
+    }
 
     if (input=="BBS") {
         modemSound.play();
