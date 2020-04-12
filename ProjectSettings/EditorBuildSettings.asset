@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EyeForcz/TurnTableCar.unity
     guid: b7b34b6f271b24b309bdfdcae2c0fb6b
+  - enabled: 1
+    path: Assets/Scenes/EyeForcz/Bathroom.unity
+    guid: d78e3974c14ee4997ae48024e7b8c670
   m_configObjects: {}
