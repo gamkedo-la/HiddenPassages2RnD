@@ -1,0 +1,16 @@
+0
+
+You've arrived in what appears to be a sun room,
+though most of the sun is blocked by bookshelves that span from floor to ceiling. 
+The room can't be larger than a studio apartment, but the shelves live in a surpsingly maze-like arrangement. 
+beams of light peer through the spaces between the books.
+
+[make your way through a few shelves]
+
+In the heart of the room, you find a plywood board laid across two shelves. 
+on it lies a small matress and a few sheets
+it's a bed, but it doesn't even qualifiy as a twin. 
+
+there's a book..."the heart is decietful above all things"
+a page is bookmarked. (passage about not hiding in a closet)
+[enter book]
