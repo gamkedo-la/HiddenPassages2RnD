@@ -223,26 +223,29 @@ else {
 //    textToSpeech("already loaded")
 }
 
+function toggleMuteVO() {
+	var sayWordsToggled = !speakerThing.sayWords;
+	speakerThing.sayWords = true; // turn on to hear feedback
+	if(sayWordsToggled) {
+		if(speakerThing.mutedBuffer != "") {
+			speakerThing.textToSpeech(speakerThing.mutedBuffer);
+		} else {
+			speakerThing.textToSpeech("VO on");
+		}
+	} else {
+		var resumeSay = speakerThing.mutedBuffer;
+		speakerThing.textToSpeech("VO off"); // skip override mutedBuffer
+		speakerThing.mutedBuffer = resumeSay;
+	}
+	speakerThing.sayWords = sayWordsToggled;
+	updateMuteIndicator();
+	localStorage.setItem('useVO',speakerThing.sayWords);
+}
+
 function keyPush(evt)  {
-	var sayWordsToggled;
 	switch(evt.keyCode) {
 		case 77: // M Key
-			sayWordsToggled = !speakerThing.sayWords;
-			speakerThing.sayWords = true; // turn on to hear feedback
-			if(sayWordsToggled) {
-				if(speakerThing.mutedBuffer != "") {
-				  speakerThing.textToSpeech(speakerThing.mutedBuffer);
-				} else {
-					speakerThing.textToSpeech("VO on");
-				}
-			} else {
-				var resumeSay = speakerThing.mutedBuffer;
-				speakerThing.textToSpeech("VO off"); // skip override mutedBuffer
-				speakerThing.mutedBuffer = resumeSay;
-			}
-			speakerThing.sayWords = sayWordsToggled;
-			updateMuteIndicator();
-			localStorage.setItem('useVO',speakerThing.sayWords);
+			toggleMuteVO();
 			break;
 		default:
 //				speakerThing.textToSpeech("unused key: "+evt.keyCode);
@@ -317,8 +320,9 @@ muteShow.style.color="red";
 muteShow.style.position="absolute";
 muteShow.style.zIndex=1000;
 muteShow.innerHTML = "shows mute state here"
-document.body.appendChild(muteShow);
 
+document.body.appendChild(muteShow);
+muteShow.addEventListener("click", toggleMuteVO);
 function updateMuteIndicator() {
 	muteShow.innerHTML = (speakerThing.sayWords ? "🔊" : "🔇")+" (M key)";
 }
