@@ -241,6 +241,7 @@ function keyPush(evt)  {
 				speakerThing.mutedBuffer = resumeSay;
 			}
 			speakerThing.sayWords = sayWordsToggled;
+			updateMuteIndicator();
 			localStorage.setItem('useVO',speakerThing.sayWords);
 			break;
 		default:
@@ -306,7 +307,22 @@ var speakerThing = {
 };
 window.SpeakingThing = speakerThing;
 
-</script><tw-tag name="VO" color="blue"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag>,<tw-tag name="ReplacedByGame" color="red"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="389,555" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
+
+var muteShow=document.createElement("div");
+muteShow.width=40;
+muteShow.height=40;
+muteShow.style.left=15;
+muteShow.style.top=15;
+muteShow.style.color="red";
+muteShow.style.position="absolute";
+muteShow.style.zIndex=1000;
+muteShow.innerHTML = "shows mute state here"
+document.body.appendChild(muteShow);
+
+function updateMuteIndicator() {
+	muteShow.innerHTML = (speakerThing.sayWords ? "🔊" : "🔇")+" (M key)";
+}
+updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="blue"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="389,555" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
 
 Press &quot;m&quot; key (for &quot;mute&quot;) at any time in these main Twine scenes to toggle Voiceover on or off. This will be restored when returning from prototypes.
 
@@ -569,7 +585,7 @@ In one corner is a particularly tidy garden.
 
 There&#39;s a sticky note on top. It says, &quot;I contain every book I&#39;ve ever copied a page from. Come see.&quot;
 
-(link: &quot;will you try... entering the copier?&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]</tw-passagedata><tw-passagedata pid="46" name="cubeFar1" tags="" position="1113,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="47" name="cubeFar2" tags="" position="1263,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="48" name="cubeFar3" tags="" position="1413,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="49" name="cubeFar4" tags="" position="1563,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="50" name="windowShade" tags="" position="1713,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="51" name="libraryArea by AshCat" tags="ReplacedByGame" position="1069.3333333333333,1261.3333333333333" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
+(link: &quot;will you try... entering the copier?&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]</tw-passagedata><tw-passagedata pid="46" name="cubeFar1" tags="" position="1113,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="47" name="cubeFar2" tags="" position="1263,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="48" name="cubeFar3" tags="" position="1413,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="49" name="cubeFar4" tags="" position="1563,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="50" name="windowShade" tags="" position="1713,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="51" name="libraryArea by AshCat" tags="ReplacedByGame" position="1069,1261" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
