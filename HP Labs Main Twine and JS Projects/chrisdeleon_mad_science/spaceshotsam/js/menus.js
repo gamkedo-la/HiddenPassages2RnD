@@ -8,7 +8,14 @@ function drawTitleScreen() {
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
   ctx.fillText("SPACE SHOT SAM!",canv.width/2,canv.height*1/3);
-  ctx.fillText("Press Space to Begin",canv.width/2,canv.height-50);  
+  ctx.fillText("Press Space to Begin",canv.width/2,canv.height-250);  
+
+  ctx.fillStyle = "gray";
+  if(webGLFakeCRT) {
+    ctx.fillText("includes display technology by Evan Wallace released under the MIT license",canv.width/2,canv.height-30);
+  } else {
+    ctx.fillText("CRT magic tech is not supported",canv.width/2,canv.height-30);
+  }
 
   if(highScore != 0) {
     ctx.textAlign = "left";
