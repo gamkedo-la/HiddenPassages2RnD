@@ -11,7 +11,18 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="HiddenPassagesStudio" startnode="1" creator="Twine" creator-version="2.3.5" ifid="1FDC9DA6-B756-41BD-A0D8-258F3FDFB363" zoom="0.6" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import 'https://fonts.googleapis.com/css?family=Alegreya+Sans+SC';
+<tw-storydata name="HiddenPassagesStudio" startnode="1" creator="Twine" creator-version="2.3.5" ifid="1FDC9DA6-B756-41BD-A0D8-258F3FDFB363" zoom="0.6" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import 'https://fonts.googleapis.com/css?family=Rajdhani|Scheherazade|Special+Elite|Alegreya+Sans+SC';
+
+html.oldOffice, body.oldOffice, tw-story[tags~="oldOffice"] {
+  font-family: 'Special Elite', serif;
+}
+html.oldOffice {
+	background-color: #efef00;
+}
+tw-story[tags~="oldOffice"] {
+  background-image: url('https://gamkedo.com/new-home-img/subtle/ricepaper2.png');
+  font-size: 16px;
+}
 
 tw-story {
 	background: white;
@@ -326,7 +337,7 @@ muteShow.addEventListener("click", toggleMuteVO);
 function updateMuteIndicator() {
 	muteShow.innerHTML = (speakerThing.sayWords ? "🔊" : "🔇")+" (M key)";
 }
-updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="blue"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="389,555" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
+updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="blue"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag>,<tw-tag name="oldOffice" color="purple"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="389,555" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
 
 Press &quot;m&quot; key (for &quot;mute&quot;) at any time in these main Twine scenes to toggle Voiceover on or off. This will be restored when returning from prototypes.
 
@@ -351,7 +362,8 @@ note: there are likely to be other spaces and realms added, but these time shift
 [[I stay down, trying to remember how I got here.-&gt;stayDown]]
 &lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re laid out on the hardwood floor, waking up to fluorescent lights humming overhead.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="1980s time warp" tags="" position="151,859" size="100,100">This will be a place for retro Apple IIe / Atari / VHS / NES era glitch art stuff
 
-(link: &quot;DIR/BBS, by McFunkypants&quot;)[(goto-url: &#39;mcfunkypants/mcf-index.html&#39;)]</tw-passagedata><tw-passagedata pid="5" name="2020 present day office" tags="" position="264,860" size="100,100">This area might have the most recognizably &quot;normal&quot; things like single mechanic tiny gameplay prototypes
+(link: &quot;DIR/BBS, by McFunkypants&quot;)[(goto-url: &#39;mcfunkypants/mcf-index.html&#39;)]
+(link: &quot;Space Shot Sam, by Chris&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)]</tw-passagedata><tw-passagedata pid="5" name="2020 present day office" tags="" position="264,860" size="100,100">This area might have the most recognizably &quot;normal&quot; things like single mechanic tiny gameplay prototypes
 
 No others are here yet, use back option on the left to return
 
@@ -443,16 +455,14 @@ The counter is curved, with a white marble top. A coffee machine and toaster ove
 [[Step inside the elevator (to distant future tower)-&gt;futureTower]]</tw-passagedata><tw-passagedata pid="17" name="garden" tags="" position="1939,898" size="100,100">Hedge maze?
 Classical statues
 
-[[Go to graveyard area-&gt;graveyard]]</tw-passagedata><tw-passagedata pid="18" name="lab" tags="" position="2282,536" size="100,100">Science lab, chemicals and inventions, like a hospital area
-
-[[Time machine to 1990 office-&gt;backInTime]]</tw-passagedata><tw-passagedata pid="19" name="graveyard" tags="" position="1944,1042" size="100,100">dark, Bloodborne-ish, feels long ago</tw-passagedata><tw-passagedata pid="20" name="futureTower" tags="" position="1721,0" size="100,100">overlooking city in all directions
-maybe only see city here with glasses off?</tw-passagedata><tw-passagedata pid="21" name="backInTime" tags="" position="2421,541" size="100,100">1990 version of main office area, start by hearing a fax?</tw-passagedata><tw-passagedata pid="22" name="playerPath2-teleporter" tags="" position="159,58" size="100,100">A loud hum fills your ears. It would hurt if it went on longer, but it&#39;s just long enough to tense up reflexively, as if you could somehow dodge it.
+[[Go to graveyard area-&gt;graveyard]]</tw-passagedata><tw-passagedata pid="18" name="graveyard" tags="" position="1944,1042" size="100,100">dark, Bloodborne-ish, feels long ago</tw-passagedata><tw-passagedata pid="19" name="futureTower" tags="" position="1721,0" size="100,100">overlooking city in all directions
+maybe only see city here with glasses off?</tw-passagedata><tw-passagedata pid="20" name="playerPath2-teleporter" tags="" position="159,58" size="100,100">A loud hum fills your ears. It would hurt if it went on longer, but it&#39;s just long enough to tense up reflexively, as if you could somehow dodge it.
 
 Your starched collar is warm and moist from sweat. Pulling your tie loose to breathe easier, you glance down just as the lower half of your legs are finishing phasing in. They&#39;ve always advised you not to look down, but now that you finally got the chance to do this, it&#39;s hard to look away. They warned that would probably happen, too.
 
 An flashing orange glow accompanies the transition. You can&#39;t tell whether it&#39;s coming from your legs, or a result effect of eyeballs adjusting as their particles slide tightly back together.
 
-**Time to get started.-&gt;officeStart**</tw-passagedata><tw-passagedata pid="23" name="playerPath3-literal" tags="" position="279,61" size="100,100">Moments ago I was at home, on my computer, minding my own business.
+**Time to get started.-&gt;officeStart**</tw-passagedata><tw-passagedata pid="21" name="playerPath3-literal" tags="" position="279,61" size="100,100">Moments ago I was at home, on my computer, minding my own business.
 
 I followed a few links through HomeTeamGameDev.com, and I don&#39;t fully understand what I&#39;m looking at.
 
@@ -460,7 +470,7 @@ Curiosity got me this far, why not have a quick look around?
 
 Maybe there&#39;s something interesting to see here.
 
-**Explore the office.**</tw-passagedata><tw-passagedata pid="24" name="playerPath4-officeJob" tags="" position="399,71" size="100,100">Y A W N
+**Explore the office.**</tw-passagedata><tw-passagedata pid="22" name="playerPath4-officeJob" tags="" position="399,71" size="100,100">Y A W N
 
 Here&#39;s to another day at the digital prototyping lab.
 
@@ -468,7 +478,7 @@ Am I really the first person to reach the office today? Where is everyone?
 
 Whatever, all else being equal, I&#39;d rather them catch me working.
 
-**It&#39;s time to start the workday.-&gt;officeStart**</tw-passagedata><tw-passagedata pid="25" name="playerPath5-alienClone" tags="" position="164,179" size="100,100">I can&#39;t believe they&#39;re expecting me to stand and walk with just two legs.
+**It&#39;s time to start the workday.-&gt;officeStart**</tw-passagedata><tw-passagedata pid="23" name="playerPath5-alienClone" tags="" position="164,179" size="100,100">I can&#39;t believe they&#39;re expecting me to stand and walk with just two legs.
 
 I reach down and squeeze the mess of meat and fat on my sides. If this is the body ᖽᐸᓍᘉᑢᕴᓰᕲ picked for me, I&#39;m sure there&#39;s a good reason.
 
@@ -482,13 +492,13 @@ I can&#39;t believe they all really live like this.
 
 Disgusting.
 
-Alright, **I&#39;ve got to do my best to blend in.**</tw-passagedata><tw-passagedata pid="26" name="playerPath6-officeLetter" tags="" position="283,181" size="100,100">Walking down the city street one day, you notice an unassuming office just across road that you could swear was never there before.
+Alright, **I&#39;ve got to do my best to blend in.**</tw-passagedata><tw-passagedata pid="24" name="playerPath6-officeLetter" tags="" position="283,181" size="100,100">Walking down the city street one day, you notice an unassuming office just across road that you could swear was never there before.
 
 You&#39;ve been taking this route regularly for years, and you&#39;d never noticed so much as a construction fence. You&#39;d leave it alone, but somethings bothering you about it, maybe the way it&#39;s so hard to picture what was there before. Had you just never paid attention? Was this always there?
 
 There&#39;s an envelope on the ground near the door, already torn open with a folded letter hanging partway out, gentle scooting and twisting in the wind. Perhaps it fell from the mail slot.
 
-Wouldn&#39;t want it to blow away - better [[cross the street to check it out.-&gt;openGroundLetter]]</tw-passagedata><tw-passagedata pid="27" name="openGroundLetter" tags="" position="401,184" size="100,100">You cross the street and step on the letter, so it won&#39;t blow away while you think of what to do next.
+Wouldn&#39;t want it to blow away - better [[cross the street to check it out.-&gt;openGroundLetter]]</tw-passagedata><tw-passagedata pid="25" name="openGroundLetter" tags="" position="401,184" size="100,100">You cross the street and step on the letter, so it won&#39;t blow away while you think of what to do next.
 
 You consider shoving it back into the door&#39;s mail slot.
 
@@ -510,7 +520,7 @@ You&#39;re feeling chilly from a strong AC vent overhead.
 
 You&#39;re on the other side of a door, inexplicably finding yoruself in an office. Looking out the glass, it&#39;s not even clear this was the same door you were on the other side of.
 
-**Let&#39;s see if there&#39;s a good desk to leave this letter on.**</tw-passagedata><tw-passagedata pid="28" name="old intros-biome transitions?" tags="" position="18,88" size="100,100">Might still repurpose for a spinoff prototype or easter egg?
+**Let&#39;s see if there&#39;s a good desk to leave this letter on.**</tw-passagedata><tw-passagedata pid="26" name="old intros-biome transitions?" tags="" position="18,88" size="100,100">Might still repurpose for a spinoff prototype or easter egg?
 
 [[teleported here-&gt;playerPath2-teleporter]]
 
@@ -520,7 +530,7 @@ You&#39;re on the other side of a door, inexplicably finding yoruself in an offi
 
 [[alien clone-&gt;playerPath5-alienClone]]
 
-[[street office letter-&gt;playerPath6-officeLetter]]</tw-passagedata><tw-passagedata pid="29" name="wearGlasses" tags="VO" position="1063,336" size="100,100">Your vision comes into focus. The glasses help.
+[[street office letter-&gt;playerPath6-officeLetter]]</tw-passagedata><tw-passagedata pid="27" name="wearGlasses" tags="VO" position="1063,336" size="100,100">Your vision comes into focus. The glasses help.
 
 You&#39;re in the reception area of an office.
 
@@ -528,7 +538,7 @@ Rows of empty cubicles are visible through a propped open door.
 
 [[Investigate the office-&gt;officeStart]]
 
-&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Your vision comes into focus. The glasses help. You\&#39;re in the reception area of an office. Rows of empty cubicles are visible through a propped open door.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="30" name="officeNToyRoom" tags="" position="1928,573" size="100,100">There&#39;s a giant boomerang hanging on a wall, maybe 6 feet across.
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Your vision comes into focus. The glasses help. You\&#39;re in the reception area of an office. Rows of empty cubicles are visible through a propped open door.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="28" name="officeNToyRoom" tags="VO" position="1928,573" size="100,100">There&#39;s a giant boomerang hanging on a wall, maybe 6 feet across.
 
 Orange gel ant farms line the shelves. Bugs inside are hard at work.
 
@@ -536,9 +546,9 @@ Scattered about you see wooden building blocks, plastic army figures, and toy ca
 
 Posters cover the walls - for kid movies, TV shows you haven&#39;t heard of, and ads for classic games.
 
-[[leave to the science lab-&gt;lab]]
+[[check out the time machine in the corner-&gt;timeMachine]]
 
-&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a giant boomerang hanging on a wall, maybe 6 feet across. Orange gel ant farms line the shelves. Bugs inside are hard at work. Scattered about you see wooden building blocks, plastic army figures, and toy cars of different sizes. The toys on the center table are arranged like two teams facing off, hidden behind obstacles for cover. Posters cover the walls - for kid movies, TV shows you haven\&#39;t heard of, and ads for classic games.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="31" name="vendingMachines" tags="" position="1721,390" size="100,100">One dispenses soda. The top two rows are energy drinks. At the bottom is a bright orange drink for kids. The machine hums as it stays cold.
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a giant boomerang hanging on a wall, maybe 6 feet across. Orange gel ant farms line the shelves. Bugs inside are hard at work. Scattered about you see wooden building blocks, plastic army figures, and toy cars of different sizes. The toys on the center table are arranged like two teams facing off, hidden behind obstacles for cover. Posters cover the walls - for kid movies, TV shows you haven\&#39;t heard of, and ads for classic games.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="29" name="vendingMachines" tags="VO" position="1721,390" size="100,100">One dispenses soda. The top two rows are energy drinks. At the bottom is a bright orange drink for kids. The machine hums as it stays cold.
 
 The other machine has junk food, including chips labeled as healthy, cheese puffs, candy bars, and trail mix.
 
@@ -548,7 +558,7 @@ A blue on black display on the soda machine reads, &quot;CANCEL?&quot;
 
 [[mess with the coin return-&gt;underground]]
 
-&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;One dispenses soda. The top two rows are energy drinks. At the bottom is a bright orange drink for kids. The machine hums as it stays cold. The other machine has junk food, including chips labeled as healthy, cheese puffs, candy bars, and trail mix. You\&#39;re tempted, but you don\&#39;t have your wallet. A blue on black display on the soda machine reads, CANCEL?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="32" name="cubicles" tags="" position="1566,568" size="100,100">There are 3 distinct rows.
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;One dispenses soda. The top two rows are energy drinks. At the bottom is a bright orange drink for kids. The machine hums as it stays cold. The other machine has junk food, including chips labeled as healthy, cheese puffs, candy bars, and trail mix. You\&#39;re tempted, but you don\&#39;t have your wallet. A blue on black display on the soda machine reads, CANCEL?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="30" name="cubicles" tags="VO" position="1566,568" size="100,100">There are 3 distinct rows.
 
 [[walk down the near row, near the bathroom entrance-&gt;nearHexes]]
 
@@ -556,7 +566,7 @@ A blue on black display on the soda machine reads, &quot;CANCEL?&quot;
 
 [[walk down the far row, along the windows-&gt;farHexes]]
 
-&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There are 3 distinct rows.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="33" name="courtyard" tags="" position="1751,690" size="100,100">There&#39;s a clear midday sky overhead, but everything has a hazy shadow from a mesh net covering the courtyard.
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There are 3 distinct rows.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="31" name="courtyard" tags="VO" position="1751,690" size="100,100">There&#39;s a clear midday sky overhead, but everything has a hazy shadow from a mesh net covering the courtyard.
 
 You hear dribbling water of a small stream dividing the space. Flat white rocks are spaced to cross it.
 
@@ -568,28 +578,39 @@ In one corner is a particularly tidy garden.
 
 [[take a closer look at the small garden-&gt;garden]]
 
-&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a clear midday sky overhead, but everything has a hazy shadow from a mesh net covering the courtyard. You hear dribbling water of a small stream dividing the space. Flat white rocks are spaced to cross it. The trees are adorned with string lights. It\&#39;s warm enough you don\&#39;t think it\&#39;s winter. This reminds you that you have no clue where you are. A pair of stone benches have small bronze plaques, like about donations or in memory of people. In one corner is a particularly tidy garden.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="34" name="nearHexes" tags="" position="1416,718" size="100,100">You see 4 cubicles along your left, and the bathrooms to your right.
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a clear midday sky overhead, but everything has a hazy shadow from a mesh net covering the courtyard. You hear dribbling water of a small stream dividing the space. Flat white rocks are spaced to cross it. The trees are adorned with string lights. It\&#39;s warm enough you don\&#39;t think it\&#39;s winter. This reminds you that you have no clue where you are. A pair of stone benches have small bronze plaques, like about donations or in memory of people. In one corner is a particularly tidy garden.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="32" name="nearHexes" tags="" position="1416,718" size="100,100">You see 4 cubicles along your left, and the bathrooms to your right.
 
 (link: &quot;enter intern Hex&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_cubicle&amp;file=LexiGameDev_cubicle-of-an-intern-version1~&#39;)]
 [[enter Name2 Hex-&gt;cubeNear2]]
 [[enter Name3 Hex-&gt;cubeNear3]]
 [[enter Name4 Hex-&gt;cubeNear4]]
-(link: &quot;enter the bathroom&quot;)[(goto-url: &#39;unity_loader.html?phrase=Exit_bathroom&amp;file=Bathroom&#39;)]</tw-passagedata><tw-passagedata pid="35" name="midHexes" tags="" position="1409,1028" size="100,100">You see 3 cubicle openings, and a space where the copier is set up.
+(link: &quot;enter the bathroom&quot;)[(goto-url: &#39;unity_loader.html?phrase=Exit_bathroom&amp;file=Bathroom&#39;)]</tw-passagedata><tw-passagedata pid="33" name="midHexes" tags="" position="1409,1028" size="100,100">You see 3 cubicle openings, and a space where the copier is set up.
 
 [[enter Name1b Hex-&gt;cubeMid1]]
 [[enter Name2b Hex-&gt;cubeMid2]]
 [[enter Name3b Hex-&gt;cubeMid3]]
-[[check out the copier-&gt;copier]]</tw-passagedata><tw-passagedata pid="36" name="farHexes" tags="" position="1413,1325" size="100,100">You see 4 cubicles along your right, and floor-to-ceiling windows on the other side with a solid sunshade blocking the view.
+[[check out the copier-&gt;copier]]</tw-passagedata><tw-passagedata pid="34" name="farHexes" tags="" position="1413,1325" size="100,100">You see 4 cubicles along your right, and floor-to-ceiling windows on the other side with a solid sunshade blocking the view.
 
 [[enter Name1c Hex-&gt;cubeFar1]]
 [[enter Name2c Hex-&gt;cubeFar2]]
 [[enter Name3c Hex-&gt;cubeFar3]]
 [[enter Name4c Hex-&gt;cubeFar4]]
-[[look for a way to raise the sun shade-&gt;windowShade]]</tw-passagedata><tw-passagedata pid="37" name="cubeNear1 now intern" tags="ReplacedByGame" position="1279,723" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="38" name="cubeNear2" tags="" position="1266,868" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="39" name="cubeNear3" tags="" position="1416,868" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="40" name="cubeNear4" tags="" position="1566,870" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="41" name="bathroom Eyeforcz scene" tags="ReplacedByGame" position="1567,728" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="cubeMid1" tags="" position="1351,1163" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="cubeMid2" tags="" position="1501,1163" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="44" name="cubeMid3" tags="" position="1651,1163" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="45" name="copier" tags="" position="1171,1168" size="100,100">You&#39;re standing in front of the copy machine.
+[[look for a way to raise the sun shade-&gt;windowShade]]</tw-passagedata><tw-passagedata pid="35" name="cubeNear1 now intern" tags="ReplacedByGame" position="1279,723" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="36" name="cubeNear2" tags="" position="1266,868" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="37" name="cubeNear3" tags="" position="1416,868" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="38" name="cubeNear4" tags="" position="1566,870" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="39" name="bathroom Eyeforcz scene" tags="ReplacedByGame" position="1567,728" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="40" name="cubeMid1" tags="" position="1351,1163" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="41" name="cubeMid2" tags="" position="1501,1163" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="cubeMid3" tags="" position="1651,1163" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="copier" tags="" position="1171,1168" size="100,100">You&#39;re standing in front of the copy machine.
 
 There&#39;s a sticky note on top. It says, &quot;I contain every book I&#39;ve ever copied a page from. Come see.&quot;
 
-(link: &quot;will you try... entering the copier?&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]</tw-passagedata><tw-passagedata pid="46" name="cubeFar1" tags="" position="1113,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="47" name="cubeFar2" tags="" position="1263,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="48" name="cubeFar3" tags="" position="1413,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="49" name="cubeFar4" tags="" position="1563,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="50" name="windowShade" tags="" position="1713,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="51" name="libraryArea by AshCat" tags="ReplacedByGame" position="1069,1261" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
+(link: &quot;will you try... entering the copier?&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]</tw-passagedata><tw-passagedata pid="44" name="cubeFar1" tags="" position="1113,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="45" name="cubeFar2" tags="" position="1263,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="46" name="cubeFar3" tags="" position="1413,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="47" name="cubeFar4" tags="" position="1563,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="48" name="windowShade" tags="" position="1713,1475" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="49" name="libraryArea by AshCat" tags="ReplacedByGame" position="1069,1261" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="50" name="timeMachine" tags="" position="2108,564.6666666666667" size="100,100">Oh hey, yep, that is certainly a time machine.
+
+Do you... wanna use it?
+
+[[Yes, punch in 1983, obviously-&gt;pastOffice]]</tw-passagedata><tw-passagedata pid="51" name="pastOffice" tags="oldOffice" position="2272.9999999999995,486.3333333333333" size="100,100">You&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage?
+
+[[Step back into the main office-&gt;oldOfficeMain]]</tw-passagedata><tw-passagedata pid="52" name="oldOfficeMain" tags="oldOffice" position="2468,634.6666666666666" size="100,100">The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the build is... smaller, somehow? It seems to have undergone some expansion somewhere in the past few decades, but what&#39;s here is also more sparse. Apparently there used to be 3 private offices where you last saw a dozen cucibles packed together.
+
+Visit the reception area
+Enter the private office on the left
+Enter the private office in the middle
+Enter the private office on the right</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
