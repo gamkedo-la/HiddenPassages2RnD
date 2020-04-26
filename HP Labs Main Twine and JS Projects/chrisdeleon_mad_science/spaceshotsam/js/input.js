@@ -40,6 +40,10 @@ function keyDown(evt) {
         jumpSnd.play();
       }
       break;
+    case 40: // down
+    case 83: // s
+      // no functionality at this time, but blocking the key scrolling the page
+      break;
     case 39: // right
     case 68: // d
       if(holdFire==false) {
