@@ -11,7 +11,7 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="HiddenPassagesStudio" startnode="1" creator="Twine" creator-version="2.3.5" ifid="1FDC9DA6-B756-41BD-A0D8-258F3FDFB363" zoom="0.6" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import 'https://fonts.googleapis.com/css?family=Rajdhani|Scheherazade|Special+Elite|Alegreya+Sans+SC';
+<tw-storydata name="HiddenPassagesStudio" startnode="1" creator="Twine" creator-version="2.3.5" ifid="1FDC9DA6-B756-41BD-A0D8-258F3FDFB363" zoom="0.6" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import 'https://fonts.googleapis.com/css?family=Rajdhani|Scheherazade|Special+Elite|Alegreya+Sans+SC|Josefin+Sans';
 
 html.oldOffice, body.oldOffice, tw-story[tags~="oldOffice"] {
   font-family: 'Special Elite', serif;
@@ -22,6 +22,18 @@ html.oldOffice {
 tw-story[tags~="oldOffice"] {
   background-image: url('https://gamkedo.com/new-home-img/subtle/ricepaper2.png');
   font-size: 16px;
+}
+
+html.futureTower, body.futureTower, tw-story[tags~="futureTower"] {
+  font-family: 'Josefin Sans', sans-serif;
+}
+html.futureTower {
+	background-color: #eeefee;
+  	color: #111111;
+}
+tw-story[tags~="futureTower"] {
+  background-image: url('https://gamkedo.com/new-home-img/subtle/brushed_alu.png');
+  font-size: 15px;
 }
 
 tw-story {
@@ -337,7 +349,7 @@ muteShow.addEventListener("click", toggleMuteVO);
 function updateMuteIndicator() {
 	muteShow.innerHTML = (speakerThing.sayWords ? "🔊" : "🔇")+" (M key)";
 }
-updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="blue"></tw-tag>,<tw-tag name="oldOffice" color="purple"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="389,555" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
+updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="blue"></tw-tag>,<tw-tag name="oldOffice" color="purple"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag>,<tw-tag name="futureTower" color="green"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="389,555" size="100,100">&lt;h3&gt;Hidden Passages 2: R&amp;D prototype&lt;/h3&gt;
 
 Press &quot;m&quot; key (for &quot;mute&quot;) at any time in these main Twine scenes to toggle Voiceover on or off. This will be restored when returning from prototypes.
 
@@ -450,13 +462,13 @@ The counter is curved, with a white marble top. A coffee machine and toaster ove
 
 [[step straight ahead into the lushly vegetated courtyard-&gt;courtyard]]
 
-&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re standing at the central kitchen area of an office. The counter is curved, with a white marble top. A coffee machine and toaster oven sit against the wall. Two vending machines are behind you.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="16" name="underground" tags="" position="1730,96" size="100,100">You hear clicks of a ratchet, swaying chain links, and low pitch rumble of steel on tile as the soda machine slides aside, revealing an elevator entrance.
+&lt;img src=&quot;https://hometeamgamedev.com/hp2/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re standing at the central kitchen area of an office. The counter is curved, with a white marble top. A coffee machine and toaster oven sit against the wall. Two vending machines are behind you.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="16" name="underground" tags="" position="1715,162.66666666666669" size="100,100">You hear clicks of a ratchet, swaying chain links, and low pitch rumble of steel on tile as the soda machine slides aside, revealing an elevator entrance.
 
 [[Step inside the elevator (to distant future tower)-&gt;futureTower]]</tw-passagedata><tw-passagedata pid="17" name="garden" tags="" position="1939,898" size="100,100">Hedge maze?
 Classical statues
 
-[[Go to graveyard area-&gt;graveyard]]</tw-passagedata><tw-passagedata pid="18" name="graveyard" tags="" position="1944,1042" size="100,100">dark, Bloodborne-ish, feels long ago</tw-passagedata><tw-passagedata pid="19" name="futureTower" tags="" position="1721,0" size="100,100">overlooking city in all directions
-maybe only see city here with glasses off?</tw-passagedata><tw-passagedata pid="20" name="playerPath2-teleporter" tags="" position="159,58" size="100,100">A loud hum fills your ears. It would hurt if it went on longer, but it&#39;s just long enough to tense up reflexively, as if you could somehow dodge it.
+[[Go to graveyard area-&gt;graveyard]]</tw-passagedata><tw-passagedata pid="18" name="graveyard" tags="" position="1944,1042" size="100,100">dark, Bloodborne-ish, feels long ago</tw-passagedata><tw-passagedata pid="19" name="futureTower" tags="futureTower" position="1924.3333333333333,66.66666666666667" size="100,100">overlooking city in all directions
+(to be continued)</tw-passagedata><tw-passagedata pid="20" name="playerPath2-teleporter" tags="" position="159,58" size="100,100">A loud hum fills your ears. It would hurt if it went on longer, but it&#39;s just long enough to tense up reflexively, as if you could somehow dodge it.
 
 Your starched collar is warm and moist from sweat. Pulling your tie loose to breathe easier, you glance down just as the lower half of your legs are finishing phasing in. They&#39;ve always advised you not to look down, but now that you finally got the chance to do this, it&#39;s hard to look away. They warned that would probably happen, too.
 
