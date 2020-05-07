@@ -328,6 +328,11 @@ function commandDotCom(input) {
         pendingBufferedCommand = "BOOT";
     }
 
+    if (input=="FORMAT") {
+        onBBS = false;
+        pendingBufferedCommand = "BOOT";
+    }
+
     /*
     // special commands
     if (input=="EXIT" ||
