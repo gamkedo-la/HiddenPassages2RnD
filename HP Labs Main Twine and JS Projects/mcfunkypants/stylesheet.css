@@ -7,6 +7,7 @@
 }
 
 body { 
+    user-select: none;   
     background:#464749;
     font-size:32px;
     margin:0; padding:0;
@@ -49,6 +50,23 @@ body {
     opacity:0.5;
 }
 #powerButton:hover { opacity:1; }
+
+#walkthrough {
+    display:block;
+    position:absolute;
+    font-size:11px;
+    color:orange;
+    width:320px;
+    height:10px;
+    right:8px;
+    top:8px;
+    cursor:pointer;
+    overflow:hidden;
+    line-height:10px;
+    font-family:BlockZone;
+    text-align:right;
+    white-space: pre; 
+}
 
 pre { 
     display:none; 
