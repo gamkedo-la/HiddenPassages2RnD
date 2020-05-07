@@ -30,6 +30,12 @@ function ModemPoll() {
         incomingModemData = incomingModemData.substr(char.length); // remove from COM1 buffer
         // special fx: go slower if there's a ... in the text
         if (char=='.' && incomingModemData[0]=='.') delay = 500;
+        // same for password style entry except it is random!
+        if (char=='*') { // && incomingModemData[0]=='*') {
+            delay = Math.ceil(Math.random()*1000);
+            if (isPlaying(keyboardSound)) keyboardSound.load(); // rewind!
+            keyboardSound.play(); // error on browser perms
+        }
     }
 
     // just finished?
