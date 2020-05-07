@@ -37,8 +37,9 @@ function ModemPoll() {
         console.log("Finished printing all incoming modem data.");
         if (pendingBufferedCommand) {
             console.log("Running a pending buffered command: " + pendingBufferedCommand);
-            commandDotCom(pendingBufferedCommand);
+            var nextone = pendingBufferedCommand;
             pendingBufferedCommand = null;
+            commandDotCom(nextone);
         }
     }
 
@@ -110,7 +111,7 @@ var MSDOS = (function () {
             
             soundON = true; // allow sounds after the first this user-initiated event
             if (isPlaying(keyboardSound)) keyboardSound.load(); // rewind!
-            keyboardSound.play();
+            keyboardSound.play(); // error on browser perms
             
             if (e.which === 37 || e.which === 39 || e.which === 38 || e.which === 40 || e.which === 9) {
 				e.preventDefault()
@@ -264,7 +265,7 @@ var MSDOS = (function () {
 		this._cursor.innerHTML = 'C'; //put something in the cursor..
 		this._cursor.style.display = 'none'; //then hide it
         this._input.style.display = 'none';
-        this.html.style.lineHeight = '16px';
+        this.html.style.lineHeight = '16px'; // nop?
         this.html.style.letterSpacing = '-1px'; // to avoid small gaps
 	}
 
@@ -316,7 +317,12 @@ function commandDotCom(input) {
     if (input=="LS") input = "DIR";
 
     if (input=="BBS") onBBS = true;
+    if (input=="QUIT") {
+        onBBS = false;
+        pendingBufferedCommand = "BOOT";
+    }
 
+    /*
     // special commands
     if (input=="EXIT" ||
         input=="QUIT" ||
@@ -325,6 +331,7 @@ function commandDotCom(input) {
         // FIXME: prompt y/n?
         window.history.back();
     }
+    */
     
     t1.cls(); // clear the screen, why scroll at all
 
@@ -449,6 +456,18 @@ function init(e) {
     document.getElementById('monitor').appendChild(t1.html);
     commandDotCom("BOOT");
     ModemPoll();
+}
+
+function toggleCheats() {
+    console.log("toggleCheats!");
+    const BIGCHEAT = "400px";
+    const NOCHEAT = "10px";
+    var walkthrough = document.getElementById('walkthrough');
+    if (walkthrough.style.height != BIGCHEAT) {
+        walkthrough.style.height = BIGCHEAT;
+    } else {
+        walkthrough.style.height = NOCHEAT;
+    }
 }
 
 window.addEventListener("load",init);
