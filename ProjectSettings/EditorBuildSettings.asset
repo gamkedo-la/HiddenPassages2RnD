@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HTrayford/HOne.unity
     guid: d624a5e9b84964636917430d0ce9d309
+  - enabled: 1
+    path: Assets/Scenes/ChrisDeLeon/underwater/Underwater.unity
+    guid: bb1c1007704d24c8f851e4b626f33267
   m_configObjects: {}
