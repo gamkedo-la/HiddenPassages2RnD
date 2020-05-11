@@ -322,6 +322,8 @@ function commandDotCom(input) {
     if (input=="") input = "HELP";
     if (input=="LS") input = "DIR";
 
+	if (input=="4 8 15 16 23 42") input = "4815162342";
+
     if (input=="BBS") onBBS = true;
     if (input=="QUIT") {
         onBBS = false;
