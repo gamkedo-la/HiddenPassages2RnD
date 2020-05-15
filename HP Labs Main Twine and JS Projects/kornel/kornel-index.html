@@ -11,7 +11,7 @@
 
 <tw-story></tw-story>
 
-<tw-storydata name="Bomb" startnode="1" creator="Twine" creator-version="2.3.7" ifid="A6BB2127-2849-44DB-8AE7-A5EF99C3BCCC" zoom="1" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start Point" tags="" position="792,197" size="100,100">(set: $seconds to 10)
+<tw-storydata name="Bomb" startnode="1" creator="Twine" creator-version="2.3.8" ifid="A6BB2127-2849-44DB-8AE7-A5EF99C3BCCC" zoom="1" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start Point" tags="" position="789,197" size="100,100">(set: $seconds to 10)
 
 &#39;**DO SOMETHING!**&#39;
 You hear a scream in your left ear.
@@ -22,7 +22,8 @@ You look around and see a box before you.
 What now?
 
 [[Take a look at the box -&gt; Box]]
-[[Open the box -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="2" name=" Box" tags="" position="691,362" size="100,100">(set: $seconds to $seconds - 1)
+[[Open the box -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="2" name=" Box" tags="" position="688,362" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 The box is (css: &quot;font-size: 80%;&quot;)[small]. The lit seem to open. It&#39;s made out of wood.
 
@@ -31,22 +32,26 @@ Unremarkable in almost every way except for a small bump on a side. Noticeable o
 And a counter on top of the lit. (css: &quot;font-size: 120%;&quot;)[Large] LED display with **bold** (colour: &quot;#e61919&quot;)[red] numbers counting down: (colour: &quot;#e61919&quot;)[**$seconds**].
 
 [[Put it back -&gt; Table]]
-[[Press the small bump on the side -&gt; Bump]]</tw-passagedata><tw-passagedata pid="3" name="Open Armed" tags="" position="888,358" size="100,100">(css: &quot;font-size: 150%;&quot;)[(colour: &quot;#e61919&quot;)[**BOOM!!!**]]
+[[Press the small bump on the side -&gt; Bump]]</tw-passagedata><tw-passagedata pid="3" name="Open Armed" tags="" position="885,358" size="100,100">(css: &quot;font-size: 150%;&quot;)[(colour: &quot;#e61919&quot;)[**BOOM!!!**]]
 
-*[[Restart the game -&gt;Start Point]]*</tw-passagedata><tw-passagedata pid="4" name=" Table" tags="" position="620,569" size="100,100">(set: $seconds to $seconds - 1)
+*[[Restart the game -&gt;Start Point]]*</tw-passagedata><tw-passagedata pid="4" name=" Table" tags="" position="617,569" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 You place the box gently on the table. The display shows: (colour: &quot;#e61919&quot;)[**$seconds**].
 
 [[Take a look at the box -&gt; Box]]
-[[Open the box -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="5" name=" Bump" tags="" position="775,570" size="100,100">(set: $seconds to $seconds - 1)
+[[Open the box -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="5" name=" Bump" tags="" position="772,570" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 You pressed the *small bump* and hear a quiet &#39;click&#39;.
 
-[[Put the box on the table -&gt; Table Unarmed]]</tw-passagedata><tw-passagedata pid="6" name=" Table Unarmed" tags="" position="924,569" size="100,100">(set: $seconds to $seconds - 1)
+[[Put the box on the table -&gt; Table Unarmed]]</tw-passagedata><tw-passagedata pid="6" name=" Table Unarmed" tags="" position="921,569" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 You place the box gently on the table. The display shows: (colour: &quot;#e61919&quot;)[**$seconds**].
 
-[[Open the box -&gt; Open Unarmed]]</tw-passagedata><tw-passagedata pid="7" name=" Open Unarmed" tags="" position="1100,568" size="100,100">(set: $seconds to $seconds - 1)
+[[Open the box -&gt; Open Unarmed]]</tw-passagedata><tw-passagedata pid="7" name=" Open Unarmed" tags="" position="1097,568" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 Inside you see a bunch of wires. The display shows: (colour: &quot;#e61919&quot;)[**$seconds**].
 
@@ -54,7 +59,8 @@ What now?
 
 [[Cut the blue wire -&gt; Wire Blue]]
 [[Cut the green wire -&gt; Wire Green]]
-[[Cut the red wire -&gt;Open Armed]] </tw-passagedata><tw-passagedata pid="8" name=" Wire Blue" tags="" position="1043,733" size="100,100">(set: $seconds to $seconds - 1)
+[[Cut the red wire -&gt;Open Armed]] </tw-passagedata><tw-passagedata pid="8" name=" Wire Blue" tags="" position="1040,733" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 Nothing happened. Which is most likely good.
 
@@ -63,7 +69,8 @@ The display shows: (colour: &quot;#e61919&quot;)[**$seconds**].
 What now?
 
 [[Cut the green wire -&gt; Only Red]]
-[[Cut the red wire -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="9" name=" Wire Green" tags="" position="1258,636" size="100,100">(set: $seconds to $seconds - 1)
+[[Cut the red wire -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="9" name=" Wire Green" tags="" position="1255,636" size="100,100">(set: $seconds to $seconds - 1)
+(if: $seconds &lt;= 0) [ (goto: &quot;Open Armed&quot;)]
 
 Nothing happened. Which is most likely good.
 
@@ -72,11 +79,11 @@ The display shows: (colour: &quot;#e61919&quot;)[**$seconds**].
 What now?
 
 [[Cut the blue wire -&gt; Only Red]]
-[[Cut the red wire -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="10" name=" Only Red" tags="" position="1241,831" size="100,100">(set: $seconds to $seconds - 1)
+[[Cut the red wire -&gt;Open Armed]]</tw-passagedata><tw-passagedata pid="10" name=" Only Red" tags="" position="1238,831" size="100,100">(set: $seconds to $seconds - 1)
 
 (colour: &quot;#e61919&quot;)[**$seconds**] seconds left on the display and only one thing to do...
 
-[[Cut the red wire -&gt; Wire Red]]</tw-passagedata><tw-passagedata pid="11" name=" Wire Red" tags="" position="1244,983" size="100,100">(set: $seconds to $seconds - 1)
+[[Cut the red wire -&gt; Wire Red]]</tw-passagedata><tw-passagedata pid="11" name=" Wire Red" tags="" position="1241,983" size="100,100">(set: $seconds to $seconds - 1)
 
 The display stopped changing, stuck on: (colour: &quot;#e61919&quot;)[**$seconds**].
 
