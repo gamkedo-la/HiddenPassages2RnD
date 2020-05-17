@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChrisDeLeon/underwater/Underwater.unity
     guid: bb1c1007704d24c8f851e4b626f33267
+  - enabled: 1
+    path: Assets/Scenes/EyeForcz/Oneil.unity
+    guid: d73f0d76784aa41bf8d8cdb343ce39e6
   m_configObjects: {}
