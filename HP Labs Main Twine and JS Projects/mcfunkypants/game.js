@@ -2,12 +2,14 @@
 // based on work by https://github.com/eosterberg/terminaljs
 
 const promptDOS = "A:\\>";
-const promptBBS = "Main Menu: ";
+const promptBBS = "[BBS] Main Menu: ";
+
+// anything else is assumed to be a DOS command
+const bbsCommands = ["MSG","BTF","MSG","DTC","CTK","UPLOAD","DOWNLOAD","QUIT"];
+var onBBS = false;
 
 var incomingModemData = ""; // COM1 buffer =)
 var TerminalOutput = null; // this._output
-var onBBS = false;
-
 var soundON = false;
 var keyboardSound;
 var modemSound;
@@ -288,6 +290,21 @@ function commandDotCom(input) {
     input = input.toUpperCase();
     input = input.replace(".EXE", "");
 
+    // differentiate between DOS and BBS mode
+    if (bbsCommands.includes(input)) {
+        if (!onBBS) {
+            console.log("(DOS mode: ignoring a BBS command)")
+            input = "";
+        }
+    } else {
+        if (onBBS) {
+            console.log("(BBS mode: ignoring a DOS command)")
+            input = "";
+        }
+    }
+
+    if (input=="BBS") onBBS = true;
+
     if (input=="DIR") { // remove hint
         if (!hintRemoved) {
             hintRemoved = true;
@@ -319,33 +336,31 @@ function commandDotCom(input) {
     */
     
     if (input=="?") input = "HELP";
-    if (input=="") input = "HELP";
+    //if (input=="") input = "HELP";
     if (input=="LS") input = "DIR";
 
 	if (input=="4 8 15 16 23 42") input = "4815162342";
 
-    if (input=="BBS") onBBS = true;
-    if (input=="QUIT") {
-        onBBS = false;
-        pendingBufferedCommand = "BOOT";
-    }
-
+    
     if (input=="FORMAT") {
         onBBS = false;
         pendingBufferedCommand = "BOOT";
     }
 
-    /*
-    // special commands
-    if (input=="EXIT" ||
-        input=="QUIT" ||
-        input=="BACK") {
-        console.log("User requested that we QUIT.");
-        // FIXME: prompt y/n?
-        window.history.back();
+    // BBS only commands
+    if (onBBS) {
+
+        if (input=="EXIT" ||
+            input=="QUIT" ||
+            input=="BACK") {
+            onBBS = false;
+            pendingBufferedCommand = "BOOT";
+        }
+
     }
-    */
-    
+
+    //// RENDER
+
     t1.cls(); // clear the screen, why scroll at all
 
     // find a hidden pre in the html
@@ -355,7 +370,11 @@ function commandDotCom(input) {
         console.log("found text: " + found.innerHTML);
         t1.print(found.innerHTML.trimLeft()); // trimmed because our PREs have leading crlf
     } else {
-        t1.print('Unknown command or file name: ' + input + '.EXE\nHint: try typing DIR then pressing enter.\n');
+        if (!onBBS) {
+            t1.print('Unknown command or file name: ' + input + '.EXE\n\nHint: try typing DIR then pressing enter.\n\n');
+        } else {
+            t1.print('[BBS] zModem Pro Command List:\n\n\[3 DIGIT CODE] to connect.\n[UPLOAD] to transfer a file.\n[QUIT] to return to DOS\n\n');
+        }
     }
     
     if (!pendingBufferedCommand) t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
