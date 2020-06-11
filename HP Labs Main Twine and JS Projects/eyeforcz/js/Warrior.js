@@ -34,7 +34,7 @@ function warriorClass() {
 			for(var eachCol=0;eachCol<WORLD_COLS;eachCol++) {
 				var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
 				if(worldGrid[arrayIndex] == TILE_PLAYERSTART) {
-					worldGrid[arrayIndex] = TILE_GROUND;
+					worldGrid[arrayIndex] = TILE_GRASS;
 					this.x = eachCol * WORLD_W + WORLD_W/2;
 					this.y = eachRow * WORLD_H + WORLD_H/2;
 					return;
@@ -73,7 +73,7 @@ function warriorClass() {
 		}
 
 		switch(walkIntoTileType) {
-			case TILE_GROUND:
+			case TILE_GRASS:
 				this.x = nextX;
 				this.y = nextY;
 				break;
@@ -85,13 +85,13 @@ function warriorClass() {
 				if(this.keysHeld > 0) {
 					this.keysHeld--; // one less key
 					this.updateKeyReadout();
-					worldGrid[walkIntoTileIndex] = TILE_GROUND;
+					worldGrid[walkIntoTileIndex] = TILE_GRASS;
 				}
 				break;
 			case TILE_KEY:
 				this.keysHeld++; // one more key
 				this.updateKeyReadout();
-				worldGrid[walkIntoTileIndex] = TILE_GROUND;
+				worldGrid[walkIntoTileIndex] = TILE_GRASS;
 				break;
 			case TILE_WALL:
 			default:

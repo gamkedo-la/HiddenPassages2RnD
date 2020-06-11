@@ -1,26 +1,29 @@
-const WORLD_W = 50;
-const WORLD_H = 50;
+const WORLD_W = 40;
+const WORLD_H = 40;
 const WORLD_GAP = 2;
-const WORLD_COLS = 16;
-const WORLD_ROWS = 12;
-var levelOne =  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-				 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 5, 0, 1, 1, 1, 1,
-				 1, 0, 4, 0, 4, 0, 1, 0, 2, 0, 1, 0, 1, 4, 4, 1,
-				 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 5, 1, 1,
-				 1, 1, 1, 5, 1, 1, 1, 0, 4, 0, 1, 0, 0, 0, 1, 1,
-				 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 1, 1,
-				 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1,
-				 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 0, 1, 1,
-				 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1,
-				 1, 0, 5, 0, 5, 0, 5, 0, 3, 0, 1, 1, 1, 1, 1, 1,
-				 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1,
-				 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+const WORLD_COLS = 20;
+const WORLD_ROWS = 15;
+var levelOne =  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2,
+				 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 var worldGrid = [];
 
-const TILE_GROUND = 0;
+const TILE_GRASS = 0;
 const TILE_WALL = 1;
-const TILE_PLAYERSTART = 2;
-const TILE_GOAL = 3;
+const TILE_TREE = 2;
+const TILE_HOUSE = 3;
 const TILE_KEY = 4;
 const TILE_DOOR = 5;
 
@@ -52,8 +55,8 @@ function rowColToArrayIndex(col, row) {
 }
 
 function tileTypeHasTransparency(checkTileType) {
-	return (checkTileType == TILE_GOAL ||
-			checkTileType == TILE_KEY ||
+	return (checkTileType == TILE_WALL ||
+			checkTileType == TILE_TREE ||
 			checkTileType == TILE_DOOR);
 }
 
@@ -67,10 +70,10 @@ function drawWorld() {
 
 			var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
 			var tileKindHere = worldGrid[arrayIndex];
-			var useImg = worldPics[tileKindHere];
+			var useImg = imageList[tileKindHere];
 
 			if( tileTypeHasTransparency(tileKindHere) ) {
-				canvasContext.drawImage(worldPics[TILE_GROUND],drawTileX,drawTileY);
+				canvasContext.drawImage(imageList[TILE_GRASS],drawTileX,drawTileY);
 			}
 			canvasContext.drawImage(useImg,drawTileX,drawTileY);
 			drawTileX += WORLD_W;
