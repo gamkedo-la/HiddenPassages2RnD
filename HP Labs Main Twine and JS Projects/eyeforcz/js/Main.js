@@ -22,7 +22,9 @@ function imageLoadingDoneSoStartGame() {
 }
 
 function loadLevel(whichLevel) {
-	worldGrid = whichLevel.slice();
+	initWorld();
+	drawWorld();
+	//worldGrid = whichLevel.slice();
 	//blueWarrior.reset(warriorPic, "Blue Storm");
 }
 
@@ -36,7 +38,7 @@ function moveAll() {
 }
 
 function drawAll() {
-	drawWorld();
+	
 	//blueWarrior.draw();
 } 
 

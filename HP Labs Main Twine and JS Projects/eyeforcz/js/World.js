@@ -20,12 +20,57 @@ var levelOne =  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 				 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,];
 var worldGrid = [];
 
+var tileGrass = {
+	imageID: 1,
+	block: 'Full',
+  };
+
+var tileTree = {
+	imageID: 2,
+	block: 'Full',
+  };
+
+var tileWall = {
+	imageID: 3,
+	block: 'Full',
+  };
+
+var tileHouse = {
+	imageID: 4,
+	block: 'Full',
+  };
 const TILE_GRASS = 0;
 const TILE_WALL = 1;
 const TILE_TREE = 2;
 const TILE_HOUSE = 3;
 const TILE_KEY = 4;
 const TILE_DOOR = 5;
+const TILE_SHEEP = 7;
+const TILE_COYOTE = 6;
+var mapGrid = [];
+
+function initWorld(){
+
+	//draw the grid size and make everything to grass
+	for (var posX=0; posX<WORLD_COLS; posX++) {
+	  mapGrid[posX] = [];
+
+	  for (var posY=0; posY<WORLD_ROWS; posY++) {
+		mapGrid[posX][posY] = tileGrass;
+	  }
+	}
+
+	//draw trees around the map
+	for (var posX=0; posX<WORLD_COLS; posX++) {
+		mapGrid[posX][0] = tileTree;
+		mapGrid[posX][WORLD_ROWS-3] = tileTree;
+	}
+	for (var posY=0; posY<WORLD_ROWS-3; posY++) {
+		mapGrid[0][posY] = tileTree;
+		mapGrid[WORLD_COLS-1][posY] = tileTree;
+	}
+
+}
 
 function returnTileTypeAtColRow(col, row) {
 	if(col >= 0 && col < WORLD_COLS &&
@@ -61,14 +106,19 @@ function tileTypeHasTransparency(checkTileType) {
 }
 
 function drawWorld() {
-
-	var arrayIndex = 0;
+	
+	//var arrayIndex = 0;
 	var drawTileX = 0;
 	var drawTileY = 0;
-	for(var eachRow=0;eachRow<WORLD_ROWS;eachRow++) {
-		for(var eachCol=0;eachCol<WORLD_COLS;eachCol++) {
-
-			var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
+		for(var indexX=0;indexX<WORLD_COLS;indexX++) {
+			for(var indexY=0;indexY<WORLD_ROWS;indexY++) {
+				canvasContext.drawImage(imageList[mapGrid[indexX][indexY].imageID],drawTileX,drawTileY);
+				drawTileY += WORLD_H;
+			}
+			drawTileX += WORLD_W;
+			drawTileY = 0;
+		}
+		/*	var arrayIndex = rowColToArrayIndex(eachCol, eachRow); 
 			var tileKindHere = worldGrid[arrayIndex];
 			var useImg = imageList[tileKindHere];
 
@@ -81,6 +131,6 @@ function drawWorld() {
 		} // end of for each col
 		drawTileY += WORLD_H;
 		drawTileX = 0;
-	} // end of for each row
+	} // end of for each row*/
 
 } // end of drawWorld func

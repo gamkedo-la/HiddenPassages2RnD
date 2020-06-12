@@ -23,13 +23,17 @@ function loadImageForWorldCode(worldCode, fileName) {
 
 function loadImages() {
 	var imageArray = [
-		{varName: warriorPic, theFile: "warrior.png"},
+		{tileType: tileGrass.imageID, theFile: "world_grass.png"},
+		{tileType: tileTree.imageID, theFile: "world_tree.png"},
+		{tileType: tileWall.imageID, theFile: "world_wall.png"},
+		{tileType: tileHouse.imageID, theFile: "world_house.png"},
 
-		{worldType: TILE_GRASS, theFile: "world_grass.png"},
-		{worldType: TILE_WALL, theFile: "world_fence.png"},
-		{worldType: TILE_TREE, theFile: "world_tree.png"},
-		{worldType: TILE_HOUSE, theFile: "world_house.png"},
-		{worldType: TILE_DOOR, theFile: "world_door.png"}
+
+	/*	{tileType: TILE_GRASS, theFile: "world_grass.png"},
+		{tileType: TILE_WALL, theFile: "world_fence.png"},
+		{tileType: TILE_TREE, theFile: "world_tree.png"},
+		{tileType: TILE_HOUSE, theFile: "world_house.png"},
+		{tileType: TILE_DOOR, theFile: "world_door.png"}*/
 		];
 
 	picsToLoad = imageArray.length;
@@ -38,7 +42,7 @@ function loadImages() {
 		if(imageArray[i].varName != undefined) {
 			beginLoadingImage(imageArray[i].varName, imageArray[i].theFile);
 		} else {
-			loadImageForWorldCode(imageArray[i].worldType, imageArray[i].theFile);
+			loadImageForWorldCode(imageArray[i].tileType, imageArray[i].theFile);
 		}
 	}
 }
