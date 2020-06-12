@@ -15,15 +15,13 @@ window.onload = function() {
 function imageLoadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
-
 	setupInput();
-
-	loadLevel(levelOne);
+	loadLevel();
 }
 
-function loadLevel(whichLevel) {
+function loadLevel() {
 	initWorld();
-	drawWorld();
+	console.log("hello");
 	//worldGrid = whichLevel.slice();
 	//blueWarrior.reset(warriorPic, "Blue Storm");
 }
@@ -38,7 +36,8 @@ function moveAll() {
 }
 
 function drawAll() {
-	
+	drawWorld();
+	colorText("X: " + Math.floor(mouseX / WORLD_W) + "Y: " + Math.floor(mouseY / WORLD_H),mouseX, mouseY, 'black');
 	//blueWarrior.draw();
 } 
 

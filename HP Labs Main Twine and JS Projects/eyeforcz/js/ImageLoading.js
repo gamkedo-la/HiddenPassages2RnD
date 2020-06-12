@@ -23,17 +23,12 @@ function loadImageForWorldCode(worldCode, fileName) {
 
 function loadImages() {
 	var imageArray = [
-		{tileType: tileGrass.imageID, theFile: "world_grass.png"},
-		{tileType: tileTree.imageID, theFile: "world_tree.png"},
-		{tileType: tileWall.imageID, theFile: "world_wall.png"},
-		{tileType: tileHouse.imageID, theFile: "world_house.png"},
-
-
-	/*	{tileType: TILE_GRASS, theFile: "world_grass.png"},
-		{tileType: TILE_WALL, theFile: "world_fence.png"},
-		{tileType: TILE_TREE, theFile: "world_tree.png"},
-		{tileType: TILE_HOUSE, theFile: "world_house.png"},
-		{tileType: TILE_DOOR, theFile: "world_door.png"}*/
+		{tileType: tileGrass.tileType, theFile: "world_grass.png"},
+		{tileType: tileTree.tileType, theFile: "world_tree.png"},
+		{tileType: tileWall.tileType, theFile: "world_wall.png"},
+		{tileType: tileHouse.tileType, theFile: "world_house.png"},
+		{tileType: objSheep.tileType, theFile: "object_sheep.png"},
+		{tileType: objCoyote.tileType, theFile: "object_coyote.png"},
 		];
 
 	picsToLoad = imageArray.length;
