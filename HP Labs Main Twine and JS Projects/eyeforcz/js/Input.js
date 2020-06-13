@@ -17,7 +17,7 @@ function setupInput() {
 	document.addEventListener('keydown', keyPressed);
 	document.addEventListener('keyup', keyReleased);
 
-	blueWarrior.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW);
+	//blueWarrior.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW);
 } 
 
  function initInput() {
@@ -68,7 +68,7 @@ function updateMousePos(evt) {
 }
 
 function keySet(keyEvent, setTo) {
-	if(keyEvent.keyCode == blueWarrior.controlKeyLeft) {
+/*	if(keyEvent.keyCode == blueWarrior.controlKeyLeft) {
 		blueWarrior.keyHeld_West = setTo;
 	}
 	if(keyEvent.keyCode == blueWarrior.controlKeyRight) {
@@ -79,7 +79,7 @@ function keySet(keyEvent, setTo) {
 	}
 	if(keyEvent.keyCode == blueWarrior.controlKeyDown) {
 		blueWarrior.keyHeld_South = setTo;
-	}
+	}*/
 }
 
 function keyPressed(evt) {

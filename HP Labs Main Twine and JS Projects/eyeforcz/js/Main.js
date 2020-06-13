@@ -1,6 +1,5 @@
 var canvas, canvasContext;
-
-var blueWarrior = new warriorClass();
+var gameMain = new gameLoop();
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -17,13 +16,11 @@ function imageLoadingDoneSoStartGame() {
 	setInterval(updateAll, 1000/framesPerSecond);
 	setupInput();
 	initGame();
+	gameMain.spawnSheeps()
 }
 
 function initGame() {
 	initMapGrid();
-	console.log("hello");
-	//worldGrid = whichLevel.slice();
-	//blueWarrior.reset(warriorPic, "Blue Storm");
 }
 
 function updateAll() {
@@ -32,11 +29,12 @@ function updateAll() {
 }
 
 function moveAll() {
-	//blueWarrior.move();
+	gameMain.move();
 }
 
 function drawAll() {
 	drawWorld();
+	gameMain.draw();
 	colorText("X: " + Math.floor(mouseX / WORLD_W) + "Y: " + Math.floor(mouseY / WORLD_H),mouseX, mouseY, 'black');
 	//blueWarrior.draw();
 } 

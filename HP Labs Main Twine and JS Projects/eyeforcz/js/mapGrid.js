@@ -1,11 +1,11 @@
 const WORLD_W = 40;
 const WORLD_H = 40;
-const WORLD_GAP = 2;
 const WORLD_ROWS = 20;
 const WORLD_COLS = 15;
 const TREE_BORDER_Y = 13;
 
 var mapGrid = [];
+
 var wallDistance = 2;
 
 var playArea = {
@@ -50,6 +50,11 @@ var objCoyote = {
 	block: 'COYOTE',
 	transparent: true,
   };
+
+  var farmSpawner ={
+	xID: WORLD_ROWS/2 - 1,
+	yID: playArea.endY -1
+}
 
 function initMapGrid(){
 	//draw the grid size and make everything to grass
@@ -111,19 +116,47 @@ function returnTileTypeAtColRow(col, row) {
 	}
 }
 
-function getTileIndexAtPixelCoord(atX, atY) {
-	var warriorWorldCol = Math.floor(atX / WORLD_W);
-	var warriorWorldRow = Math.floor(atY / WORLD_H);
-	var worldIndexUnderWarrior = rowColToArrayIndex(warriorWorldCol, warriorWorldRow);
+//Get the Pixel coordinate of a grid index for Y
+function indexXtoPixelX(idX) {
+	var indexX = idX * WORLD_W;
+	if(indexX >= 0 && indexX < WORLD_ROWS * WORLD_W){
+		return indexX;
+	}
 
-	if(warriorWorldCol >= 0 && warriorWorldCol < WORLD_COLS &&
-		warriorWorldRow >= 0 && warriorWorldRow < WORLD_ROWS) {
-		return worldIndexUnderWarrior;
-	} // end of valid col and row
-
+	console.log("indexXtoPixelX: not in area");
 	return undefined;
-} // end of warriorWorldHandling func
-
-function rowColToArrayIndex(col, row) {
-	return col + WORLD_COLS * row;
 }
+
+//Get the Pixel coordinate of a grid index for X
+function indexYtoPixelY(idY) {
+	var indexY = idY * WORLD_H;
+	if(indexY >= 0 && indexY < WORLD_COLS * WORLD_H){
+		return indexY;
+	}
+
+	console.log("indexXtoPixelX: not in area");
+	return undefined;
+}
+
+//Get the grid Index of a pixel position for X
+function pixelXtoindexX(atX) {
+	var indexX = Math.floor(atX / WORLD_W);
+	if(atX >= 0 && atX < WORLD_ROWS){
+		return indexX;
+	}
+
+	console.log("indexXtoPixelX: not in area");
+	return undefined;
+}
+
+//Get the grid Index of a pixel position for Y
+function pixelYtoindexY(atY) {
+	var indexY = Math.floor(atY / WORLD_H);
+	if(atY >= 0 && atY < WORLD_COLS){
+		return indexY;
+	}
+
+	console.log("indexYtoPixelY: not in area");
+	return undefined;
+}
+
