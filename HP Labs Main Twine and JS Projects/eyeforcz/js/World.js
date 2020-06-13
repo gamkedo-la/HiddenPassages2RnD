@@ -17,41 +17,41 @@ var playArea = {
 
 var tileGrass = {
 	tileType: 1,
-	block: 'Full',
+	block: 'GRASS',
 	transparent: false,
   };
 
 var tileTree = {
 	tileType: 2,
-	block: 'Full',
+	block: 'TREE',
 	transparent: true,
   };
 
 var tileWall = {
 	tileType: 3,
-	block: 'Full',
+	block: 'WALL',
 	transparent: true,
   };
 
 var tileHouse = {
 	tileType: 4,
-	block: 'Full',
+	block: 'HOUSE',
 	transparent: false,
   };
 
 var objSheep = {
 	tileType: 5,
-	block: 'Full',
+	block: 'SHEEP',
 	transparent: true,
   };
 
 var objCoyote = {
 	tileType: 6,
-	block: 'Full',
+	block: 'COYOTE',
 	transparent: true,
   };
 
-function initWorld(){
+function initMapGrid(){
 	//draw the grid size and make everything to grass
 	for (var posX = 0; posX < WORLD_ROWS; posX++) {
 	  mapGrid[posX] = [];

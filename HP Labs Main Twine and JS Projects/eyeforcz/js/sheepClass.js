@@ -1,5 +1,27 @@
 const PLAYER_MOVE_SPEED = 3.0;
 
+class animalClass {
+	constructor(spawnX, spawnY,) {
+	  this.currentX = spawnX;
+	  this.currentY = spawnY;
+	  this.moveToX;
+	  this.moveToY;
+	  this.ingoreBlocks = [];
+
+	}
+	
+	moveTo() {
+	  return findShortestPath(this,moveToX, moveToY, mapGrid);
+	}
+}
+
+class sheepClass extends animalClass(){
+	constructor(){
+		this.ingoreBlocks = ['GRASS']
+	}
+}
+
+
 function warriorClass() {
 	this.x = 75;
 	this.y = 75;

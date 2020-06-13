@@ -16,11 +16,11 @@ function imageLoadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 	setupInput();
-	loadLevel();
+	initGame();
 }
 
-function loadLevel() {
-	initWorld();
+function initGame() {
+	initMapGrid();
 	console.log("hello");
 	//worldGrid = whichLevel.slice();
 	//blueWarrior.reset(warriorPic, "Blue Storm");
