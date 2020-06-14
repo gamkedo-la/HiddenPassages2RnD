@@ -28,7 +28,7 @@ function setupInput() {
 
   function mouseclicked(evt) {
 
-	  sheepList[0].moveTo(mouseX,mouseY);
+	  animalList[0].moveTo(mouseX,mouseY);
 	/*
     if(tileOverIdx < 0 || tileOverIdx >= tileGrid.length) { // invalid or off board
       return;

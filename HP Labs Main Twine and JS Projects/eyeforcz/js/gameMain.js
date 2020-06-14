@@ -1,21 +1,23 @@
-var sheepList = [];
+var animalList = [];
 
 function gameLoop(){
 
 
 	this.move = function (){
-		
+		for (i = 0; i < animalList.length; i++){
+			animalList[i].move();
+		}
 	}
 
 	this.draw = function(){
-		for (i = 0; i < sheepList.length; i++){
-			canvasContext.drawImage(imageList[sheepList[i].tileType], indexXtoPixelX(farmSpawner.xID), indexYtoPixelY(farmSpawner.yID));
+		for (i = 0; i < animalList.length; i++){
+			animalList[i].draw();
 		}
 
 	}
 
 	this.spawnSheeps = function (){
-		var sheep = new sheepClass(farmSpawner.xID, farmSpawner.yID);
-		sheepList.push(sheep);
+		var sheep = new sheepClass(indexXtoPixelX(farmSpawner.xID),indexYtoPixelY(farmSpawner.yID));
+		animalList.push(sheep);
 	}
 }

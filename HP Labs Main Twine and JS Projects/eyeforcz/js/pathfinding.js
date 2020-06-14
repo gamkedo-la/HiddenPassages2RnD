@@ -1,22 +1,14 @@
 
 function findPath(object, goalX, goalY) {
  
-  //chris look at this
   var grid = JSON.parse(JSON.stringify(mapGrid));
-
-  var goal = {
-    block: 'GOAL'
-  };
-  grid[goalX][goalY] = goal;
-
-  //chris you can stop looking now
-
+  grid[goalX][goalY].block = 'GOAL';
 
   // Each "location" will store its coordinates
   // and the shortest path required to arrive there
   var location = {
-    distX: object.currentX,
-    distY: object.currentY,
+    distX: pixelXtoindexX(object.currentX),
+    distY: pixelYtoindexY(object.currentY),
     path: [],
     block: 'START'
   };
