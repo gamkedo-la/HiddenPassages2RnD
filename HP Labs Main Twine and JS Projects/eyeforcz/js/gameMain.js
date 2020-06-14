@@ -1,5 +1,7 @@
 var animalList = [];
-
+var debug_MODE = {
+	path: false,
+};
 function gameLoop(){
 
 

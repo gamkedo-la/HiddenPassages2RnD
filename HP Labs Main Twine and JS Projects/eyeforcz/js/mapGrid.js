@@ -152,3 +152,12 @@ function pixelYtoindexY(atY) {
 	return undefined;
 }
 
+//Rest the position to the nearest tile for X
+function resetPixelXtoNearestIndexX(pixX){
+	return indexXtoPixelX(pixelXtoindexX(pixX));
+}
+
+//Rest the position to the nearest tile for Y
+function resetPixelYtoNearestIndexY(pixY){
+	return indexYtoPixelY(pixelYtoindexY(pixY));
+}
