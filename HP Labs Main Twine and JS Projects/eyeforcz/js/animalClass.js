@@ -1,18 +1,24 @@
+function animalClass(spawnX,spawnY) {
+	this.currentX = spawnX;
+	this.currentY = spawnY;
+	this.moveToX;
+	this.moveToY;
+	this.tileType;
+	this.ingoreBlocks = [];
 
-class animalClass {
-	constructor(spawnX, spawnY){
-		this.currentX = spawnX;
-		this.currentY = spawnY;
-		this.tileType = objSheep.tileType;
-		this.moveToX;
-		this.moveToY;
-		this.ingoreBlocks = ['GRASS'];
-
-	};
-	
-	moveTo() {
-	  return findShortestPath(this,moveToX, moveToY, mapGrid);
+	this.moveTo = function(moveX, moveY) {
+		moveToX = pixelXtoindexX(moveX);
+		moveToY = pixelYtoindexY(moveY);
+		console.log(findPath(this,moveToX, moveToY));
+		//return findShortestPath(this,moveToX, moveToY);
 	}
+}
+
+
+function sheepClass(spawnX,spawnY) {
+	animalClass.call(this, spawnX,spawnY)
+		this.tileType = objSheep.tileType;
+		this.ingoreBlocks = ['GRASS'];
 }
 
 

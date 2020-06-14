@@ -13,6 +13,7 @@ var mouseY = 0;
 //
 function setupInput() {
 	canvas.addEventListener('mousemove', updateMousePos);
+	document.addEventListener("mousedown", mouseclicked);
 
 	document.addEventListener('keydown', keyPressed);
 	document.addEventListener('keyup', keyReleased);
@@ -26,6 +27,9 @@ function setupInput() {
   }
 
   function mouseclicked(evt) {
+
+	  sheepList[0].moveTo(mouseX,mouseY);
+	/*
     if(tileOverIdx < 0 || tileOverIdx >= tileGrid.length) { // invalid or off board
       return;
     }
@@ -36,7 +40,7 @@ function setupInput() {
       selectedIdx = -1; // forget selection
     } else if(tileGrid[tileOverIdx] != NO_PIECE ) {
       selectedIdx = tileOverIdx;
-    }
+    }*/
   }
 
   function mousemoved(evt) {

@@ -51,7 +51,7 @@ var objCoyote = {
 	transparent: true,
   };
 
-  var farmSpawner ={
+var farmSpawner ={
 	xID: WORLD_ROWS/2 - 1,
 	yID: playArea.endY -1
 }
@@ -98,22 +98,14 @@ function drawWorld() {
 				if(mapGrid[indexX][indexY].transparent) {
 					canvasContext.drawImage(imageList[tileGrass.tileType],drawTileX,drawTileY);
 				}
+				if (mapGrid[indexX][indexY].tileType != undefined){
 				canvasContext.drawImage(imageList[mapGrid[indexX][indexY].tileType],drawTileX,drawTileY);
+				}
 				drawTileY += WORLD_H;
 			}
 			drawTileX += WORLD_W;
 			drawTileY = 0;
 		}
-}
-
-function returnTileTypeAtColRow(col, row) {
-	if(col >= 0 && col < WORLD_COLS &&
-		row >= 0 && row < WORLD_ROWS) {
-		 var worldIndexUnderCoord = rowColToArrayIndex(col, row);
-		 return worldGrid[worldIndexUnderCoord];
-	} else {
-		return WORLD_WALL;
-	}
 }
 
 //Get the Pixel coordinate of a grid index for Y
@@ -141,7 +133,7 @@ function indexYtoPixelY(idY) {
 //Get the grid Index of a pixel position for X
 function pixelXtoindexX(atX) {
 	var indexX = Math.floor(atX / WORLD_W);
-	if(atX >= 0 && atX < WORLD_ROWS){
+	if(atX >= 0 && atX < WORLD_ROWS * WORLD_W){
 		return indexX;
 	}
 
@@ -152,7 +144,7 @@ function pixelXtoindexX(atX) {
 //Get the grid Index of a pixel position for Y
 function pixelYtoindexY(atY) {
 	var indexY = Math.floor(atY / WORLD_H);
-	if(atY >= 0 && atY < WORLD_COLS){
+	if(atY >= 0 && atY < WORLD_COLS * WORLD_H){
 		return indexY;
 	}
 

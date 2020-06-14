@@ -1,15 +1,24 @@
-// Start location will be in the following format:
-// [distY, distX]
-var findShortestPath = function(object, goalX, goalY, theGrid) {
-  grid = theGrid.slice();
-  grid[goalX][goalY] = "GOAL";
+
+function findPath(object, goalX, goalY) {
+ 
+  //chris look at this
+  var grid = JSON.parse(JSON.stringify(mapGrid));
+
+  var goal = {
+    block: 'GOAL'
+  };
+  grid[goalX][goalY] = goal;
+
+  //chris you can stop looking now
+
+
   // Each "location" will store its coordinates
   // and the shortest path required to arrive there
   var location = {
     distX: object.currentX,
     distY: object.currentY,
     path: [],
-    status: 'START'
+    block: 'START'
   };
 
   // Initialize the queue with the start location already inside
@@ -22,33 +31,33 @@ var findShortestPath = function(object, goalX, goalY, theGrid) {
 
     // Explore North
     var newLocation = exploreInDirection(currentLocation, 'North', grid, object);
-    if (newLocation.status === 'GOAL') {
+    if (newLocation.block === 'GOAL') {
       return newLocation.path;
-    } else if (newLocation.status === 'Valid') {
+    } else if (newLocation.block === 'Valid') {
       queue.push(newLocation);
     }
 
     // Explore East
     var newLocation = exploreInDirection(currentLocation, 'East', grid, object);
-    if (newLocation.status === 'GOAL') {
+    if (newLocation.block === 'GOAL') {
       return newLocation.path;
-    } else if (newLocation.status === 'Valid') {
+    } else if (newLocation.block === 'Valid') {
       queue.push(newLocation);
     }
 
     // Explore South
     var newLocation = exploreInDirection(currentLocation, 'South', grid, object);
-    if (newLocation.status === 'GOAL') {
+    if (newLocation.block === 'GOAL') {
       return newLocation.path;
-    } else if (newLocation.status === 'Valid') {
+    } else if (newLocation.block === 'Valid') {
       queue.push(newLocation);
     }
 
     // Explore West
     var newLocation = exploreInDirection(currentLocation, 'West', grid, object);
-    if (newLocation.status === 'GOAL') {
+    if (newLocation.block === 'GOAL') {
       return newLocation.path;
-    } else if (newLocation.status === 'Valid') {
+    } else if (newLocation.block === 'Valid') {
       queue.push(newLocation);
     }
   }
@@ -59,7 +68,7 @@ var findShortestPath = function(object, goalX, goalY, theGrid) {
 };
 
   // Explore the grid in different directions
-  var exploreInDirection = function(currentLocation, direction, grid, object) {
+  function exploreInDirection(currentLocation, direction, grid, object) {
   var newPath = currentLocation.path.slice();
   newPath.push(direction);
 
@@ -80,12 +89,12 @@ var findShortestPath = function(object, goalX, goalY, theGrid) {
     distY: dft,
     distX: dfl,
     path: newPath,
-    status: 'Unknown'
+    block: 'Unknown'
   };
-  newLocation.status = locationStatus(newLocation, grid, object);
+  newLocation.block = locationStatus(newLocation, grid, object);
 
   // If this new location is valid, mark it as 'Visited'
-  if (newLocation.status === 'Valid') {
+  if (newLocation.block === 'Valid') {
     grid[newLocation.distX][newLocation.distY] = 'Visited';
   }
 
@@ -93,28 +102,27 @@ var findShortestPath = function(object, goalX, goalY, theGrid) {
 };
 
 
-// This function will check a location's status
+// This function will check a location's block
 // (a location is "valid" if it is on the grid, is not an "obstacle",
 // and has not yet been visited by our algorithm)
 // Returns "Valid", "Invalid", "Blocked", or "Goal"
-var locationStatus = function(location, grid, object) {
-  var gridSize = grid.length;
+function locationStatus(location, grid, object) {
   var dft = location.distY;
   var dfl = location.distX;
 
   // If the location is outside of the grid
-  if (location.distX < 0 || location.distX >= gridSize ||
-      location.distY < 0 || location.distY >= gridSize) {
+  if (location.distX < 0 || location.distX >= WORLD_ROWS ||
+      location.distY < 0 || location.distY >= WORLD_COLS) {
     return 'Invalid';
     
     //If the location is our goal object
-  } else if (grid[dfl][dft] === 'GOAL') {
+  } else if (grid[dfl][dft].block === 'GOAL') {
     return 'GOAL';
   }
 
-  //If its a block that the object can walk thru
+  //If its a block that the object can walk on
   for(i = 0; i < object.ingoreBlocks.length; i++){
-    if (grid[dfl][dft] == object.ingoreBlocks[i]) {
+    if (grid[dfl][dft].block == object.ingoreBlocks[i]) {
       return 'Valid';
     }
   }
@@ -122,34 +130,3 @@ var locationStatus = function(location, grid, object) {
   //If the path is blocked
   return 'Blocked';
 };
-
-
-
-
-// OK. We have the functions we need--let's run them to get our shortest path!
-
-// Create a 4x4 grid
-// Represent the grid as a 2-dimensional array
-var gridSize = 4;
-var egrid = [];
-for (var i=0; i<gridSize; i++) {
-  egrid[i] = [];
-  for (var j=0; j<gridSize; j++) {
-    egrid[i][j] = 'Empty';
-  }
-}
-
-// This is how we would represent the grid with obstacles above
-//grid[0][0] = "Start";
-//grid[2][2] = "Goal";
-
-egrid[1][1] = "Obstacle";
-egrid[2][1] = "Obstacle";
-egrid[3][1] = "Obstacle";
-egrid[1][2] = "Obstacle";
-test = {
-  currentX: 0,
-  currentY: 0,
-  ingoreBlocks: ['Empty']
-};
-console.log(findShortestPath(test,2,2,egrid));

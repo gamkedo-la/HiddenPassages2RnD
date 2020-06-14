@@ -35,8 +35,9 @@ function moveAll() {
 function drawAll() {
 	drawWorld();
 	gameMain.draw();
-	colorText("X: " + Math.floor(mouseX / WORLD_W) + "Y: " + Math.floor(mouseY / WORLD_H),mouseX, mouseY, 'black');
-	//blueWarrior.draw();
+	
+	colorText("X: " + Math.floor(mouseX / WORLD_W) + "Y: " + Math.floor(mouseY / WORLD_H) + "type: " + mapGrid[pixelXtoindexX(mouseX)][pixelYtoindexY(mouseY)],mouseX, mouseY, 'black');
+
 } 
 
 function lerp (value1, value2, amount) {
