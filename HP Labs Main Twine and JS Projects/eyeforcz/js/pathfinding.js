@@ -1,8 +1,19 @@
 
 function findPath(object, goalX, goalY) {
  
+  //copy mapGrid array to a temp array
   var grid = JSON.parse(JSON.stringify(mapGrid));
-  grid[goalX][goalY].block = 'GOAL';
+
+  //check if the goal location is a valid location
+  for(i = 0; i < object.walkableBlocks.length; i++){
+    if (grid[goalX][goalY].block == object.walkableBlocks[i]) {
+      grid[goalX][goalY].block = 'GOAL';
+      break;
+    }
+  }
+  if(grid[goalX][goalY].block != 'GOAL'){
+    return false;
+  }
 
   // Each "location" will store its coordinates
   // and the shortest path required to arrive there
@@ -113,8 +124,8 @@ function locationStatus(location, grid, object) {
   }
 
   //If its a block that the object can walk on
-  for(i = 0; i < object.ingoreBlocks.length; i++){
-    if (grid[dfl][dft].block == object.ingoreBlocks[i]) {
+  for(i = 0; i < object.walkableBlocks.length; i++){
+    if (grid[dfl][dft].block == object.walkableBlocks[i]) {
       return 'Valid';
     }
   }
