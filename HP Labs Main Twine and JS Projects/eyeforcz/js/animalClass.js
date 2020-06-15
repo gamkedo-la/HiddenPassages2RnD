@@ -1,34 +1,31 @@
 function animalClass(spawnX,spawnY) {
+	this.objType = 'ANIMAL';
 	this.currentX = spawnX;
 	this.currentY = spawnY;
 	this.moveToX;
 	this.moveToY;
 	this.speed;
 
-	this.tileType;
-	this.walkableBlocks = [];
+	this.imageID;
+	this.imageAngel = 0;
 
 	this.pathQueue = [];
-	this.processingQueue = false;
+	this.walkableBlocks = [];
+
 	this.status;
 	this.intention = 'WAITING';
-
+	this.selected = false;
 
 	this.move = function(){
-	
-		if(this.intention == 'WALKING'){
-			if(debug_MODE.path = true){console.log(this.pathQueue);}
-			if(this.pathQueue.length == 0){
-				this.status = undefined;
-				this.intention = 'WAITING';
-			}else{
-				this.intenWalking();				
-			}
-		}
+		
+		this.checkOnIntention();
 	}
 
 	this.draw = function(){
-		canvasContext.drawImage(imageList[this.tileType], this.currentX, this.currentY);
+		drawAnImage(this.imageID, this.currentX, this.currentY,this.imageAngel);
+		if(this.selected == true){
+			this.menu();
+		}
 	}
 
 	//Pathfinding and enabling walking
@@ -42,11 +39,19 @@ function animalClass(spawnX,spawnY) {
 		}
 	}
 
+
 	//On intention is "WALKING"
 	this.intenWalking = function(){
+		if(debug_MODE.path = true){console.log(this.pathQueue);}
+		if(this.pathQueue.length == 0){
+			this.status = undefined;
+			this.intention = 'WAITING';
+			return;
+		}
+
 		if(this.pathQueue[0] == 'North'){		
 			if(this.status != 'WALKING_NORTH'){
-				this.moveToY = this.currentY - WORLD_H;
+				this.moveToY = this.currentY - TILE_H;
 				this.status = 'WALKING_NORTH';
 				this.currentY -= this.speed;
 			}else if(this.currentY <= this.moveToY){
@@ -59,7 +64,7 @@ function animalClass(spawnX,spawnY) {
 
 		}else if(this.pathQueue[0] == 'South'){		
 			if(this.status != 'WALKING_SOUTH'){
-				this.moveToY = this.currentY + WORLD_H;
+				this.moveToY = this.currentY + TILE_H;
 				this.status = 'WALKING_SOUTH';
 				this.currentY += this.speed;
 			}else if(this.currentY >= this.moveToY){
@@ -72,7 +77,7 @@ function animalClass(spawnX,spawnY) {
 
 		}else if(this.pathQueue[0] == 'East'){		
 			if(this.status != 'WALKING_EAST'){
-				this.moveToX = this.currentX + WORLD_W;
+				this.moveToX = this.currentX + TILE_W;
 				this.status = 'WALKING_EAST';
 				this.currentX += this.speed;
 			}else if(this.currentX >= this.moveToX){
@@ -85,7 +90,7 @@ function animalClass(spawnX,spawnY) {
 
 		}else if(this.pathQueue[0] == 'West'){			
 			if(this.status != 'WALKING_WEST'){
-				this.moveToX = this.currentX - WORLD_W;
+				this.moveToX = this.currentX - TILE_W;
 				this.status = 'WALKING_WEST';
 				this.currentX -= this.speed;
 			}else if(this.currentX <= this.moveToX){
@@ -98,12 +103,3 @@ function animalClass(spawnX,spawnY) {
 		}
 	}
 }
-
-function sheepClass(spawnX,spawnY) {
-	animalClass.call(this, spawnX,spawnY)
-
-	this.tileType = objSheep.tileType;
-	this.walkableBlocks = ['GRASS','HOUSE'];
-	this.speed = 5;
-}
-

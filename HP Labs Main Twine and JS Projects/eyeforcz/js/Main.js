@@ -29,7 +29,7 @@ function updateAll() {
 	drawWorld();
 	gameMain.draw();
 	
-	colorText("X: " + Math.floor(mouseX / WORLD_W) + "Y: " + Math.floor(mouseY / WORLD_H) + "type: " + mapGrid[pixelXtoindexX(mouseX)][pixelYtoindexY(mouseY)],mouseX, mouseY, 'black');
+	colorText("X: " + Math.floor(mouseX / TILE_W) + "Y: " + Math.floor(mouseY / TILE_H) + "type: " + mapGrid[pixelXtoindexX(mouseX)][pixelYtoindexY(mouseY)],mouseX, mouseY, 'black');
 }
 
 

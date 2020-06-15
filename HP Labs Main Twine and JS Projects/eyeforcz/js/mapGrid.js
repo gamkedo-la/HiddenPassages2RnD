@@ -1,8 +1,7 @@
-const WORLD_W = 40;
-const WORLD_H = 40;
+const TILE_W = 40;
+const TILE_H = 40;
 const WORLD_ROWS = 20;
 const WORLD_COLS = 15;
-const TREE_BORDER_Y = 13;
 
 var mapGrid = [];
 
@@ -15,42 +14,10 @@ var playArea = {
 	endY: 12,
   };
 
-var tileGrass = {
-	tileType: 1,
-	block: 'GRASS',
-	transparent: false,
-  };
-
-var tileTree = {
-	tileType: 2,
-	block: 'TREE',
-	transparent: true,
-  };
-
-var tileWall = {
-	tileType: 3,
-	block: 'WALL',
-	transparent: true,
-  };
-
-var tileHouse = {
-	tileType: 4,
-	block: 'HOUSE',
-	transparent: false,
-  };
-
-var objSheep = {
-	tileType: 5,
-	block: 'SHEEP',
-	transparent: true,
-  };
-
-var objCoyote = {
-	tileType: 6,
-	block: 'COYOTE',
-	transparent: true,
-  };
-
+var menuBar = {
+	startX: indexXtoPixelX(7),
+	startY: indexYtoPixelY(14)
+}
 var farmSpawner ={
 	xID: WORLD_ROWS/2 - 1,
 	yID: playArea.endY -1
@@ -96,22 +63,22 @@ function drawWorld() {
 		for(var indexX=0;indexX<WORLD_ROWS;indexX++) {
 			for(var indexY=0;indexY<WORLD_COLS;indexY++) {
 				if(mapGrid[indexX][indexY].transparent) {
-					canvasContext.drawImage(imageList[tileGrass.tileType],drawTileX,drawTileY);
+					drawAnImage(tileGrass.imageID,drawTileX,drawTileY,0);
 				}
-				if (mapGrid[indexX][indexY].tileType != undefined){
-				canvasContext.drawImage(imageList[mapGrid[indexX][indexY].tileType],drawTileX,drawTileY);
+				if (mapGrid[indexX][indexY].imageID != undefined){
+				drawAnImage(mapGrid[indexX][indexY].imageID,drawTileX,drawTileY,0);
 				}
-				drawTileY += WORLD_H;
+				drawTileY += TILE_H;
 			}
-			drawTileX += WORLD_W;
+			drawTileX += TILE_W;
 			drawTileY = 0;
 		}
 }
 
 //Get the Pixel coordinate of a grid index for Y
 function indexXtoPixelX(idX) {
-	var indexX = idX * WORLD_W;
-	if(indexX >= 0 && indexX < WORLD_ROWS * WORLD_W){
+	var indexX = idX * TILE_W;
+	if(indexX >= 0 && indexX < WORLD_ROWS * TILE_W){
 		return indexX;
 	}
 
@@ -121,8 +88,8 @@ function indexXtoPixelX(idX) {
 
 //Get the Pixel coordinate of a grid index for X
 function indexYtoPixelY(idY) {
-	var indexY = idY * WORLD_H;
-	if(indexY >= 0 && indexY < WORLD_COLS * WORLD_H){
+	var indexY = idY * TILE_H;
+	if(indexY >= 0 && indexY < WORLD_COLS * TILE_H){
 		return indexY;
 	}
 
@@ -132,8 +99,8 @@ function indexYtoPixelY(idY) {
 
 //Get the grid Index of a pixel position for X
 function pixelXtoindexX(atX) {
-	var indexX = Math.floor(atX / WORLD_W);
-	if(atX >= 0 && atX < WORLD_ROWS * WORLD_W){
+	var indexX = Math.floor(atX / TILE_W);
+	if(atX >= 0 && atX < WORLD_ROWS * TILE_W){
 		return indexX;
 	}
 
@@ -143,8 +110,8 @@ function pixelXtoindexX(atX) {
 
 //Get the grid Index of a pixel position for Y
 function pixelYtoindexY(atY) {
-	var indexY = Math.floor(atY / WORLD_H);
-	if(atY >= 0 && atY < WORLD_COLS * WORLD_H){
+	var indexY = Math.floor(atY / TILE_H);
+	if(atY >= 0 && atY < WORLD_COLS * TILE_H){
 		return indexY;
 	}
 

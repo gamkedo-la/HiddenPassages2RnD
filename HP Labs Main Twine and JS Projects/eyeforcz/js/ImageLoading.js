@@ -23,12 +23,14 @@ function loadImageForWorldCode(worldCode, fileName) {
 
 function loadImages() {
 	var imageArray = [
-		{tileType: tileGrass.tileType, theFile: "world_grass.png"},
-		{tileType: tileTree.tileType, theFile: "world_tree.png"},
-		{tileType: tileWall.tileType, theFile: "world_wall.png"},
-		{tileType: tileHouse.tileType, theFile: "world_house.png"},
-		{tileType: objSheep.tileType, theFile: "object_sheep.png"},
-		{tileType: objCoyote.tileType, theFile: "object_coyote.png"},
+		{imageID: tileGrass.imageID, theFile: "world_grass.png"},
+		{imageID: tileTree.imageID, theFile: "world_tree.png"},
+		{imageID: tileWall.imageID, theFile: "world_wall.png"},
+		{imageID: tileHouse.imageID, theFile: "world_house.png"},
+		{imageID: objSheep.imageID, theFile: "object_sheep.png"},
+		{imageID: objCoyote.imageID, theFile: "object_coyote.png"},
+		{imageID: btnMoveTo.imageIdIDLE, theFile: "btn_moveto_IDLE.png"},
+		{imageID: btnMoveTo.imageIdSEL, theFile: "btn_moveto_SEL.png"},
 		];
 
 	picsToLoad = imageArray.length;
@@ -37,7 +39,7 @@ function loadImages() {
 		if(imageArray[i].varName != undefined) {
 			beginLoadingImage(imageArray[i].varName, imageArray[i].theFile);
 		} else {
-			loadImageForWorldCode(imageArray[i].tileType, imageArray[i].theFile);
+			loadImageForWorldCode(imageArray[i].imageID, imageArray[i].theFile);
 		}
 	}
 }

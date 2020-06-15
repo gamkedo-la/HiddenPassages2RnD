@@ -10,37 +10,17 @@ const KEY_D = 68;
 
 var mouseX = 0;
 var mouseY = 0;
-//
+
 function setupInput() {
 	canvas.addEventListener('mousemove', updateMousePos);
 	document.addEventListener("mousedown", mouseclicked);
 
 	document.addEventListener('keydown', keyPressed);
 	document.addEventListener('keyup', keyReleased);
-
-	//blueWarrior.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW);
 } 
 
- function initInput() {
-    document.addEventListener("mousemove", mousemoved);
-    document.addEventListener("mousedown", mouseclicked);
-  }
-
   function mouseclicked(evt) {
-
-	  animalList[0].moveTo(mouseX,mouseY);
-	/*
-    if(tileOverIdx < 0 || tileOverIdx >= tileGrid.length) { // invalid or off board
-      return;
-    }
-
-    if(selectedIdx != -1) {
-      tileGrid[tileOverIdx] = tileGrid[selectedIdx]; // put the piece here (overwrite)
-      tileGrid[selectedIdx] = NO_PIECE; // clear the spot where it was sitting
-      selectedIdx = -1; // forget selection
-    } else if(tileGrid[tileOverIdx] != NO_PIECE ) {
-      selectedIdx = tileOverIdx;
-    }*/
+	gameMain.onMouseClicked();
   }
 
   function mousemoved(evt) {
@@ -50,10 +30,6 @@ function setupInput() {
     // account for the margins, canvas position on page, scroll amount, etc.
     mouseX = evt.clientX - rect.left - root.scrollLeft;
     mouseY = evt.clientY - rect.top - root.scrollTop;
-
-    var tileOverCol = Math.floor(mouseX / TILE_W);
-    var tileOverRow = Math.floor(mouseY / TILE_H);    
-    tileOverIdx = tileCoordToIndex(tileOverCol,tileOverRow);
   }
 //
 
@@ -63,12 +39,6 @@ function updateMousePos(evt) {
 
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
 	mouseY = evt.clientY - rect.top - root.scrollTop;
-
-	// cheat / hack to test car in any position
-	/*carX = mouseX;
-	carY = mouseY;
-	carSpeedX = 4;
-	carSpeedY = -4;*/
 }
 
 function keySet(keyEvent, setTo) {
