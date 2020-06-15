@@ -20,7 +20,7 @@ function setupInput() {
 } 
 
   function mouseclicked(evt) {
-	gameMain.onMouseClicked();
+	gameLoop.onMouseClicked();
   }
 
   function mousemoved(evt) {

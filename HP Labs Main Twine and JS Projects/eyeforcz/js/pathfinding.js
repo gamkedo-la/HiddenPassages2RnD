@@ -18,8 +18,8 @@ function findPath(object, goalX, goalY) {
   // Each "location" will store its coordinates
   // and the shortest path required to arrive there
   var location = {
-    distX: pixelXtoindexX(object.currentX),
-    distY: pixelYtoindexY(object.currentY),
+    distX: object.indexX,
+    distY: object.indexY,
     path: [],
     block: 'START'
   };

@@ -12,18 +12,20 @@ var playArea = {
 	startY: 1,
 	endX: WORLD_ROWS-2,
 	endY: 12,
+	menuIDX: 7,
+	menuIDY: 14
   };
 
 var menuBar = {
 	startX: indexXtoPixelX(7),
 	startY: indexYtoPixelY(14)
-}
+};
 var farmSpawner ={
 	xID: WORLD_ROWS/2 - 1,
 	yID: playArea.endY -1
-}
+};
 
-function initMapGrid(){
+function updateMapGrid(){
 	//draw the grid size and make everything to grass
 	for (var posX = 0; posX < WORLD_ROWS; posX++) {
 	  mapGrid[posX] = [];
@@ -52,7 +54,19 @@ function initMapGrid(){
 	}
 
 	//place the house
-		mapGrid[WORLD_ROWS/2 - 1][playArea.endY] = tileHouse;
+	mapGrid[WORLD_ROWS/2 - 1][playArea.endY] = tileHouse;
+
+	//place the animals
+	if(animalList != undefined && animalList.length > 0){
+		animalList.forEach (function (val,index){
+			mapGrid[val.indexX][val.indexY] = animalList[index];
+		});
+	}
+	if(menuList != undefined && menuList.length > 0){
+		menuList.forEach (function (val,index){
+			mapGrid[val.indexX][val.indexY] = menuList[index];
+		});
+	}
 
 }
 
@@ -67,6 +81,8 @@ function drawWorld() {
 				}
 				if (mapGrid[indexX][indexY].imageID != undefined){
 				drawAnImage(mapGrid[indexX][indexY].imageID,drawTileX,drawTileY,0);
+				}else{
+					console.log("IMAGE ID ERROR ON tile X:" + indexX + " Y: " + indexY);
 				}
 				drawTileY += TILE_H;
 			}

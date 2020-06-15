@@ -1,5 +1,5 @@
 var canvas, canvasContext;
-var gameMain = new gameLoop();
+//var gameMain = new gameLoop();
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -15,19 +15,16 @@ function imageLoadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 	setupInput();
-	initGame();
-	gameMain.spawnSheeps()
-}
-
-function initGame() {
-	initMapGrid();
+	gameLoop.spawnSheeps()
 }
 
 function updateAll() {
-	gameMain.move();
+	
+	gameLoop.move();
+	updateMapGrid();
 
 	drawWorld();
-	gameMain.draw();
+	gameLoop.draw();
 	
 	colorText("X: " + Math.floor(mouseX / TILE_W) + "Y: " + Math.floor(mouseY / TILE_H) + "type: " + mapGrid[pixelXtoindexX(mouseX)][pixelYtoindexY(mouseY)],mouseX, mouseY, 'black');
 }

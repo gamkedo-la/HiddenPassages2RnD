@@ -27,10 +27,10 @@ function loadImages() {
 		{imageID: tileTree.imageID, theFile: "world_tree.png"},
 		{imageID: tileWall.imageID, theFile: "world_wall.png"},
 		{imageID: tileHouse.imageID, theFile: "world_house.png"},
-		{imageID: objSheep.imageID, theFile: "object_sheep.png"},
-		{imageID: objCoyote.imageID, theFile: "object_coyote.png"},
-		{imageID: btnMoveTo.imageIdIDLE, theFile: "btn_moveto_IDLE.png"},
-		{imageID: btnMoveTo.imageIdSEL, theFile: "btn_moveto_SEL.png"},
+		{imageID: tileSheep.imageID, theFile: "object_sheep.png"},
+		{imageID: tileCoyote.imageID, theFile: "object_coyote.png"},
+		{imageID: tileBtnMoveTo.imageIdIDLE, theFile: "btn_moveto_IDLE.png"},
+		{imageID: tileBtnMoveTo.imageIdSEL, theFile: "btn_moveto_SEL.png"},
 		];
 
 	picsToLoad = imageArray.length;

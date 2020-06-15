@@ -9,50 +9,57 @@ var mouseAction ={
 	action: undefined
 };
 
-//var is gameMain
-function gameLoop(){
-
-
+gameLoop = new function(){
+	
 	this.move = function (){
 		for (i = 0; i < animalList.length; i++){
 			animalList[i].move();
 		}
+		menuClass.move();
+		
 	}
 
 	this.draw = function(){
 		for (i = 0; i < animalList.length; i++){
 			animalList[i].draw();
 		}
-
+		menuClass.draw();
 	}
 
 	this.onMouseClicked = function(){
-		var theObjectClickedON = checkIfTileIsObject();
+		var mouseIDX = pixelXtoindexX(mouseX);
+		var mouseIDY = pixelYtoindexY(mouseY);
+		var theObjectClickedON = mapGrid[mouseIDX][mouseIDY];
+		console.log(theObjectClickedON.block)
 		
 		//If current selection is empty and the clicked place is a object
-		if(mouseAction.selected == undefined && theObjectClickedON != false){
+		if(mouseAction.selected == undefined && theObjectClickedON.typ == 'ANIMAL'){
 				mouseAction.selected = theObjectClickedON;
-				mouseAction.selected.selected = true;
+				console.log("selc: " + mouseAction.selected.block)
 		//If current selection is not empty
-		}else{
+		}else if(mouseAction.selected != undefined){
+			console.log("what");
 			//Select the the object as an action if its a button
-			if(theObjectClickedON.objType == 'BUTTON'){
+			if(theObjectClickedON.typ == 'BUTTON'){
 					mouseAction.action = theObjectClickedON;
 					//Run the action if the selected action doesnt need extra Parameters
 					if(mouseAction.action.needParams == false){	
 						mouseAction.action.run();
 						mouseAction.selected = undefined;
 						mouseAction.action = undefined;
+						menuList = [];
 					}
 			//Rest everything if its not a button and the actions are empty
 			}else if(mouseAction.action == undefined){
 				mouseAction.selected = undefined;
 				mouseAction.action = undefined;
+				menuList = [];
 			//If an action was selected than choose its params and run it
 			}else{
 				if(mouseAction.action.run(mouseX, mouseY) == true){
 					mouseAction.selected = undefined;
 					mouseAction.action = undefined;
+					menuList = [];
 				}
 			}
 		}
@@ -60,12 +67,11 @@ function gameLoop(){
 
 
 	this.checkIfTileIsObject = function(){
-		var mouseIDX = pixelXtoindexX(mouseX);
-		var mouseIDY = pixelYtoindexY(mouseY);
+	
 		var choosenObject = undefined;
 
 		for(i = 0; i < animalList.length; i++){
-			if(pixelXtoindexX(animalList[i].currentX) == mouseIDX && pixelYtoindexY(animalList[i].currentY) == mouseIDY){
+			if(animalList[i].indexX == mouseIDX && animalList[i].indexY == mouseIDY){
 				choosenObject = animalList[i];
 			
 			}

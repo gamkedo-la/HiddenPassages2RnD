@@ -1,7 +1,10 @@
 function animalClass(spawnX,spawnY) {
-	this.objType = 'ANIMAL';
 	this.currentX = spawnX;
 	this.currentY = spawnY;
+	this.indexX;
+	this.indexY;
+	this.typ = 'ANIMAL';
+	this.transparent = true;
 	this.moveToX;
 	this.moveToY;
 	this.speed;
@@ -17,23 +20,23 @@ function animalClass(spawnX,spawnY) {
 	this.selected = false;
 
 	this.move = function(){
-		
+
+		this.indexX = pixelXtoindexX(this.currentX);
+		this.indexY = pixelYtoindexY(this.currentY);
+
 		this.checkOnIntention();
 	}
 
 	this.draw = function(){
 		drawAnImage(this.imageID, this.currentX, this.currentY,this.imageAngel);
-		if(this.selected == true){
-			this.menu();
-		}
 	}
 
 	//Pathfinding and enabling walking
 	this.moveTo = function(moveX, moveY) {
 		var testPath = findPath(this,pixelXtoindexX(moveX), pixelYtoindexY(moveY));
 		if(testPath.length != 0 && testPath != false){
-			this.currentX = resetPixelXtoNearestIndexX(this.currentX);
-			this.currentY = resetPixelYtoNearestIndexY(this.currentY);
+			this.currentX = indexXtoPixelX(this.indexX);
+			this.currentY = indexXtoPixelX(this.indexX);
 			this.pathQueue = findPath(this,pixelXtoindexX(moveX), pixelYtoindexY(moveY));
 			this.intention = 'WALKING';
 		}
