@@ -32,13 +32,15 @@ function animalClass(spawnX,spawnY) {
 	}
 
 	//Pathfinding and enabling walking
-	this.moveTo = function(moveX, moveY) {
-		var testPath = findPath(this,pixelXtoindexX(moveX), pixelYtoindexY(moveY));
+	this.moveTo = function(moveIdX, moveIdY) {
+		var testPath = findPath(this, moveIdX, moveIdY);
 		if(testPath.length != 0 && testPath != false){
-			this.currentX = indexXtoPixelX(this.indexX);
-			this.currentY = indexXtoPixelX(this.indexX);
-			this.pathQueue = findPath(this,pixelXtoindexX(moveX), pixelYtoindexY(moveY));
+			console.log("call: " + moveIdX + " " + moveIdY)
+			this.pathQueue = testPath;
 			this.intention = 'WALKING';
+			return true;
+		}else{
+			return false;
 		}
 	}
 
@@ -49,59 +51,60 @@ function animalClass(spawnX,spawnY) {
 		if(this.pathQueue.length == 0){
 			this.status = undefined;
 			this.intention = 'WAITING';
+			console.log("end: " + this.indexX + " " + this.indexY)
 			return;
-		}
+		}else{
+			if(this.pathQueue[0] == 'North'){		
+				if(this.status != 'WALKING_NORTH'){
+					this.moveToY = this.currentY - TILE_H;
+					this.status = 'WALKING_NORTH';
+					this.currentY -= this.speed;
+				}else if(this.currentY <= this.moveToY){
+					this.currentY = this.moveToY;
+					this.pathQueue = this.pathQueue.slice(1);
+					this.status = undefined;
+				}else{
+					this.currentY -= this.speed;
+				}
 
-		if(this.pathQueue[0] == 'North'){		
-			if(this.status != 'WALKING_NORTH'){
-				this.moveToY = this.currentY - TILE_H;
-				this.status = 'WALKING_NORTH';
-				this.currentY -= this.speed;
-			}else if(this.currentY <= this.moveToY){
-				this.currentY = this.moveToY;
-				this.pathQueue = this.pathQueue.slice(1);
-				this.status = undefined;
-			}else{
-				this.currentY -= this.speed;
-			}
+			}else if(this.pathQueue[0] == 'South'){		
+				if(this.status != 'WALKING_SOUTH'){
+					this.moveToY = this.currentY + TILE_H;
+					this.status = 'WALKING_SOUTH';
+					this.currentY += this.speed;
+				}else if(this.currentY >= this.moveToY){
+					this.currentY = this.moveToY;
+					this.pathQueue = this.pathQueue.slice(1);
+					this.status = undefined;
+				}else{
+					this.currentY += this.speed;
+				}
 
-		}else if(this.pathQueue[0] == 'South'){		
-			if(this.status != 'WALKING_SOUTH'){
-				this.moveToY = this.currentY + TILE_H;
-				this.status = 'WALKING_SOUTH';
-				this.currentY += this.speed;
-			}else if(this.currentY >= this.moveToY){
-				this.currentY = this.moveToY;
-				this.pathQueue = this.pathQueue.slice(1);
-				this.status = undefined;
-			}else{
-				this.currentY += this.speed;
-			}
+			}else if(this.pathQueue[0] == 'East'){		
+				if(this.status != 'WALKING_EAST'){
+					this.moveToX = this.currentX + TILE_W;
+					this.status = 'WALKING_EAST';
+					this.currentX += this.speed;
+				}else if(this.currentX >= this.moveToX){
+					this.currentX = this.moveToX;
+					this.pathQueue = this.pathQueue.slice(1);
+					this.status = undefined;
+				}else{ 
+					this.currentX += this.speed;
+				}
 
-		}else if(this.pathQueue[0] == 'East'){		
-			if(this.status != 'WALKING_EAST'){
-				this.moveToX = this.currentX + TILE_W;
-				this.status = 'WALKING_EAST';
-				this.currentX += this.speed;
-			}else if(this.currentX >= this.moveToX){
-				this.currentX = this.moveToX;
-				this.pathQueue = this.pathQueue.slice(1);
-				this.status = undefined;
-			}else{ 
-				this.currentX += this.speed;
-			}
-
-		}else if(this.pathQueue[0] == 'West'){			
-			if(this.status != 'WALKING_WEST'){
-				this.moveToX = this.currentX - TILE_W;
-				this.status = 'WALKING_WEST';
-				this.currentX -= this.speed;
-			}else if(this.currentX <= this.moveToX){
-				this.currentX = this.moveToX;
-				this.pathQueue = this.pathQueue.slice(1);
-				this.status = undefined;
-			}else{
-				this.currentX -= this.speed;
+			}else if(this.pathQueue[0] == 'West'){			
+				if(this.status != 'WALKING_WEST'){
+					this.moveToX = this.currentX - TILE_W;
+					this.status = 'WALKING_WEST';
+					this.currentX -= this.speed;
+				}else if(this.currentX <= this.moveToX){
+					this.currentX = this.moveToX;
+					this.pathQueue = this.pathQueue.slice(1);
+					this.status = undefined;
+				}else{
+					this.currentX -= this.speed;
+				}
 			}
 		}
 	}

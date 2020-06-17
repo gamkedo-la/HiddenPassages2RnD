@@ -79,10 +79,24 @@ function drawWorld() {
 				if(mapGrid[indexX][indexY].transparent) {
 					drawAnImage(tileGrass.imageID,drawTileX,drawTileY,0);
 				}
-				if (mapGrid[indexX][indexY].imageID != undefined){
-				drawAnImage(mapGrid[indexX][indexY].imageID,drawTileX,drawTileY,0);
+				
+				if(mapGrid[indexX][indexY].typ == 'BUTTON'){
+					if(mouseAction.action != undefined && mapGrid[indexX][indexY].block == mouseAction.action.block){
+						drawAnImage(mapGrid[indexX][indexY].imageIdSEL,drawTileX, drawTileY, 0);
+					}else{
+						drawAnImage(mapGrid[indexX][indexY].imageIdIDLE, drawTileX, drawTileY, 0);
+					}
+					
+				}else if(mapGrid[indexX][indexY].typ == 'ANIMAL'){
+					//Animals get drawn on there own class, we just put it on the grid for reference
+
+				}else if (mapGrid[indexX][indexY].imageID != undefined){
+					
+					drawAnImage(mapGrid[indexX][indexY].imageID,drawTileX,drawTileY,0);
+	
 				}else{
 					console.log("IMAGE ID ERROR ON tile X:" + indexX + " Y: " + indexY);
+					console.log(mapGrid[indexX][indexY]);
 				}
 				drawTileY += TILE_H;
 			}

@@ -15,7 +15,8 @@ function imageLoadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
 	setupInput();
-	gameLoop.spawnSheeps()
+	gameLoop.spawnSheeps(farmSpawner.xID, farmSpawner.yID)
+	gameLoop.spawnSheeps(farmSpawner.xID - 1, farmSpawner.yID - 1)
 }
 
 function updateAll() {

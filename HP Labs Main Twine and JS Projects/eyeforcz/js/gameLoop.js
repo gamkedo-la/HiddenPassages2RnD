@@ -30,42 +30,47 @@ gameLoop = new function(){
 		var mouseIDX = pixelXtoindexX(mouseX);
 		var mouseIDY = pixelYtoindexY(mouseY);
 		var theObjectClickedON = mapGrid[mouseIDX][mouseIDY];
-		console.log(theObjectClickedON.block)
 		
 		//If current selection is empty and the clicked place is a object
 		if(theObjectClickedON.typ == 'ANIMAL'){
-				mouseAction.selected = theObjectClickedON;
-				menuClass.initSelectMenu();
-				console.log("selc: " + mouseAction.selected.block)
+			this.resetMouseActions();
+			mouseAction.selected = theObjectClickedON;
+			menuClass.initSelectMenu();
+			console.log("selc: " + mouseAction.selected.block)
 		//If current selection is not empty
 		}else if(mouseAction.selected != undefined){
-			console.log("what");
+			
+			//Reset action if the same button was clicked twice (for param buttons)
+			if(mouseAction.action != undefined && mouseAction.action.block == theObjectClickedON.block){
+				mouseAction.action = undefined;
+
 			//Select the the object as an action if its a button
-			if(theObjectClickedON.typ == 'BUTTON'){
+			}else if(theObjectClickedON.typ == 'BUTTON'){
 					mouseAction.action = theObjectClickedON;
+					console.log(mouseAction.action)
 					//Run the action if the selected action doesnt need extra Parameters
 					if(mouseAction.action.needParams == false){	
-						mouseAction.action.run();
-						mouseAction.selected = undefined;
+						menuClass.run(mouseIDX, mouseIDY);
 						mouseAction.action = undefined;
-						menuList = [];
 					}
+
 			//Rest everything if its not a button and the actions are empty
 			}else if(mouseAction.action == undefined){
-				mouseAction.selected = undefined;
-				mouseAction.action = undefined;
-				menuList = [];
+				this.resetMouseActions();
 			//If an action was selected than choose its params and run it
 			}else{
-				if(mouseAction.action.run(mouseX, mouseY) == true){
-					mouseAction.selected = undefined;
-					mouseAction.action = undefined;
-					menuList = [];
+				if(menuClass.run(mouseIDX, mouseIDY) == true){
+					this.resetMouseActions();
 				}
 			}
 		}
 	}
 
+	this.resetMouseActions = function(){
+		mouseAction.selected = undefined;
+		mouseAction.action = undefined;
+		menuList = [];
+	}
 
 	this.checkIfTileIsObject = function(){
 	
@@ -84,8 +89,8 @@ gameLoop = new function(){
 			return false;
 		}
 	}
-	this.spawnSheeps = function (){
-		var sheep = new sheepClass(indexXtoPixelX(farmSpawner.xID),indexYtoPixelY(farmSpawner.yID));
+	this.spawnSheeps = function (idX, idY){
+		var sheep = new sheepClass(indexXtoPixelX(idX),indexYtoPixelY(idY));
 		animalList.push(sheep);
 	}
 }

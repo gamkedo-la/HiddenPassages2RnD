@@ -15,34 +15,16 @@ menuClass = new function(){
 	];
 
 	this.move = function(){
-		console.log(menuList.length)
-
-		/*if(mouseAction.selected != undefined){
-		mouseAction.selected.menuItems.forEach (function (selVal,selIndex){
-				this.menuItemList.forEach (function (mVal,mIndex){
-					if(mVal.block == selVal){
-						var	item ={
-							typ: this.typ,
-							block: mVal.block,
-							needParams: mVal.needParams,
-							transparent: mVal.transparent,
-							indexX: playArea.menuIDX + index,
-							indexY: playArea.menuIDY
-						};
-						menuList.push(item);
-					}
-				});
-			});
-		}*/
-
 	}
 
 	this.draw = function(){
 		if(mouseAction.selected != undefined){
-			this.menuItemList.forEach (function (mVal,mIndex){
+			this.menuList.forEach (function (mVal,mIndex){
 				if(mouseAction.action != undefined && mVal.block == mouseAction.action.block){
+					console.log("here1");
 					drawAnImage(mVal.imageIdSEL, mVal.indexX, mVal.indexY, 0);
 				}else{
+					console.log("here2");
 					drawAnImage(mVal.imageIdIDLE, mVal.indexX, mVal.indexY, 0);
 				}
 			});
@@ -65,16 +47,29 @@ menuClass = new function(){
 							typ: this.typ,
 							block: this.menuItemList[j].block,
 							needParams: this.menuItemList[j].needParams,
-							imageID: this.menuItemList[j].imageIdIDLE,
+							imageIdIDLE: this.menuItemList[j].imageIdIDLE,
+							imageIdSEL: this.menuItemList[j].imageIdSEL,
 							transparent: this.menuItemList[j].transparent,
 							indexX: playArea.menuIDX + i,
 							indexY: playArea.menuIDY
 						};
 						menuList.push(item);
+						console.log(menuList)
 					}
 				}
 			}
 		} 
+	}
+
+	this.run = function(idX, idY){
+		
+		switch (mouseAction.action.block) {
+			case 'MOVETO':
+				return mouseAction.selected.moveTo(idX,idY);
+				break;	
+		}
+
+
 	}
 }
 
