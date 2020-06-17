@@ -16,25 +16,9 @@ menuClass = new function(){
 
 	this.move = function(){
 		console.log(menuList.length)
-		if(mouseAction.selected != undefined){
-			for(var i = 0; i < mouseAction.selected.menuItems.length; i++){
-				for(var j = 0; j < this.menuItemList.length; j++){
-					if(this.menuItemList[j].block == mouseAction.selected.menuItems[i]){
-						var	item ={
-							typ: this.typ,
-							block: this.menuItemList[j].block,
-							needParams: this.menuItemList[j].needParams,
-							imageID: this.menuItemList[j].imageIdIDLE,
-							transparent: this.menuItemList[j].transparent,
-							indexX: playArea.menuIDX + i,
-							indexY: playArea.menuIDY
-						};
-						menuList.push(item);
-					}
-				}
-			}
-		}
-		/*	mouseAction.selected.menuItems.forEach (function (selVal,selIndex){
+
+		/*if(mouseAction.selected != undefined){
+		mouseAction.selected.menuItems.forEach (function (selVal,selIndex){
 				this.menuItemList.forEach (function (mVal,mIndex){
 					if(mVal.block == selVal){
 						var	item ={
@@ -69,8 +53,28 @@ menuClass = new function(){
 	this.menu = function(){
 		//TODO: make a menu class and a menu array for this class
 		drawAnImage(btnMoveTo.imageIdIDLE, menuBar.startX, menuBar.startY,0);
+	}
 
-
+	this.initSelectMenu = function(){
+		if(mouseAction.selected != undefined){
+			this.menuList = [];
+			for(var i = 0; i < mouseAction.selected.menuItems.length; i++){
+				for(var j = 0; j < this.menuItemList.length; j++){
+					if(this.menuItemList[j].block == mouseAction.selected.menuItems[i]){
+						var	item ={
+							typ: this.typ,
+							block: this.menuItemList[j].block,
+							needParams: this.menuItemList[j].needParams,
+							imageID: this.menuItemList[j].imageIdIDLE,
+							transparent: this.menuItemList[j].transparent,
+							indexX: playArea.menuIDX + i,
+							indexY: playArea.menuIDY
+						};
+						menuList.push(item);
+					}
+				}
+			}
+		} 
 	}
 }
 

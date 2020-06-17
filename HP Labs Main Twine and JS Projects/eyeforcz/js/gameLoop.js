@@ -33,8 +33,9 @@ gameLoop = new function(){
 		console.log(theObjectClickedON.block)
 		
 		//If current selection is empty and the clicked place is a object
-		if(mouseAction.selected == undefined && theObjectClickedON.typ == 'ANIMAL'){
+		if(theObjectClickedON.typ == 'ANIMAL'){
 				mouseAction.selected = theObjectClickedON;
+				menuClass.initSelectMenu();
 				console.log("selc: " + mouseAction.selected.block)
 		//If current selection is not empty
 		}else if(mouseAction.selected != undefined){
