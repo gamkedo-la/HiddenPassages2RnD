@@ -373,7 +373,7 @@ function commandDotCom(input) {
         if (!onBBS) {
             t1.print('Unknown command or file name: ' + input + '.EXE\n\nHint: try typing DIR then pressing enter.\n\n');
         } else {
-            t1.print('[BBS] zModem Pro Command List:\n\n\[3 DIGIT CODE] to connect.\n[UPLOAD] to transfer a file.\n[QUIT] to return to DOS\n\n');
+            t1.print('[BBS] zModem Pro Command List:\n\n\[3 DIGIT CODE] to connect.\n[MSG] to read echo mail.\n[UPLOAD] to transfer a file.\n[QUIT] to return to DOS\n\n');
         }
     }
     
