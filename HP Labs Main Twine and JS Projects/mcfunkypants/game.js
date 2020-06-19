@@ -377,6 +377,10 @@ function commandDotCom(input) {
         }
     }
     
+    if (input=="HINT") {
+        t1.print(getHint());
+    }
+
     if (!pendingBufferedCommand) t1.input(onBBS?promptBBS:promptDOS, commandDotCom);
 }
 
@@ -500,6 +504,28 @@ function toggleCheats() {
     } else {
         walkthrough.style.height = NOCHEAT;
     }
+}
+
+const hints = [
+    "Hint: you are a hacker. Type HINT for another tip.",
+    "This computer belongs to your enemy.",
+    "Somebody is waiting to give you a mission.",
+    "Find a way to communicate with the outside world.",
+    "Bulletin board systems contain echomail messages.",
+    "Have you received your mission yet?",
+    "Fragmented disks may hide data errors.",
+    "Hidden files may be revealed when you ignore errors.",
+    "Your contacts want you to send them something.",
+    "Have you found the hidden password file?",
+    "Upload the secret data to a BBS.",
+];
+var hintCount = 0;
+function getHint() {
+    // random
+    // return hints[Math.floor(Math.random() * hints.length)];
+    // sequential
+    hintCount++;
+    return "\n" + hints[hintCount-1 % hints.length] + "\n";
 }
 
 window.addEventListener("load",init);
