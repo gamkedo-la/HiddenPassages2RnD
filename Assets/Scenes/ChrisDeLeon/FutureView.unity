@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 6038db660b529447b9c33e557c3f04ee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -54.4
+      value: -50.6
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6038db660b529447b9c33e557c3f04ee,
         type: 3}
@@ -1191,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: cf60cb854b6474a8391937bcb6a5094b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0898602
+      value: 6.110139
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cf60cb854b6474a8391937bcb6a5094b,
         type: 3}
@@ -1248,6 +1248,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: future-bldg-colortest
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: cf60cb854b6474a8391937bcb6a5094b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf60cb854b6474a8391937bcb6a5094b, type: 3}
 --- !u!4 &1270222259 stripped
@@ -1271,7 +1276,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ad07f08fd89f1459ba1c33a991c919ae,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.8
+      value: -13.6
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ad07f08fd89f1459ba1c33a991c919ae,
         type: 3}
@@ -6277,7 +6282,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: cf38fe63c9e8543c384a27ee6fbc69c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -136.6
+      value: -118.05
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: cf38fe63c9e8543c384a27ee6fbc69c0,
         type: 3}
