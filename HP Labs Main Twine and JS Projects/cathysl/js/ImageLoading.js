@@ -1,5 +1,6 @@
 var puzzlePics = [];
 var movingPics = [];
+var otherImages = [];
 
 var picsToLoad = 0; //set automatically based on imageList in loadImages()
 
@@ -26,6 +27,11 @@ function loadImageForMovingCode(movingCode, fileName){
 	beginLoadingImage (movingPics[movingCode], fileName);	
 }
 
+function loadImageForOtherImages(otherImg, fileName){
+	otherImages[otherImg] = document.createElement("img");
+	beginLoadingImage (otherImages[otherImg], fileName);	
+}
+
 function loadImages(){
 //	var dataSet = {varName: carPic, theFile: "player1car.png"};
 
@@ -39,6 +45,7 @@ function loadImages(){
 	{movingType: MOVING_CROSS, theFile: "puzzle_cross.png"},
 	{movingType: MOVING_TRIANGLE, theFile: "puzzle_triangle.png"},
 	{movingType: MOVING_CIRCLE, theFile: "puzzle_circle.png"},
+	{otherImg: PUZZLE_EMPTY, theFile: "rotation.png"},
 	];
 
 	picsToLoad = imageList.length;
@@ -48,8 +55,10 @@ function loadImages(){
 			beginLoadingImage (imageList[i].varName, imageList[i].theFile);	
 		} else if (imageList[i].puzzleType != undefined) {
 			loadImageForPuzzleCode(imageList[i].puzzleType,imageList[i].theFile);
+		} else if (imageList[i].movingType != undefined) {
+			loadImageForMovingCode(imageList[i].movingType,imageList[i].theFile);
 		} else {
-			loadImageForMovingCode(imageList[i].movingType,imageList[i].theFile)
+			loadImageForOtherImages(imageList[i].otherImg,imageList[i].theFile);
 		}
 	}
 }
