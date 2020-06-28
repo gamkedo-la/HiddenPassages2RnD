@@ -316,8 +316,9 @@ GameObject:
   - component: {fileID: 346622806}
   - component: {fileID: 346622808}
   - component: {fileID: 346622807}
+  - component: {fileID: 346622809}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Holographic Screen Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,6 +379,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346622805}
   m_CullTransparentMesh: 0
+--- !u!114 &346622809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346622805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3568336926fec42c8ab7b63b074cf5d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &469892822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1639,7 +1652,7 @@ GameObject:
   - component: {fileID: 1585924353}
   - component: {fileID: 1585924352}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ENTER PROMPT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6795,7 +6808,7 @@ GameObject:
   - component: {fileID: 2082032948}
   - component: {fileID: 2082032947}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Passcode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
