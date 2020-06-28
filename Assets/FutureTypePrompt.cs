@@ -21,7 +21,7 @@ public class FutureTypePrompt : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0)) {
             openMatchingSite();
         }
     }
@@ -43,9 +43,10 @@ public class FutureTypePrompt : MonoBehaviour
         int matchIdx = findMatchingAnswerIdx();
 
         if (matchIdx != -1) {
-        Debug.Log("Opening site (if in browser): " + URLs[matchIdx]);
+            inputField.text = "";
+            Debug.Log("Erasing input and opening site (if in browser): " + URLs[matchIdx]);
 #if !UNITY_EDITOR
-        openWindow(URLs[matchIdx]);
+            openWindow(URLs[matchIdx]);
 #endif
         }
     }

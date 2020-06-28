@@ -5,8 +5,8 @@ var OpenWindowPlugin = {
         var url = Pointer_stringify(link);
         document.onmouseup = function()
         {
-            // window.open(url,"game_drop"); // game_drop is id for itch frame? can't control name...
-            location = url; // trying this method, instead
+            window.open(url,"_blank");
+            // location = url; // another way to try
 
             document.onmouseup = null;
         }
