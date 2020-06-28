@@ -1098,7 +1098,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 2b95e5d38b02548cc9499d759a117151, type: 3}
     m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
@@ -1850,7 +1850,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 2b95e5d38b02548cc9499d759a117151, type: 3}
     m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
@@ -6956,7 +6956,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 14
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -7018,6 +7018,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a76134874f9cb45aeb91462426ba1023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  answers:
+  - principles
+  - intentionally
+  - universe
+  answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
+  nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
 --- !u!1001 &2039797686
 PrefabInstance:
   m_ObjectHideFlags: 0
