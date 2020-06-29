@@ -344,7 +344,8 @@ function commandDotCom(input) {
     
     if (input=="FORMAT") {
         onBBS = false;
-        pendingBufferedCommand = "BOOT";
+        //pendingBufferedCommand = "BOOT";
+        pendingBufferedCommand = "WINSCREEN";
     }
 
     // BBS only commands
