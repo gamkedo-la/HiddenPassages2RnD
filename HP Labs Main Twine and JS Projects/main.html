@@ -355,7 +355,7 @@ muteShow.addEventListener("click", toggleMuteVO);
 function updateMuteIndicator() {
 	muteShow.innerHTML = (speakerThing.sayWords ? "🔊" : "🔇")+" (V key)";
 }
-updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="green"></tw-tag>,<tw-tag name="futureTower" color="yellow"></tw-tag>,<tw-tag name="oldOffice" color="purple"></tw-tag>,<tw-tag name="underWater" color="blue"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="1266.6666666666667,378.3333333333333" size="100,100">&lt;center&gt;
+updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGame" color="red"></tw-tag>,<tw-tag name="VO" color="green"></tw-tag>,<tw-tag name="futureTower" color="yellow"></tw-tag>,<tw-tag name="oldOffice" color="purple"></tw-tag>,<tw-tag name="underWater" color="blue"></tw-tag>,<tw-tag name="wrongVO" color="yellow"></tw-tag><tw-passagedata pid="1" name="Here is where it starts" tags="wrongVO" position="1266,378" size="100,100">&lt;center&gt;
 &lt;h3&gt;&lt;font color=&quot;orange&quot;&gt;Hidden Passages 2:&lt;br/&gt;R&amp;D Labs&lt;/font&gt;&lt;/h3&gt;
 
 [[Start-&gt;playerPath1-amnesia]]
@@ -364,7 +364,7 @@ updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGa
 
 &lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Welcome to Hidden Passages 2: R&amp;D Labs. Choose to Start or view Credits.&#39;)&quot;&gt;
 
-&lt;/center&gt;</tw-passagedata><tw-passagedata pid="2" name="playerPath1-amnesia" tags="VO" position="1463.3333333333333,381" size="100,100">Press the V key at any time to turn on or off automated Voiceover.
+&lt;/center&gt;</tw-passagedata><tw-passagedata pid="2" name="playerPath1-amnesia" tags="VO" position="1463,381" size="100,100">Press the V key at any time to turn on or off automated Voiceover.
 
 This game contains many different kinds of interactions, like a digital museum. It&#39;s also a deep rabbit hole leading to secrets outside of it, including puzzle rewards that are real.
 
@@ -390,7 +390,7 @@ Vending machines are behind you. A box with a key drawn on it is on the counter 
 
 [[step inside the elevator-&gt;futureTower]]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You hear clicks of a ratcheting gear, swaying chains, and low pitch rumble of steel on tile as the soda machine slides aside, revealing a cramped, steel elevator.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="5" name="futureTower" tags="futureTower VO" position="1858.6666666666667,272.6666666666667" size="100,100">After an uncomfortably long elevator ride, the door dings, opening to a floor-to-ceiling view of skyscrapers and neon lights in all directions.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You hear clicks of a ratcheting gear, swaying chains, and low pitch rumble of steel on tile as the soda machine slides aside, revealing a cramped, steel elevator.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="5" name="futureTower" tags="futureTower VO" position="1858,272" size="100,100">After an uncomfortably long elevator ride, the door dings, opening to a floor-to-ceiling view of skyscrapers and neon lights in all directions.
 
 (link: &quot;walk up to get a closer look at the window&quot;)[(goto-url: &#39;unity_loader.html?phrase=Return_to_the_elevator&amp;file=FutureView&#39;)]
 
@@ -418,6 +418,8 @@ Vending machines are behind you. A box with a key drawn on it is on the counter 
 (link: &quot;play the flute machine&quot;)[(goto-url: &#39;mdfewkes/Fl.html&#39;)]
 (link: &quot;play the trumpet machine&quot;)[(goto-url: &#39;mdfewkes/Tp.html&#39;)]
 
+(link: &quot;talk to Angelbot&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_Angelbot&amp;file=jchingamesexperiments_angelbot~&#39;)]
+
 &lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see building blocks, army figures, a giant boomerang, glowing green ant farms, toy cars, and several other things to play with.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="7" name="vendingMachines" tags="VO" position="1721,390" size="100,100">One dispenses soda. The other has junk food.
 
 You don&#39;t have your wallet.
@@ -426,7 +428,7 @@ A blue on black LCD display above the bill slot reads, &quot;CANCEL?&quot;
 
 [[press CANCEL on the pad-&gt;futureElevator]]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;One dispenses soda. The other has junk food. You don\&#39;t have your wallet. A blue on black LCD display above the bill slot reads, CANCEL?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="8" name="cubicles" tags="VO" position="1507.6666666666667,693" size="100,100">You see a bathroom entrance, messy cubicle, and copy machine.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;One dispenses soda. The other has junk food. You don\&#39;t have your wallet. A blue on black LCD display above the bill slot reads, CANCEL?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="8" name="cubicles" tags="VO" position="1507,693" size="100,100">You see a bathroom entrance, messy cubicle, and copy machine.
 
 (link: &quot;investigate the bathroom&quot;)[(goto-url: &#39;unity_loader.html?phrase=Get_out_of_here&amp;file=Bathroom&#39;)]
 
@@ -434,30 +436,30 @@ A blue on black LCD display above the bill slot reads, &quot;CANCEL?&quot;
 
 [[check out the copier-&gt;copier]]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see a bathroom entrance, messy cubicle, and copy machine.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="9" name="cubeNear1 now intern" tags="ReplacedByGame" position="1455.6666666666667,581.3333333333333" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="10" name="bathroom Eyeforcz scene" tags="ReplacedByGame" position="1608.6666666666667,803" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="11" name="copier" tags="VO" position="1382.3333333333333,764.3333333333334" size="100,100">There&#39;s a note on the copy machine. It says, &quot;I contain every book I&#39;ve copied.&quot;
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see a bathroom entrance, messy cubicle, and copy machine.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="9" name="cubeNear1 now intern" tags="ReplacedByGame" position="1455,581" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="10" name="bathroom Eyeforcz scene" tags="ReplacedByGame" position="1608,803" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="11" name="copier" tags="VO" position="1382,764" size="100,100">There&#39;s a note on the copy machine. It says, &quot;I contain every book I&#39;ve copied.&quot;
 
 (link: &quot;get inside the copier&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a note on the copy machine. It says, I contain every book I\&#39;ve copied.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="12" name="libraryArea by AshCat" tags="ReplacedByGame" position="1270.6666666666667,870.6666666666666" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="13" name="timeMachine" tags="VO" position="2108,564" size="100,100">Yep, that is definitely a time machine.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a note on the copy machine. It says, I contain every book I\&#39;ve copied.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="12" name="libraryArea by AshCat" tags="ReplacedByGame" position="1270,870" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="13" name="timeMachine" tags="VO" position="2108,564" size="100,100">Yep, that is definitely a time machine.
 
 Want to use it?
 
 [[punch in 1983 (obviously)-&gt;pastOffice]]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Yep, that is definitely a time machine. Want to use it?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="14" name="pastOffice" tags="oldOffice VO" position="2100.333333333333,697.6666666666667" size="100,100">You&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage? You are soaking wet and cold from the time travel process, but would prefer to not think about what just happened.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Yep, that is definitely a time machine. Want to use it?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="14" name="pastOffice" tags="oldOffice VO" position="2100,697" size="100,100">You&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage? You are soaking wet and cold from the time travel process, but would prefer to not think about what just happened.
 
 [[Step back into the main office-&gt;oldOfficeMain]]
 
 (link: &quot;Take the time machine farther back, to 1818&quot;)[(goto-url: &#39;unity_loader.html?phrase=Return_in_the_time_machine&amp;file=HOne&#39;)]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage? You are soaking wet and cold from the time travel process, but would prefer to not think about what just happened.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="15" name="oldOfficeMain" tags="oldOffice VO" position="2099.6666666666665,820.6666666666667" size="100,100">The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the building is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what&#39;s here is also more spacious.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage? You are soaking wet and cold from the time travel process, but would prefer to not think about what just happened.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="15" name="oldOfficeMain" tags="oldOffice VO" position="2099,820" size="100,100">The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the building is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what&#39;s here is also more spacious.
 
 [[enter the private office on the left-&gt;oldOfficeL]]
 [[enter the private office in the middle-&gt;oldOfficeM]]
 [[enter the private office on the right-&gt;oldOfficeR]]
 [[enter the opening into the infinite abyss-&gt;oldOfficeAbyss]]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the building is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what\&#39;s here is also more spacious.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="16" name="oldOfficeL" tags="oldOffice VO" position="1951.3333333333333,817.3333333333333" size="100,100">This must have been the boss&#39;s office. This setup looks serious. Let&#39;s see what it can do.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the building is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what\&#39;s here is also more spacious.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="16" name="oldOfficeL" tags="oldOffice VO" position="1951,817" size="100,100">This must have been the boss&#39;s office. This setup looks serious. Let&#39;s see what it can do.
 
 (link: &quot;boot up the computer to check out the BBS&quot;)[(goto-url: &#39;mcfunkypants/mcf-index.html&#39;)]
 
@@ -465,11 +467,11 @@ Want to use it?
 
 (link: &quot;insert the Space Shot Sam floppy disk&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;It appears this employee was either being unproductive, or doing research related to their own game development. Hard to say.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="18" name="oldOfficeR" tags="oldOffice VO" position="2209.6666666666665,952.3333333333334" size="100,100">Wow! This computer has a hard drive! Amazing!
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;It appears this employee was either being unproductive, or doing research related to their own game development. Hard to say.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="18" name="oldOfficeR" tags="oldOffice VO" position="2209,952" size="100,100">Wow! This computer has a hard drive! Amazing!
 
 (link: &quot;try out this new computer&#39;s one pre-installed game&quot;)[(goto-url: &#39;cathysl/cathysl_rotation.html&#39;)]
 
-&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Wow! This computer has a hard drive! Amazing!&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="19" name="gameCredits" tags="" position="1135,472.6666666666667" size="100,100">Chris DeLeon: Project lead, core gameplay, main areas, (link: &quot;Space Shot Sam&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)], (link: &quot;Tumult future eye art&quot;)[(goto-url: &#39;chrisdeleon_mad_science/tumult.html&#39;)], (link: &quot;future tower password entry area&quot;)[(goto-url: &#39;unity_loader.html?phrase=Take_the_elevator_back_down&amp;file=FutureView&#39;)], custom Unity webGL sceneloader and Twine linking, wrote (link: &quot;Self-Calm key text&quot;)[(goto-url: &#39;http://self-calm.com&#39;)]
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Wow! This computer has a hard drive! Amazing!&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="19" name="gameCredits" tags="" position="1135,472" size="100,100">Chris DeLeon: Project lead, core gameplay, main areas, (link: &quot;Space Shot Sam&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)], (link: &quot;Tumult future eye art&quot;)[(goto-url: &#39;chrisdeleon_mad_science/tumult.html&#39;)], (link: &quot;future tower password entry area&quot;)[(goto-url: &#39;unity_loader.html?phrase=Take_the_elevator_back_down&amp;file=FutureView&#39;)], custom Unity webGL sceneloader and Twine linking, wrote (link: &quot;Self-Calm key text&quot;)[(goto-url: &#39;http://self-calm.com&#39;)]
 
 Muhammed &quot;EyeForcz&quot; Durmusoglu: Models ((link: &quot;clock&quot;)[(goto-url: &#39;unity_loader.html?phrase=Quit_game&amp;file=ClockSpin&amp;param=1&#39;)], (link: &quot;train&quot;)[(goto-url: &#39;unity_loader.html?phrase=Quit_game&amp;file=ClockSpin&amp;param=0&#39;)], (link: &quot;crystal table&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=TurnTable&#39;)], (link: &quot;mountain snow globe cars&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=TurnTableCar&#39;)], (link: &quot;bathroom models and related sound effects&quot;)[(goto-url: &#39;unity_loader.html?phrase=Exit_bathroom&amp;file=Bathroom&#39;)], (link: &quot;oneil&quot;)[(goto-url: &#39;unity_loader.html?phrase=Scream&amp;file=Oneil&amp;param=0&#39;)] (link: &quot;tubes&quot;)[(goto-url: &#39;unity_loader.html?phrase=Scream&amp;file=Oneil&amp;param=1&#39;)]), (link: &quot;sheep sim&quot;)[(goto-url: &#39;eyeforcz/sheep.html&#39;)], post-it art (unused)
 
@@ -494,7 +496,7 @@ Alan Zaring: (link: &quot;Snowglobe music&quot;)[(goto-url: &#39;unity_loader.ht
 Justin Chin: (link: &quot;Angelbot&quot;)[(goto-url: &#39;twine_frame.html?phrase=Back&amp;file=jchingamesexperiments_angelbot~&#39;)]
 
 This project was made by members of (link-repeat: &quot;HomeTeamGameDev.com
-Apply to make games with us!&quot;)[(open-url: &#39;https://HomeTeamGameDev.com&#39;)]</tw-passagedata><tw-passagedata pid="20" name="oldOfficeAbyss" tags="VO oldOffice" position="2252.9999999999995,804" size="100,100">You feel yourself turning into soup from just thinking about going towards the opening, but are physically unable to make any movement that direction.
+Apply to make games with us!&quot;)[(open-url: &#39;https://HomeTeamGameDev.com&#39;)]</tw-passagedata><tw-passagedata pid="20" name="oldOfficeAbyss" tags="VO oldOffice" position="2252,804" size="100,100">You feel yourself turning into soup from just thinking about going towards the opening, but are physically unable to make any movement that direction.
 
 Dizzy, your hands start to fall off until you use each to twist the other back on tighter.
 
