@@ -1965,6 +1965,144 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634a7077dc84d4bb2acdf45343b8816e, type: 3}
+--- !u!1 &1547448170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547448171}
+  - component: {fileID: 1547448173}
+  - component: {fileID: 1547448172}
+  m_Layer: 0
+  m_Name: dummy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1547448171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547448170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.723583, y: 9.709206, z: -3.9921396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547448172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547448170}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76134874f9cb45aeb91462426ba1023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  answers:
+  - tubebmr
+  - mqekmrexmsr
+  - xbnlltmhs
+  - uvehjkdqj
+  - jocfh
+  - ehtesj
+  - noaqjera
+  - laccvncpgc
+  - ifwbsfprx
+  - iglerfgl
+  - hfodzvs
+  - kmdonnscdb
+  - nafvqrbpr
+  - chmcxy
+  - sdscdz
+  - uofqfgeqb
+  - dovodjinhzy
+  - nnyhncihu
+  URLs:
+  - fqeu.iqqing.eqo/fqewogpv/f/1CS2E8xFeIpbypsUQ7e5YerYVYy2YOHJMskHhT2Y6Q3C/gfkv
+  - oekjkru.sec/mqjsx?l=bLjPSNJavB0
+  - 4jzfefmp.nzx/hlens?g=pTbQIq21-4
+  - dq3.ykyxmlyuq.amk/eykicbmajsz/qszqapgzcp_egdr-wp7-ebj09/FmkcRcyk_EykcBctq_Njywzmmi.nb
+  - nlbncdxntqehqrsfzld.b
+  - 2umasxugj.ius/r/ngtjy-ut-mgsk-vxumxgssotm/nv2-kfn4m
+  - a2iaogliux.wig/f/myfz-wigguhx/bj2-ytb4
+  - m2umasxugj.ius/r/bojkumgsk-jkbkruvkxy-yzxgzkme-maojk/nv2-kfn4
+  - .lubsmywqpa.oay/yqynqde/Smywqpa-Gpqyk-fa-Fqmye-Egbbxqyqzf-(Abfuazmx)
+  - yxcnxiwm.aiiafy.wig/xiwogyhn/x/1Y8uOhacOBXe6Rt12shEkqUKC4HpWj6KsO2QikFRAz1C/
+  - rlxpdszxpeplxrlxpopg.nzx/
+  - f.jxzaugeyxiwfov.m3.ugutihuqm.wig/movmwlcvyl_aczn-sl7-axf09/2007-Sioha-Pcxyiaugy-Xypyfijylm-Diolhu
+  - yz.pbzfrys-pn
+  - NvPXRGgwcbcjm.kwu/eibkp?d=Y9IH4
+  - C8b2268brxwxeh.frp/zdwfk?y=sDvj
+  - oiusmlwxibzmwv.kwu/
+  - -kfn4m2umasxugj.ius/r/ktpuemgskjkb-bojku/nv2
+  - -cxf4e2meskpmyb.amk/j/eykcbctzgx-tgbcm/fn2
+  matchFoundActionPrompt: {fileID: 977585926}
+  answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
+  nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
+--- !u!114 &1547448173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547448170}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76134874f9cb45aeb91462426ba1023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  answers:
+  - ability
+  - imagination
+  - community
+  - fortunate
+  - begin
+  - doctor
+  - universe
+  - experience
+  - visualize
+  - thinking
+  - urgency
+  - distracted
+  - oceanside
+  - inside
+  - people
+  - epictetus
+  - meditations
+  - attention
+  URLs:
+  - docs.google.com/document/d/1AQ2C8vDcGnzwnqSO7c5WcpWTWw2WMFHKqiFfR2W6O3A/edit
+  - youtube.com/watch?v=lVtZCXTkfL0
+  - youtube.com/watch?v=eIqFXf21-44
+  - s3.amazonaws.com/gamkedoclub/subscriber_gift-yr7-gdl09/HomeTeam_GameDevs_Playbook.pdf
+  - codeyourfirstgame.com
+  - gumroad.com/l/hands-on-game-programming/hp2-ezh4g2o
+  - gumroad.com/l/self-command/hp2-ezh4g2o
+  - gumroad.com/l/videogame-developers-strategy-guide/hp2-ezh4g2o
+  - gamkedo.com/members/Gamkedo-Udemy-to-Teams-Supplement-(Optional).zip
+  - docs.google.com/document/d/1E8aUngiUHDk6Xz12ynKqwAQI4NvCp6QyU2WoqLXGf1I/edit
+  - hometeamgamedev.com/games
+  - gamkedoclub.s3.amazonaws.com/subscriber_gift-yr7-gdl09/2007-Young-Videogame-Developers-Journal.pdf
+  - self-calm.com
+  - youtube.com/watch?v=Q9AZ4FnHPJY
+  - youtube.com/watch?v=pAsgZ8y2268
+  - patreon.com/gamkedo
+  - gumroad.com/l/enjoygamedev-video/hp2-ezh4g2o
+  - gumroad.com/l/gamedevbiz-video/hp2-ezh4g2o
+  matchFoundActionPrompt: {fileID: 977585926}
+  answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
+  nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
 --- !u!1 &1585924350
 GameObject:
   m_ObjectHideFlags: 0
@@ -7209,6 +7347,8 @@ MonoBehaviour:
   - uofqfgeqb
   - dovodjinhzy
   - nnyhncihu
+  - cxrlb
+  - apnawoqn
   URLs:
   - fqeu.iqqing.eqo/fqewogpv/f/1CS2E8xFeIpbypsUQ7e5YerYVYy2YOHJMskHhT2Y6Q3C/gfkv
   - oekjkru.sec/mqjsx?l=bLjPSNJavB0
@@ -7228,6 +7368,8 @@ MonoBehaviour:
   - oiusmlwxibzmwv.kwu/
   - -kfn4m2umasxugj.ius/r/ktpuemgskjkb-bojku/nv2
   - -cxf4e2meskpmyb.amk/j/eykcbctzgx-tgbcm/fn2
+  - 5u7rR35PMcsyxyfi.gsq/tpecpmwx?pmwx=TPxesSvzoxnBYUfzn6CpAdMqR
+  - s/vujigyznuskzkgsmgskjkb.iu
   matchFoundActionPrompt: {fileID: 977585926}
   answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
   nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
