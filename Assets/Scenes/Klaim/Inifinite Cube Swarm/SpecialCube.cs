@@ -31,7 +31,7 @@ namespace klaim
                 clicked = true;
                 const float seconds_to_destroy = 5.0f;
                 
-                var secret_text = GameObject.Find("/Canvas/secret_text");
+                var secret_text = GameObject.Find("/Canvas/attention");
                 secret_text.GetComponent<Text>().enabled = true;
                 GameObject.Destroy(secret_text, seconds_to_destroy);
 

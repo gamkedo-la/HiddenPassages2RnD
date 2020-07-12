@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ClickExpose : MonoBehaviour
 {
+    public GameObject clue;
+    int shapesShown = 0;
+    int shapesToShow = 6;
+
     void Update()
     {
         if (Input.GetMouseButtonUp(0)) {
@@ -11,7 +15,13 @@ public class ClickExpose : MonoBehaviour
             RaycastHit rhInfo;
             if (Physics.Raycast(ray, out rhInfo)) {
                 Renderer rend = rhInfo.collider.GetComponent<Renderer>();
-                rend.enabled = true;
+                if(rend.enabled == false) {
+                    shapesShown++;
+                    rend.enabled = true;
+                    if (shapesShown >= shapesToShow) {
+                        clue.SetActive(true);
+                    }
+                }
             }
         }
     }

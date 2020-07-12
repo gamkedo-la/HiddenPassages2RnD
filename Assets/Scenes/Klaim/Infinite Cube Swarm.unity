@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 317724250}
   - component: {fileID: 317724249}
   m_Layer: 5
-  m_Name: secret_text
+  m_Name: attention
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: YOU FOUND THE SECRET!
+  m_Text: 4.1:9
 --- !u!222 &317724250
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -886,9 +886,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "GOAL: click on the RED hidden cube\r\n\r\nWASDQE / ZXCV\t: rotate (cubes/tiles)\r\nRTYUIO
-    / FGHJKL\t: change cubes colors (odd/even)\r\n1-2\t\t\t\t\t\t: resize cubes\n5-8\t\t\t\t\t\t:
-    rotate light\r\n3-4\t\t\t\t\t\t: show/hide hidden cube\r\n"
+  m_Text: " find and click the RED cube\r\n\r\nWASDQE / ZXCV\t: rotate\nRTYUIO /
+    FGHJKL\t: colors\n1-2\t\t\t\t\t\t: size\n5-8\t\t\t\t\t\t: light\r\n3-4\t\t\t\t\t\t:
+    shift\r\n"
 --- !u!222 &1806599234
 CanvasRenderer:
   m_ObjectHideFlags: 0
