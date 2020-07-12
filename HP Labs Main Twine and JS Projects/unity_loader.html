@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="webgl-builds/TemplateData/style.css">
     <script src="webgl-builds/TemplateData/UnityProgress.js"></script>
     <script src="webgl-builds/Build/UnityLoader.js"></script>
-
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC" rel="stylesheet">
+<style>
+  html {
+    background-image: url('future.png');
+  }
+  #phrase {
+    font-family: 'Alegreya Sans SC', sans-serif;
+  }
+</style>
 <script>
 
 function getUrlVars() { // borrowed from https://html-online.com/articles/get-url-parameters-javascript/
@@ -57,7 +65,7 @@ window.onload = function() {
     </script>
   </head>
   <body>
-    <center><a href="index.html" target="_parent" id="phrase"></a></center>
+    <center>👉 <a href="index.html" target="_parent" id="phrase"></a> 👈</center>
     <div class="webgl-content">
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
