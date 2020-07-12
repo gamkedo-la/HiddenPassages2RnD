@@ -131,6 +131,23 @@
 			colorCircle(canvas.width/2-180, canvas.height/2-80, 18, "Blue");
 		}
 
+		var anyOff = false;
+		for(var i=0;i<seq.length;i++) {
+			if(anyOff == false) {
+				for(var ii=0;ii<seq[i].length;ii++) {
+					if(seq[i][ii]>0.0) {
+						anyOff = true;
+						break;
+					}
+				}
+			}
+		}
+		if(anyOff == false) {
+			canvasContext.font = "20px Verdana";
+			canvasContext.fillStyle = "white";
+			canvasContext.fillText("11.34:4",50,50);
+		}
+
 		mouseClicked = false;
 
 		window.requestAnimationFrame(loop);

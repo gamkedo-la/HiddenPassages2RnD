@@ -1,6 +1,11 @@
 var canvas, canvasContext;
 //var gameMain = new gameLoop();
 
+var WIN_C1 = 9;
+var WIN_R1 = 2;
+var WIN_C2 = 11;
+var WIN_R2 = 7;
+
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
@@ -9,6 +14,7 @@ window.onload = function() {
 	colorText("WAITING FOR YOUR SLOW PC", canvas.width/2, canvas.height/2, 'white');
 
 	loadImages();
+	canvasContext.font = "14px Verdana";
 }
 
 function imageLoadingDoneSoStartGame() {
@@ -26,8 +32,27 @@ function updateAll() {
 
 	drawWorld();
 	gameLoop.draw();
+
+	var onSpot1 = false;
+	var onSpot2 = false;
+	for(i = 0; i < animalList.length; i++){
+		if(animalList[i].indexX == WIN_C1 && animalList[i].indexY == WIN_R1) {
+			onSpot1 = true;
+		}
+		if (animalList[i].indexX == WIN_C2 && animalList[i].indexY == WIN_R2) {
+			onSpot2 = true;
+		}
+	}
 	
-	colorText("X: " + Math.floor(mouseX / TILE_W) + "Y: " + Math.floor(mouseY / TILE_H) + "type: " + mapGrid[pixelXtoindexX(mouseX)][pixelYtoindexY(mouseY)],mouseX, mouseY, 'black');
+	var tileC = Math.floor(mouseX / TILE_W);
+	var tileR = Math.floor(mouseY / TILE_H);
+	if(onSpot1 && onSpot2) {
+		colorText("8.10:2",mouseX, mouseY, 'yellow');
+	} else if((tileC == WIN_C1 && tileR == WIN_R1) || (tileC == WIN_C2 && tileR == WIN_R2)) {
+		colorText("MOVE HERE",mouseX, mouseY, 'white');
+	} else {
+		colorText("C: " + tileC + " R: " + tileR /*+ "type: " + mapGrid[pixelXtoindexX(mouseX)][pixelYtoindexY(mouseY)]*/,mouseX, mouseY, 'black');
+	}
 }
 
 

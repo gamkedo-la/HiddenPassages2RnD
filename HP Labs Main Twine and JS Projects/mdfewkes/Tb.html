@@ -28,6 +28,9 @@
 	var audio_context = window.AudioContext || window.webkitAudioContext;
 	var audioCtx = new audio_context();
 
+	var countingTime = false;
+	var timeCounted = 0.0;
+
 	var pitch = audioCtx.createOscillator();
 	var tone = audioCtx.createBiquadFilter();
 	var volume = audioCtx.createGain();
@@ -50,11 +53,22 @@
 		draw();
 	}
 
+	var previousFrameNow;
 	function loop() {
 		var now = audioCtx.currentTime;
 		
 		updateTrombone();
 
+		if(countingTime) {
+			timeCounted += now-previousFrameNow;
+			if(timeCounted>3.0) {
+				canvasContext.fillStyle="yellow";
+				canvasContext.font="20px Verdana";
+				canvasContext.fillText("0.5:7",50,50);
+			}
+		}
+
+		previousFrameNow = now;
 		window.requestAnimationFrame(loop);
 	}
 
@@ -145,10 +159,13 @@
 		calculateMousePos(evt);
 		mousePressed = true;
 		audioCtx.resume();
+		countingTime = true;
 	}
 
 	function mouseUp(evt) {
 		mousePressed = false;
+		countingTime = false;
+		timeCounted=0;
 	}
 
 	function calculateMousePos(evt) {

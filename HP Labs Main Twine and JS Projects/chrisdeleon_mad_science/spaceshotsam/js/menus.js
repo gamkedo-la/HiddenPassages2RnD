@@ -26,6 +26,7 @@ function drawTitleScreen() {
 }
 
 function drawInGameUI() {
+  var goalScore = 24;
   ctx.fillStyle = "orange";
   ctx.textAlign = "center";
   for(var i=0;i<scorePop.length;i++) {
@@ -35,6 +36,11 @@ function drawInGameUI() {
   ctx.fillStyle = "white";
   ctx.fillText("Score: " + playerPoints,25,25);
   ctx.fillText("HighScore: " + highScore,25,50);
+  if(playerPoints>=goalScore || highScore>=goalScore) {
+    ctx.fillStyle = "yellow";
+    ctx.fillText("2.1:1",canv.width/2-20,50);
+    ctx.fillStyle = "white";
+  }
   if(shotgunAmmo>0) {
     ctx.fillText("SG Ammo: " + shotgunAmmo,canv.width-125,25);
   }

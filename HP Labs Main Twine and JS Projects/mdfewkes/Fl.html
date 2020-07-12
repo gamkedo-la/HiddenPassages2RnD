@@ -47,11 +47,25 @@
 		draw();
 	}
 
+	var countingTime = false;
+	var timeCounted = 0.0;
+
+	var previousFrameNow;
 	function loop() {
 		var now = audioCtx.currentTime;
 		
 		updateFlute();
 
+		if(countingTime) {
+			timeCounted += now-previousFrameNow;
+			if(timeCounted>2.5) {
+				canvasContext.fillStyle="yellow";
+				canvasContext.font="20px Verdana";
+				canvasContext.fillText("3.9:1",50,50);
+			}
+		}
+
+		previousFrameNow = now;
 		window.requestAnimationFrame(loop);
 	}
 
@@ -136,10 +150,13 @@
 		calculateMousePos(evt);
 		mousePressed = true;
 		audioCtx.resume();
+		countingTime = true;
 	}
 
 	function mouseUp(evt) {
 		mousePressed = false;
+		countingTime = false;
+		timeCounted=0;
 	}
 
 	function calculateMousePos(evt) {

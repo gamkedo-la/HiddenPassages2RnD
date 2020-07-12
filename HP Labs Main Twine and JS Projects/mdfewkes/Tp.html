@@ -50,11 +50,22 @@
 		draw();
 	}
 
+	var previousFrameNow;
 	function loop() {
 		var now = audioCtx.currentTime;
 		
 		updateTrumpet();
 
+		if(countingTime) {
+			timeCounted += now-previousFrameNow;
+			if(timeCounted>4.0) {
+				canvasContext.fillStyle="yellow";
+				canvasContext.font="20px Verdana";
+				canvasContext.fillText("1.8:3",50,50);
+			}
+		}
+
+		previousFrameNow = now;
 		window.requestAnimationFrame(loop);
 	}
 
@@ -159,15 +170,20 @@
 	var mousePressed = false;
 	var mouseX = 0;
 	var mouseY = 0;
+	var countingTime = false;
+	var timeCounted = 0.0;
 
 	function mouseDown(evt) {
 		calculateMousePos(evt);
 		mousePressed = true;
 		audioCtx.resume();
+		countingTime = true;
 	}
 
 	function mouseUp(evt) {
 		mousePressed = false;
+		countingTime = false;
+		timeCounted=0;
 	}
 
 	function calculateMousePos(evt) {
