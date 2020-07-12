@@ -159,7 +159,7 @@ function winCheck(){
 	}
 	if (notMatch == 0) {
 		puzzlesCompleted++;
-		colorText("You win! Puzzles Completed: "+puzzlesCompleted, 260,525, "white");
+		colorText("1.17:3 -- Puzzles Completed: "+puzzlesCompleted, 260,525, "white");
 		colorText("Click anywhere to play again.", 265,555, "white");
 		gameWon = 1;
 	}
