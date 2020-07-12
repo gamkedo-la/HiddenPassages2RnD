@@ -20,7 +20,7 @@ html.oldOffice {
 	background-color: #efef00;
 }
 tw-story[tags~="oldOffice"] {
-  background-image: url('http://hometeamgamedev.com/hp2/past.png');
+  background-image: url('past.png');
   font-size: 16px;
 }
 
@@ -32,20 +32,9 @@ html.futureTower {
   	color: #111111;
 }
 tw-story[tags~="futureTower"] {
-  background-image: url('http://hometeamgamedev.com/hp2/future.png');
+  background-image: url('future.png');
   font-size: 15px;
 }
-/*
-html.underWater, body.underWater, tw-story[tags~="underWater"] {
-  font-family: 'DM Mono', monospace;
-}
-html.underWater {
-	background-color: #efef00;
-}
-tw-story[tags~="underWater"] {
-  background-image: url('https://gamkedo.com/new-home-img/subtle/beige_paper.png');
-  font-size: 16px;
-}*/
 
 tw-story {
 	background: white;
@@ -56,7 +45,7 @@ tw-story {
   color: #888;
   font-size: 24px;
 	line-height: 1.25em;
-   background-image: url('http://hometeamgamedev.com/hp2/present.png');
+   background-image: url('present.png');
 }
 
 img.right-side {
@@ -130,6 +119,7 @@ tw-icon.undo:after {
   font-size: 13px;
   padding: 5px;
   top: 2px;
+  transform: scale(2.5);
   color: #d73a31;
   opacity: 1.0;
 }
@@ -355,7 +345,12 @@ muteShow.style.position="absolute";
 muteShow.style.zIndex=1000;
 muteShow.innerHTML = "shows mute state here"
 
+function cutOffOnInteraction() {
+	window.speechSynthesis.cancel(); // interrupt previous
+}
+
 document.body.appendChild(muteShow);
+document.body.addEventListener("click", cutOffOnInteraction);
 muteShow.addEventListener("click", toggleMuteVO);
 function updateMuteIndicator() {
 	muteShow.innerHTML = (speakerThing.sayWords ? "🔊" : "🔇")+" (V key)";
@@ -367,44 +362,9 @@ updateMuteIndicator(); // calling immediately</script><tw-tag name="ReplacedByGa
 
 [[Credits-&gt;gameCredits]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Choose to Start or view Credits.&#39;)&quot;&gt;
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Welcome to Hidden Passages 2: R&amp;D Labs. Choose to Start or view Credits.&#39;)&quot;&gt;
 
-&lt;/center&gt;</tw-passagedata><tw-passagedata pid="2" name="debug path" tags="wrongVO" position="859.3333333333334,496" size="100,100">&lt;h3&gt;1980s&lt;/h3&gt;
-(link: &quot;DIR/BBS, by McFunkypants&quot;)[(goto-url: &#39;mcfunkypants/mcf-index.html&#39;)]
-(link: &quot;Space Shot Sam, by Chris&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)]
-(link: &quot;cathySL demo&quot;)[(goto-url: &#39;cathysl/cathysl_rotation.html&#39;)]
-(link: &quot;sheep sim by EyeForcz&quot;)[(goto-url: &#39;eyeforcz/sheep.html&#39;)]
-
-&lt;h3&gt;modern office&lt;/h3&gt;
-(link: &quot;pick up the ticking box&quot;)[(goto-url: &#39;twine_frame.html?phrase=Put_down_the_box&amp;file=kornel_kornel-index~&#39;)]
-(link: &quot;enter intern Hex&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_cubicle&amp;file=LexiGameDev_cubicle-of-an-intern-version1~&#39;)]
-(link: &quot;Library (Twine) by Ashleigh&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]
-(link: &quot;EyeForcz bathroom&quot;)[(goto-url: &#39;unity_loader.html?phrase=Exit_bathroom&amp;file=Bathroom&#39;)]
-
-&lt;h3&gt;musical/toy/lab?&lt;/h3&gt;
-(link: &quot;jchingames angel bot (Twine)&quot;)[(goto-url: &#39;twine_frame.html?phrase=Put_down_the_bot&amp;file=jchingamesexperiments_angelbot~&#39;)]
-(link: &quot;mdfewkes DM&quot;)[(goto-url: &#39;mdfewkes/DM.html&#39;)]
-(link: &quot;mdfewkes tb&quot;)[(goto-url: &#39;mdfewkes/Tb.html&#39;)]
-(link: &quot;EyeForcz table 2 (Cars), song by Alan&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=TurnTableCar&#39;)]
-(link: &quot;EyeForcz table 1 (Crystal)&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=TurnTable&#39;)]
-(link: &quot;EyeForcz clock outside&quot;)[(goto-url: &#39;unity_loader.html?phrase=Quit_game&amp;file=ClockSpin&amp;param=1&#39;)]
-(link: &quot;EyeForcz clock inside&quot;)[(goto-url: &#39;unity_loader.html?phrase=Quit_game&amp;file=ClockSpin&amp;param=0&#39;)]
-
-&lt;h3&gt;future tower&lt;/h3&gt;
-(link: &quot;Chris Future View&quot;)[(goto-url: &#39;unity_loader.html?phrase=Take_the_elevator_back_down&amp;file=FutureView&#39;)]
-(link: &quot;Tumult eyelid sticker, by Chris D&quot;)[(goto-url: &#39;chrisdeleon_mad_science/tumult.html&#39;)]
-(link: &quot;Klaim Infinite Cube Swarm&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=Infinite_Cube_Swarm&#39;)]
-(link: &quot;EyeForcz infinite oneil tube (mode 1)&quot;)[(goto-url: &#39;unity_loader.html?phrase=Scream&amp;file=Oneil&amp;param=0&#39;)]
-(link: &quot;EyeForcz infinite oneil tube  (mode 2)&quot;)[(goto-url: &#39;unity_loader.html?phrase=Scream&amp;file=Oneil&amp;param=1&#39;)]
-
-&lt;h3&gt;distant past? (time machine again from 1980s)&lt;/h3&gt;
-(link: &quot;H Unity Ozymandias&quot;)[(goto-url: &#39;unity_loader.html?phrase=Abandon_statue&amp;file=HOne&#39;)]
-
-&lt;h3&gt;stubs/tests (not usable in current state)&lt;/h3&gt;
-(link: &quot;brianjb JavaScript&quot;)[(goto-url: &#39;brianjb/bjb-index.html&#39;)]
-(link: &quot;rybar demo&quot;)[(goto-url: &#39;twine_frame.html?phrase=Drop_the_book&amp;file=rybar_twineTestLost_Lost~&#39;)]
-(link: &quot;jchingames html canvas demo&quot;)[(goto-url: &#39;jchingamesexperiments/first.html&#39;)]
-(link: &quot;Justin C. Unity&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=JChinOne&#39;)]</tw-passagedata><tw-passagedata pid="3" name="playerPath1-amnesia" tags="VO" position="1463.3333333333333,381" size="100,100">Press the V key at any time to turn on or off automated Voiceover.
+&lt;/center&gt;</tw-passagedata><tw-passagedata pid="2" name="playerPath1-amnesia" tags="VO" position="1463.3333333333333,381" size="100,100">Press the V key at any time to turn on or off automated Voiceover.
 
 This is a game that contains many different kinds of games.
 
@@ -414,45 +374,7 @@ You can backtrack by using the 👈 button.
 
 [[explore the office-&gt;officeStart]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Press the V key at any time to turn on or off automated Voiceover. This is a game that contains many different kinds of games. You\&#39;ll be exploring an abandoned game studio through text such as this, but the games you discover are a mix of 2D, 3D, and also text-based. You can backtrack by using the finger pointing left button.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="writing experiments" tags="" position="229,1172" size="100,100">A few ideas of scenes that we couldn&#39;t do well without text
-
-[[Chaotic amount of papers, books, high ceilings.-&gt;hugeLibrary]]
-
-[[Time machine transition, special effects in words.-&gt;timeMachineEffect]]
-
-[[Area inspired by Control game-&gt;controlTest]]
-
-[[Myst island inspired space-&gt;mystTest]]</tw-passagedata><tw-passagedata pid="5" name="hugeLibrary" tags="" position="104,1325" size="100,100">The door felt much heavier than expected, leaning into it full your full weight until you could just barely squeeze through the crack. The door abruptly shut behind you, as the flood of books on the other side slid back into place.
-
-It&#39;s as if the high ceiling is being held up by pillars of paper.
-
-Packed shelves line the walls. Walking on the books is tricky, between feet slipping, covers tearing, and the pile shifting.</tw-passagedata><tw-passagedata pid="6" name="timeMachineEffect" tags="" position="344,1322" size="100,100">Brightness consumes the room, until with your eyes shut you can hear the walls begin to buckle and crack. You glimpse alternating darkness clean through your eyelids, peeking to reorient just long enough to see the ceiling swirling like soup, seemingly dead ahead of you now instead of above. Did you turn and now can&#39;t trust your senses, or did the whole world spin beneath you? Gripping for the metal arm rests of the chair they give way, slipping, squishing, sticking to your hands, turned to hot butter. Pulling your arms in close, deeper unease sets in when you realize you&#39;re no longer able to touch your own body.
-
-Then, darkness and silence. Absolute darkness. Weightless.
-
-A loud crash.
-
-You&#39;re soaking wet, dense rain hammering down, slowed by the dense jungle canopy, coming down hard enough or long enough that you&#39;re up to your ankles in flood water. Where are you?
-
-When are you?</tw-passagedata><tw-passagedata pid="7" name="controlTest" tags="" position="224,1327" size="100,100">Your skin tingles with a cool, numbing sensation as you stumble through the portal. There&#39;s no ceiling here, but a night sky packed with ultrabright stars - unmistakably in the wrong positions for any eartlhy constellations.
-
-Tall, dark, harshly faceted stones sparkle around you, opening into a vast chasm ahead, like an emptied lake.
-
-Orange, glowing bodies drift about. It&#39;s unclear whether they&#39;re ignoring you, somehow unable to see you, or not alive at all.
-
-Are you going to find out?</tw-passagedata><tw-passagedata pid="8" name="mystTest" tags="" position="464,1322" size="100,100">You&#39;ve found a place where time doesn&#39;t seem to pass.
-
-The only noise here is gentle wind, and water lapping at the shore. The cloudless sky glows as if it&#39;s midday, but there&#39;s no sun overhead.
-
-You were hungry before you got here. Now there&#39;s no desire to eat.
-
-The air smells of pine. Calm washes over you.
-
-Whether the instinct is right, or whether this is a trap you&#39;re giving in to, you feel completely safe here.
-
-You appear to be alone. You&#39;re no more craving other people than food, not a hint of loneliness here, just solitude.
-
-Do you step forward on the path, or take a moment to rest and breath it in?</tw-passagedata><tw-passagedata pid="9" name="officeStart" tags="VO" position="1751,540" size="100,100">You&#39;re in an open kitchen at the center of the office.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Press the V key at any time to turn on or off automated Voiceover. This is a game that contains many different kinds of games. You\&#39;ll be exploring an abandoned game studio through text such as this, but the games you discover are a mix of 2D, 3D, and also text-based. You can backtrack by using the finger pointing left button.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="3" name="officeStart" tags="VO" position="1751,540" size="100,100">You&#39;re in an open kitchen at the center of the office.
 
 Vending machines are behind you. A box with a key drawn on it is on the counter in front of you, making noise.
 
@@ -464,11 +386,11 @@ Vending machines are behind you. A box with a key drawn on it is on the counter 
 
 [[head towards the cubicles-&gt;cubicles]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re in an open kitchen at the center of the office. Vending machines are behind you. A box with a key drawn on it is on the counter in front of you, making noise&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="10" name="futureElevator" tags="VO" position="1733,260" size="100,100">You hear clicks of a ratcheting gear, swaying chains, and low pitch rumble of steel on tile as the soda machine slides aside, revealing a cramped, steel elevator.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re in an open kitchen at the center of the office. Vending machines are behind you. A box with a key drawn on it is on the counter in front of you, making noise&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="futureElevator" tags="VO" position="1733,260" size="100,100">You hear clicks of a ratcheting gear, swaying chains, and low pitch rumble of steel on tile as the soda machine slides aside, revealing a cramped, steel elevator.
 
 [[step inside the elevator-&gt;futureTower]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You hear clicks of a ratcheting gear, swaying chains, and low pitch rumble of steel on tile as the soda machine slides aside, revealing a cramped, steel elevator.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="11" name="futureTower" tags="futureTower VO" position="1858.6666666666667,272.6666666666667" size="100,100">After a strangely long elevator ride, the door dings, opening to a floor-to-ceiling view of skyscrapers and neon lights in all directions.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You hear clicks of a ratcheting gear, swaying chains, and low pitch rumble of steel on tile as the soda machine slides aside, revealing a cramped, steel elevator.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="5" name="futureTower" tags="futureTower VO" position="1858.6666666666667,272.6666666666667" size="100,100">After a strangely long elevator ride, the door dings, opening to a floor-to-ceiling view of skyscrapers and neon lights in all directions.
 
 (link: &quot;walk up to get a closer look at the window&quot;)[(goto-url: &#39;unity_loader.html?phrase=Return_to_the_elevator&amp;file=FutureView&#39;)]
 
@@ -479,85 +401,13 @@ Vending machines are behind you. A box with a key drawn on it is on the counter 
 
 (link: &quot;lick the delicious looking poster&quot;)[(goto-url: &#39;unity_loader.html?phrase=Shake_to_wake_up&amp;file=Infinite_Cube_Swarm&#39;)]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;After a strangely long elevator ride, the door dings, opening to a floor-to-ceiling view of skyscrapers and neon lights in all directions.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="12" name="playerPath2-teleporter" tags="" position="572,1079" size="100,100">A loud hum fills your ears. It would hurt if it went on longer, but it&#39;s just long enough to tense up reflexively, as if you could somehow dodge it.
-
-Your starched collar is warm and moist from sweat. Pulling your tie loose to breathe easier, you glance down just as the lower half of your legs are finishing phasing in. They&#39;ve always advised you not to look down, but now that you finally got the chance to do this, it&#39;s hard to look away. They warned that would probably happen, too.
-
-An flashing orange glow accompanies the transition. You can&#39;t tell whether it&#39;s coming from your legs, or a result effect of eyeballs adjusting as their particles slide tightly back together.
-
-**Time to get started.-&gt;officeStart**</tw-passagedata><tw-passagedata pid="13" name="playerPath3-literal" tags="" position="692,1082" size="100,100">Moments ago I was at home, on my computer, minding my own business.
-
-I followed a few links through HomeTeamGameDev.com, and I don&#39;t fully understand what I&#39;m looking at.
-
-Curiosity got me this far, why not have a quick look around?
-
-Maybe there&#39;s something interesting to see here.
-
-**Explore the office.**</tw-passagedata><tw-passagedata pid="14" name="playerPath4-officeJob" tags="" position="812,1092" size="100,100">Y A W N
-
-Here&#39;s to another day at the digital prototyping lab.
-
-Am I really the first person to reach the office today? Where is everyone?
-
-Whatever, all else being equal, I&#39;d rather them catch me working.
-
-**It&#39;s time to start the workday.-&gt;officeStart**</tw-passagedata><tw-passagedata pid="15" name="playerPath5-alienClone" tags="" position="577,1200" size="100,100">I can&#39;t believe they&#39;re expecting me to stand and walk with just two legs.
-
-I reach down and squeeze the mess of meat and fat on my sides. If this is the body ᖽᐸᓍᘉᑢᕴᓰᕲ picked for me, I&#39;m sure there&#39;s a good reason.
-
-Right? They wouldn&#39;t just be putting one over on me?
-
-If I find out all the other creatures on this planet get more than two legs I&#39;ll file a report the instant I get home.
-
-Why am I shutting down ouch ouch heart and lungs are going, stomach is going, feeling better. Don&#39;t forget the training. It&#39;ll get easier with practice.
-
-I can&#39;t believe they all really live like this.
-
-Disgusting.
-
-Alright, **I&#39;ve got to do my best to blend in.**</tw-passagedata><tw-passagedata pid="16" name="playerPath6-officeLetter" tags="" position="696,1202" size="100,100">Walking down the city street one day, you notice an unassuming office just across road that you could swear was never there before.
-
-You&#39;ve been taking this route regularly for years, and you&#39;d never noticed so much as a construction fence. You&#39;d leave it alone, but somethings bothering you about it, maybe the way it&#39;s so hard to picture what was there before. Had you just never paid attention? Was this always there?
-
-There&#39;s an envelope on the ground near the door, already torn open with a folded letter hanging partway out, gentle scooting and twisting in the wind. Perhaps it fell from the mail slot.
-
-Wouldn&#39;t want it to blow away - better [[cross the street to check it out.-&gt;openGroundLetter]]</tw-passagedata><tw-passagedata pid="17" name="openGroundLetter" tags="" position="814,1205" size="100,100">You cross the street and step on the letter, so it won&#39;t blow away while you think of what to do next.
-
-You consider shoving it back into the door&#39;s mail slot.
-
-Maybe it&#39;s spam and they don&#39;t want it.
-
-You should check if it it&#39;s spam.
-
-The letter&#39;s already open, and it&#39;s just laying on a public sidewalk. That probably avoids those laws about not opening someone else&#39;s mail, maybe?
-
-You casually bend down, raise your foot, and stand up unfolding the letter.
-
-There&#39;s only 3 words on the page:
-
-*we got you*
-
-You suddenly feel chilly, like the sun went out, but the paper you&#39;re looking at is still brightly lit.
-
-You&#39;re feeling chilly from a strong AC vent overhead.
-
-You&#39;re on the other side of a door, inexplicably finding yoruself in an office. Looking out the glass, it&#39;s not even clear this was the same door you were on the other side of.
-
-**Let&#39;s see if there&#39;s a good desk to leave this letter on.**</tw-passagedata><tw-passagedata pid="18" name="old intros-biome transitions?" tags="" position="431,1109" size="100,100">Might still repurpose for a spinoff prototype or easter egg?
-
-[[teleported here-&gt;playerPath2-teleporter]]
-
-[[literal player previous moment-&gt;playerPath3-literal]]
-
-[[office job-&gt;playerPath4-officeJob]]
-
-[[alien clone-&gt;playerPath5-alienClone]]
-
-[[street office letter-&gt;playerPath6-officeLetter]]</tw-passagedata><tw-passagedata pid="19" name="officeNToyRoom" tags="VO" position="1943,579" size="100,100">You see building blocks, army figures, a giant boomerang, glowing green ant farms, toy cars, and several other things to play with.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;After a strangely long elevator ride, the door dings, opening to a floor-to-ceiling view of skyscrapers and neon lights in all directions.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="6" name="officeNToyRoom" tags="VO" position="1943,579" size="100,100">You see building blocks, army figures, a giant boomerang, glowing green ant farms, toy cars, and several other things to play with.
 
 (link: &quot;inspect the snow globe&quot;)[(goto-url: &#39;unity_loader.html?phrase=Put_this_toy_down&amp;file=TurnTableCar&#39;)]
 
 (link: &quot;look at the toy clock&quot;)[(goto-url: &#39;unity_loader.html?phrase=Look_away&amp;file=ClockSpin&amp;param=1&#39;)]
+
+[[check out the time machine-&gt;timeMachine]]
 
 (link: &quot;crawl into the toy clock&quot;)[(goto-url: &#39;unity_loader.html?phrase=Get_out&amp;file=ClockSpin&amp;param=0&#39;)]
 
@@ -568,9 +418,7 @@ You&#39;re on the other side of a door, inexplicably finding yoruself in an offi
 (link: &quot;play the flute machine&quot;)[(goto-url: &#39;mdfewkes/Fl.html&#39;)]
 (link: &quot;play the trumpet machine&quot;)[(goto-url: &#39;mdfewkes/Tp.html&#39;)]
 
-[[check out the time machine-&gt;timeMachine]]
-
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see building blocks, army figures, a giant boomerang, glowing green ant farms, toy cars, and several other things to play with.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="20" name="vendingMachines" tags="VO" position="1721,390" size="100,100">One dispenses soda. The other has junk food.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see building blocks, army figures, a giant boomerang, glowing green ant farms, toy cars, and several other things to play with.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="7" name="vendingMachines" tags="VO" position="1721,390" size="100,100">One dispenses soda. The other has junk food.
 
 You don&#39;t have your wallet.
 
@@ -578,7 +426,7 @@ A blue on black LCD display above the bill slot reads, &quot;CANCEL?&quot;
 
 [[press CANCEL on the pad-&gt;futureElevator]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;One dispenses soda. The other has junk food. You don\&#39;t have your wallet. A blue on black LCD display above the bill slot reads, CANCEL?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="21" name="cubicles" tags="VO" position="1507.6666666666667,693" size="100,100">You see a bathroom entrance, messy cubicle, and copy machine.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;One dispenses soda. The other has junk food. You don\&#39;t have your wallet. A blue on black LCD display above the bill slot reads, CANCEL?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="8" name="cubicles" tags="VO" position="1507.6666666666667,693" size="100,100">You see a bathroom entrance, messy cubicle, and copy machine.
 
 (link: &quot;investigate the bathroom&quot;)[(goto-url: &#39;unity_loader.html?phrase=Get_out_of_here&amp;file=Bathroom&#39;)]
 
@@ -586,41 +434,41 @@ A blue on black LCD display above the bill slot reads, &quot;CANCEL?&quot;
 
 [[check out the copier-&gt;copier]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see a bathroom entrance, messy cubicle, and copy machine.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="22" name="cubeNear1 now intern" tags="ReplacedByGame" position="1514,569.6666666666666" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="23" name="bathroom Eyeforcz scene" tags="ReplacedByGame" position="1508.6666666666667,811.3333333333334" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="24" name="copier" tags="VO" position="1341.0000000000002,689.3333333333334" size="100,100">There&#39;s a note on the copy machine. It says, &quot;I contain every book I&#39;ve copied.&quot;
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You see a bathroom entrance, messy cubicle, and copy machine.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="9" name="cubeNear1 now intern" tags="ReplacedByGame" position="1455.6666666666667,581.3333333333333" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="10" name="bathroom Eyeforcz scene" tags="ReplacedByGame" position="1608.6666666666667,803" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="11" name="copier" tags="VO" position="1382.3333333333333,764.3333333333334" size="100,100">There&#39;s a note on the copy machine. It says, &quot;I contain every book I&#39;ve copied.&quot;
 
 (link: &quot;get inside the copier&quot;)[(goto-url: &#39;twine_frame.html?phrase=Leave_library&amp;file=ashleigh_library~&#39;)]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a note on the copy machine. It says, I contain every book I\&#39;ve copied.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="25" name="libraryArea by AshCat" tags="ReplacedByGame" position="1334,809" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="26" name="timeMachine" tags="VO" position="2108,564" size="100,100">You&#39;re sure that, yep, that is definitely a time machine.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;There\&#39;s a note on the copy machine. It says, I contain every book I\&#39;ve copied.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="12" name="libraryArea by AshCat" tags="ReplacedByGame" position="1270.6666666666667,870.6666666666666" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="13" name="timeMachine" tags="VO" position="2108,564" size="100,100">Yep, that is definitely a time machine.
 
 Want to use it?
 
-[[Punch in 1983 (obviously)-&gt;pastOffice]]
+[[punch in 1983 (obviously)-&gt;pastOffice]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re sure that, yep, that is definitely a time machine. Want to use it?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="27" name="pastOffice" tags="oldOffice VO" position="2100.333333333333,697.6666666666667" size="100,100">You&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage?
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Yep, that is definitely a time machine. Want to use it?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="14" name="pastOffice" tags="oldOffice VO" position="2100.333333333333,697.6666666666667" size="100,100">You&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage?
 
 [[Step back into the main office-&gt;oldOfficeMain]]
 
 (link: &quot;Take the time machine farther back, to 1818&quot;)[(goto-url: &#39;unity_loader.html?phrase=Return_in_the_time_machine&amp;file=HOne&#39;)]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="28" name="oldOfficeMain" tags="oldOffice VO" position="2099.6666666666665,820.6666666666667" size="100,100">The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the build is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what&#39;s here is also more spacious. Apparently there used to be 3 private offices, where you last saw a dozen cubicles packed together.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;You\&#39;re standing in a dark room filled with stacked plastic chairs, wide brooms, an unplugged vending machine, and racks of various cleaning supplies, bins of wires--apparently the toy room used to be used for assorted storage?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="15" name="oldOfficeMain" tags="oldOffice VO" position="2099.6666666666665,820.6666666666667" size="100,100">The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the build is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what&#39;s here is also more spacious. Apparently there used to be 3 private offices, where you last saw a dozen cubicles packed together.
 
 [[enter the private office on the left-&gt;oldOfficeL]]
 [[enter the private office in the middle-&gt;oldOfficeM]]
 [[enter the private office on the right-&gt;oldOfficeR]]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the build is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what\&#39;s here is also more spacious. Apparently there used to be 3 private offices, where you last saw a dozen cubicles packed together.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="29" name="oldOfficeL" tags="oldOffice VO" position="1951.3333333333333,817.3333333333333" size="100,100">This must has been the boss&#39;s office. This setup looks serious. I wonder what it can do?
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;The office reeks of cigarettes and burnt coffee. Bright sunlight beams through wooden slats. You can immediately tell that the build is... smaller? It seems to have undergone a lot of expansion in the past few decades, but what\&#39;s here is also more spacious. Apparently there used to be 3 private offices, where you last saw a dozen cubicles packed together.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="16" name="oldOfficeL" tags="oldOffice VO" position="1951.3333333333333,817.3333333333333" size="100,100">This must has been the boss&#39;s office. This setup looks serious. I wonder what it can do?
 
 (link: &quot;boot up the computer to check out the BBS&quot;)[(goto-url: &#39;mcfunkypants/mcf-index.html&#39;)]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;This must has been the boss\&#39;s office. This setup looks serious. I wonder what it can do?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="30" name="oldOfficeM" tags="oldOffice VO" position="2103,964" size="100,100">It appears this employee was either being unproductive, or doing research related to their own game development. Hard to say.
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;This must has been the boss\&#39;s office. This setup looks serious. I wonder what it can do?&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="17" name="oldOfficeM" tags="oldOffice VO" position="2103,964" size="100,100">It appears this employee was either being unproductive, or doing research related to their own game development. Hard to say.
 
 (link: &quot;insert the Space Shot Sam floppy disk&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;It appears this employee was either being unproductive, or doing research related to their own game development. Hard to say.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="31" name="oldOfficeR" tags="oldOffice VO" position="2238,809" size="100,100">Wow! This computer has a hard drive! Amazing!
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;It appears this employee was either being unproductive, or doing research related to their own game development. Hard to say.&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="18" name="oldOfficeR" tags="oldOffice VO" position="2238,809" size="100,100">Wow! This computer has a hard drive! Amazing!
 
 (link: &quot;try out this new computer&#39;s one pre-installed game&quot;)[(goto-url: &#39;cathysl/cathysl_rotation.html&#39;)]
 
-&lt;img src=&quot;https://gamkedo-la.github.io/HiddenPassages2RnD/HP%20Labs%20Main%20Twine%20and%20JS%20Projects/empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Wow! This computer has a hard drive! Amazing!&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="32" name="gameCredits" tags="" position="1135,472.6666666666667" size="100,100">Chris DeLeon: Project lead, core gameplay, main areas, (link: &quot;Space Shot Sam&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)], (link: &quot;Tumult future eye art&quot;)[(goto-url: &#39;chrisdeleon_mad_science/tumult.html&#39;)], (link: &quot;future tower password entry area&quot;)[(goto-url: &#39;unity_loader.html?phrase=Take_the_elevator_back_down&amp;file=FutureView&#39;)], custom Unity webGL sceneloader and Twine linking, wrote (link: &quot;Self-Calm key text&quot;)[(goto-url: &#39;http://self-calm.com&#39;)]
+&lt;img src=&quot;empty.png&quot; onload=&quot;SpeakingThing.textToSpeech(&#39;Wow! This computer has a hard drive! Amazing!&#39;)&quot;&gt;</tw-passagedata><tw-passagedata pid="19" name="gameCredits" tags="" position="1135,472.6666666666667" size="100,100">Chris DeLeon: Project lead, core gameplay, main areas, (link: &quot;Space Shot Sam&quot;)[(goto-url: &#39;chrisdeleon_mad_science/spaceshotsam/sam-exe.html&#39;)], (link: &quot;Tumult future eye art&quot;)[(goto-url: &#39;chrisdeleon_mad_science/tumult.html&#39;)], (link: &quot;future tower password entry area&quot;)[(goto-url: &#39;unity_loader.html?phrase=Take_the_elevator_back_down&amp;file=FutureView&#39;)], custom Unity webGL sceneloader and Twine linking, wrote (link: &quot;Self-Calm key text&quot;)[(goto-url: &#39;http://self-calm.com&#39;)]
 
 Muhammed &quot;EyeForcz&quot; Durmusoglu: Models ((link: &quot;clock&quot;)[(goto-url: &#39;unity_loader.html?phrase=Quit_game&amp;file=ClockSpin&amp;param=1&#39;)], (link: &quot;train&quot;)[(goto-url: &#39;unity_loader.html?phrase=Quit_game&amp;file=ClockSpin&amp;param=0&#39;)], (link: &quot;crystal table&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=TurnTable&#39;)], (link: &quot;mountain snow globe cars&quot;)[(goto-url: &#39;unity_loader.html?phrase=Leave_game&amp;file=TurnTableCar&#39;)], (link: &quot;bathroom models and related sound effects&quot;)[(goto-url: &#39;unity_loader.html?phrase=Exit_bathroom&amp;file=Bathroom&#39;)], (link: &quot;oneil&quot;)[(goto-url: &#39;unity_loader.html?phrase=Scream&amp;file=Oneil&amp;param=0&#39;)] (link: &quot;tubes&quot;)[(goto-url: &#39;unity_loader.html?phrase=Scream&amp;file=Oneil&amp;param=1&#39;)]), (link: &quot;sheep sim&quot;)[(goto-url: &#39;eyeforcz/sheep.html&#39;)], post-it art (unused)
 

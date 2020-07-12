@@ -12,6 +12,7 @@ public class FutureTypePrompt : MonoBehaviour
     InputField inputField;
     public Color answerColor;
     public Color nonAnswerColor;
+    public randToot typeSounds;
 
     string cycleText(string inURL,int offBy)
     {
@@ -90,10 +91,15 @@ public class FutureTypePrompt : MonoBehaviour
         return matchIdx;
     }
 
+    public void randTone() {
+        typeSounds.PlayRandomSound();
+    }
+
     private void openMatchingSite() {
         int matchIdx = findMatchingAnswerIdx();
 
         if (matchIdx != -1) {
+            typeSounds.PlayRandomSound();
             inputField.text = "";
             string gotoPage = "https://" + processURL(URLs[matchIdx], matchIdx);
             Debug.Log("Erasing input and opening site (if in browser): " + gotoPage);

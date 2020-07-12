@@ -801,6 +801,8 @@ GameObject:
   - component: {fileID: 704276862}
   - component: {fileID: 704276861}
   - component: {fileID: 704276860}
+  - component: {fileID: 704276863}
+  - component: {fileID: 704276864}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -968,6 +970,123 @@ MonoBehaviour:
   waveform: 0
   vectorscope: 0
   debugOverlay: 0
+--- !u!82 &704276863
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704276856}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e30b804929cec47099c9272de1a49a58, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 2.67
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &704276864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704276856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b41b54f393f4f4493d1356cb79ad5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundList:
+  - {fileID: 8300000, guid: 8f1aa8756d8cf4a2e9a4711fc7992956, type: 3}
+  - {fileID: 8300000, guid: fc05cec76b4024e868bf3bede52ab6b1, type: 3}
+  - {fileID: 8300000, guid: 6d287a0caa7f8438391bd0776838d0ae, type: 3}
+  - {fileID: 8300000, guid: 1355e7824aee7434287ad505ef0a8b63, type: 3}
+  - {fileID: 8300000, guid: cc522c84856114b4686decd0a64871c1, type: 3}
+  - {fileID: 8300000, guid: 8b04af75ce035490b854994607c4e0bf, type: 3}
+  - {fileID: 8300000, guid: d4e8d33ceba9a49a389b3eaa93af9cca, type: 3}
+  - {fileID: 8300000, guid: a6eba555a902f424fab846d43df1b38d, type: 3}
 --- !u!1001 &715277523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2050,6 +2169,7 @@ MonoBehaviour:
   matchFoundActionPrompt: {fileID: 977585926}
   answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
   nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
+  typeSounds: {fileID: 0}
 --- !u!114 &1547448173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2103,6 +2223,7 @@ MonoBehaviour:
   matchFoundActionPrompt: {fileID: 977585926}
   answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
   nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
+  typeSounds: {fileID: 0}
 --- !u!1 &1585924350
 GameObject:
   m_ObjectHideFlags: 0
@@ -7272,7 +7393,18 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954881924}
+        m_MethodName: randTone
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.70980394, g: 1, b: 0, a: 1}
   m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0}
@@ -7373,6 +7505,7 @@ MonoBehaviour:
   matchFoundActionPrompt: {fileID: 977585926}
   answerColor: {r: 0, g: 1, b: 0.9647059, a: 1}
   nonAnswerColor: {r: 0.92156863, g: 0, b: 1, a: 1}
+  typeSounds: {fileID: 704276864}
 --- !u!1001 &2039797686
 PrefabInstance:
   m_ObjectHideFlags: 0

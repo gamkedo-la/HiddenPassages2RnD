@@ -20,7 +20,7 @@ public class randToot : MonoBehaviour
         AudioSource aSource = tempGO.AddComponent<AudioSource>() as AudioSource; // add an audio source
         aSource.clip = clip; // define the clip
         aSource.volume = atVol;
-        aSource.pitch = Random.Range(0.7f, 1.4f);
+        aSource.pitch = Random.Range(0.6f, 0.9f);
         // set other aSource properties here, if desired
         aSource.Play(); // start the sound
         Destroy(tempGO, clip.length / aSource.pitch); // destroy object after clip duration
